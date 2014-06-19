@@ -1,0 +1,12 @@
+package org.genivi.mediamanager
+
+import org.genivi.mediamanager.MediaTypes.* from "MediaTypes.fidl"
+
+<** @description : Generic playback interface for basic playback control **>
+
+interface Playback {
+	version {
+		major 0
+		minor 1
+	}
+}
