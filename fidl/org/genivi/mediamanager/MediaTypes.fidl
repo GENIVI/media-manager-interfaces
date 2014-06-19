@@ -1,0 +1,8 @@
+package org.genivi.mediamanager
+
+<** @description : Media Manager Common Types **>
+
+typeCollection MediaTypes {
+	
+	
+}
