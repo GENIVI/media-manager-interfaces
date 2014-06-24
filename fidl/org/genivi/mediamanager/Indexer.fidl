@@ -1,0 +1,73 @@
+ /**
+  * Copyright (C) 2014, Jaguar Land Rover
+  *
+  * Author: Jonatan Palsson <jonatan.palsson@pelagicore.com>
+  *
+  * This file is part of the GENIVI Media Manager Proof-of-Concept
+  * For further information, see http://genivi.org/
+  *
+  * This Source Code Form is subject to the terms of the Mozilla Public
+  * License, v. 2.0. If a copy of the MPL was not distributed with this
+  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  */
+
+package org.genivi.MediaManager
+
+<** @description: Indexer control interface. Allows administrational tasks for
+                  the indexer backend, such as starting, stopping and requesting
+                  status of the indexer.
+                  For querying the database, please see
+                  org.genivi.mediamanager.Browser
+**>
+
+interface Indexer {
+    version {
+        major 1
+        minor 0
+    }
+
+    // Attributes
+    <** @description: Get the current status of the indexer. **>
+    attribute IndexerStatus indexerStatus readonly
+
+    // Methods
+    <**    @description: Get the path to the database file in the host file system.
+                      This is the database file used by LMS to store metadata
+        @param: output: Path to database file in host file system
+        @deprecated: This is only used for terting purposes ansd will be removed
+    **>
+    method getDatabasePath {
+        out {
+            String output
+        }
+    }
+
+    <** @description: If the indexer is currently IDLE or RUNNING
+                      (see IndexerStatus), stop indexing and set IndexerStatus
+                      to STOPPED.
+                      If indexer is currently STOPPED, no action is taken
+    **>
+    method stopIndexing {}
+
+    <** @description: If indexer is currently STOPPED (see IndexerStatus),
+                      status is changed to RUNNING and indexing is RUNNING. If
+                      the status is IDLE or RUNNING, no action is taken.
+                      Note that the status may go from RUNNING to IDLE directly
+                      after issuing this call, if no files are to be indexed
+    **>
+    method startIndexing {}
+
+    // Data structures
+    <** @description: RUNNING: The indexer is currently traversing files and/or
+                               extracting metadata
+                      STOPPED: The indexer has been stopped and will not start
+                                 indexing by itself
+                      IDLE:    The indexer has finished, and is waiting for new
+                                 files to index
+    **>
+    enumeration IndexerStatus {
+        RUNNING
+        STOPPED
+        IDLE
+    }
+}

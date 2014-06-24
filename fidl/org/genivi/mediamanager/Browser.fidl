@@ -1,0 +1,291 @@
+ /**
+  * Copyright (C) 2014, Jaguar Land Rover
+  *
+  * Author: Jonatan Palsson <jonatan.palsson@pelagicore.com>
+  *
+  * This interface is heavily inspired by the dLeyna-server and MediaServer2
+  * APIs: https://01.org/dleyna/documentation/server-objects
+  *       https://wiki.gnome.org/Projects/Rygel/MediaServer2Spec
+  *
+  *
+  * This file is part of the GENIVI Media Manager Proof-of-Concept
+  * For further information, see http://genivi.org/
+  *
+  * This Source Code Form is subject to the terms of the Mozilla Public
+  * License, v. 2.0. If a copy of the MPL was not distributed with this
+  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  */
+
+package org.genivi.MediaManager
+
+interface Browser {
+    version {
+        major 1
+        minor 0
+    }
+
+    <** @description: List all containers below the given path.
+         returns: A JSON list of all containers with the given path as parent
+         errors: NO_CONNECTION if no connection can be established to underlying
+                  browsing engine
+                  BAD_PATH if path parameter is invalid
+        @param: path The path to search for containers. The format of the path
+                depends on the underlying browsing backend
+        @param: offset: The offset to use for indexing the results list
+        @param: count: The number of results to return, starting from offset
+        @param: filter: Array of keys to include in resulting JSON elements
+    **>
+    method listContainers {
+        in {
+            String path
+            UInt64 offset
+            UInt64 count
+            String[] filter
+        }
+
+        out {
+            String containers
+            BrowserError e
+        }
+    }
+
+    <** @description: Extends ListContainers with sorting capabilities
+        @param: sortKey Key to sort JSON result list on
+    **>
+    method listContainersEx {
+        in {
+            String path
+            UInt64 offset
+            UInt64 count
+            String[] filter
+            SortKey sortKey
+        }
+
+        out {
+            String containers
+            BrowserError e
+        }
+    }
+
+    <** @description: List all items in the given container
+         returns: A JSON list of all items with the given container as parent
+         errors: NO_CONNECTION if no connection can be established to underlying
+                  browsing engine
+                  BAD_PATH if path parameter is invalid
+        @param: path The path of the container to search for items.
+                The format of the path depends on the underlying browsing
+                backend
+        @param: offset: The offset to use for indexing the results list
+        @param: count: The number of results to return, starting from offset
+        @param: filter: Array of keys to include in resulting JSON elements
+    **>
+    method listItems {
+        in {
+            String path
+            UInt64 offset
+            UInt64 count
+            String[] filter
+        }
+
+        out{
+            String items
+            BrowserError e
+        }
+    }
+
+    <** @description: Extends ListItems with sorting capabilities
+        @param: sortKey Key to sort JSON result list on
+    **>
+    method listItemsEx {
+        in {
+            String path
+            UInt64 offset
+            UInt64 count
+            String[] filter
+            SortKey sortKey
+        }
+
+        out{
+            String items
+            BrowserError e
+        }
+    }
+
+    <** @description: List all children in the given container
+         returns: A JSON list of all children with the given container as parent
+         errors: NO_CONNECTION if no connection can be established to underlying
+                  browsing engine
+                  BAD_PATH if path parameter is invalid
+        @param: path The path of the container to search for children.
+                The format of the path depends on the underlying browsing
+                backend
+        @param: offset: The offset to use for indexing the results list
+        @param: count: The number of results to return, starting from offset
+        @param: filter: Array of keys to include in resulting JSON elements
+    **>
+    method listChildren {
+        in {
+            String path
+            UInt64 offset
+            UInt64 count
+            String[] filter
+        }
+
+        out{
+            String children
+            BrowserError e
+        }
+    }
+
+    <** @description: Extends ListChildren with sorting capabilities
+        @param: sortKey Key to sort JSON result list on
+    **>
+    method listChildrenEx {
+        in {
+            String path
+            UInt64 offset
+            UInt64 count
+            String[] filter
+            SortKey sortKey
+        }
+
+        out{
+            String children
+            BrowserError e
+        }
+    }
+
+    <** @description: Search for children in the given container
+         returns: A JSON list of all children matching the search criteria with
+                   the given container as parent
+         errors: NO_CONNECTION if no connection can be established to underlying
+                  browsing engine
+                  BAD_PATH if path parameter is invalid
+        @param: path The path of the container to search for children.
+                The format of the path depends on the underlying browsing
+                backend
+        @param: query Search query to match children against. The format of the
+                query depends on the underlying browsing backend
+        @param: offset: The offset to use for indexing the results list
+        @param: count: The number of results to return, starting from offset
+        @param: filter: Array of keys to include in resulting JSON elements
+    **>
+    method searchObjects {
+        in {
+            String path
+            String query
+            UInt64 offset
+            UInt64 count
+            String[] filter
+        }
+
+        out{
+            String objects
+            BrowserError e
+        }
+    }
+
+    <** @description: Extends SearchObjects with sorting capabilities
+        @param: sortKey Key to sort JSON result list on
+    **>
+    method searchObjectsEx {
+        in {
+            String path
+            String query
+            UInt64 offset
+            UInt64 count
+            String[] filter
+            SortKey sortKey
+        }
+
+        out{
+            String objects
+            BrowserError e
+        }
+    }
+
+    <** @description: Get a list of all initial letters and their index in the
+                      given container
+         returns: A JSON list of tuples of initial letters and their first
+                   observed position when sorting according to sortKey
+         errors: NO_CONNECTION if no connection can be established to underlying
+                  browsing engine
+                  BAD_PATH if path parameter is invalid
+         @param: container: Container to build index list for
+         @param: count: How many (unsorted) items should be traversed to build
+                         index
+         @param: filter: List of initial letters to include
+         @param: sortKey: Key to sort on when building index list
+    **>
+    method listIndexes {
+        in {
+            String container
+            UInt64 count
+            String[] filter
+            SortKey sortKey
+        }
+
+        out {
+            String indexes
+            BrowserError e
+        }
+    }
+
+    <** @description: Create a new empty container with path used as root
+         returns: Path identifier for the newly created container
+         errors: NO_CONNECTION if no connection can be established to underlying
+                  browsing engine
+                  BAD_PATH if path parameter is invalid
+        @param: path: Path to place the newly created container in
+        @param: displayName: Display name for the new container
+        @param: childTypes: Array of allowed types on children in new container
+    **>
+    method createContainer {
+        in {
+            String path
+            String displayName
+            String[] childTypes
+        }
+        out {
+            String pathIdentifier
+            BrowserError e
+        }
+    }
+
+    <** @description: Place a reference in a container, pointing to an object
+         returns: Path identifier for the container containing the reference
+         errors: NO_CONNECTION if no connection can be established to underlying
+                  browsing engine
+                  BAD_PATH if path parameter is invalid
+        @param: path: Path to place the newly created container in
+        @param: objectPath: Path to object to create reference to
+    **>
+    method createReference {
+        in {
+            String path
+            String objectPath
+        }
+        out {
+            String pathIdentifier
+            BrowserError e
+        }
+    }
+    // Data structures
+
+    struct SortKey {
+        SortOrder order
+        String keyName
+    }
+
+    enumeration SortOrder {
+        ASCENDING
+        DESCENDING
+    }
+
+    enumeration BrowserError {
+        NO_ERROR
+
+        NO_CONNECTION
+        BAD_PATH
+    }
+}
