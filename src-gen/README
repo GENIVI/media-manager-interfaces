@@ -1,0 +1,7 @@
+This directory contains auto-generated CommonAPI-DBus code. The code is
+generated from the fidl and fdepl files in the fidl/ directory. These files
+have been checked in in order to allow systems without code generators
+available to build the associated projects.
+
+When changing a fidl or fdepl file, make sure to re-generate the code of the
+src-gen directory.
