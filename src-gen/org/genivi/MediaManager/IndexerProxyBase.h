@@ -21,6 +21,7 @@
 #include "Indexer.h"
 
 
+#include <org/genivi/MediaManager/MediaTypes.h>
 
 #if !defined (COMMONAPI_INTERNAL_COMPILATION)
 #define COMMONAPI_INTERNAL_COMPILATION
@@ -46,9 +47,9 @@ class IndexerProxyBase: virtual public CommonAPI::Proxy {
  public:
     typedef CommonAPI::ObservableReadonlyAttribute<Indexer::IndexerStatus> IndexerStatusAttribute;
 
-    typedef std::function<void(const CommonAPI::CallStatus&, const std::string&)> GetDatabasePathAsyncCallback;
-    typedef std::function<void(const CommonAPI::CallStatus&)> StopIndexingAsyncCallback;
-    typedef std::function<void(const CommonAPI::CallStatus&)> StartIndexingAsyncCallback;
+    typedef std::function<void(const CommonAPI::CallStatus&, const std::string&, const Indexer::IndexerError&)> GetDatabasePathAsyncCallback;
+    typedef std::function<void(const CommonAPI::CallStatus&, const Indexer::IndexerError&)> StopIndexingAsyncCallback;
+    typedef std::function<void(const CommonAPI::CallStatus&, const Indexer::IndexerError&)> StartIndexingAsyncCallback;
 
     /**
      * Get the current status of the indexer.
@@ -63,7 +64,7 @@ class IndexerProxyBase: virtual public CommonAPI::Proxy {
      * @param output: Path to database file in host file system
      * @deprecated This is only used for terting purposes ansd will be removed
      */
-    virtual COMMONAPI_DEPRECATED void getDatabasePath(CommonAPI::CallStatus& callStatus, std::string& output) = 0;
+    virtual COMMONAPI_DEPRECATED void getDatabasePath(CommonAPI::CallStatus& callStatus, std::string& output, Indexer::IndexerError& e) = 0;
     virtual std::future<CommonAPI::CallStatus> getDatabasePathAsync(GetDatabasePathAsyncCallback callback) = 0;
     /**
      * If the indexer is currently IDLE or RUNNING
@@ -74,7 +75,7 @@ class IndexerProxyBase: virtual public CommonAPI::Proxy {
                           If indexer is currently STOPPED, no action is
      *  taken
      */
-    virtual void stopIndexing(CommonAPI::CallStatus& callStatus) = 0;
+    virtual void stopIndexing(CommonAPI::CallStatus& callStatus, Indexer::IndexerError& e) = 0;
     virtual std::future<CommonAPI::CallStatus> stopIndexingAsync(StopIndexingAsyncCallback callback) = 0;
     /**
      * If indexer is currently STOPPED (see IndexerStatus),
@@ -87,7 +88,7 @@ class IndexerProxyBase: virtual public CommonAPI::Proxy {
                          
      *  after issuing this call, if no files are to be indexed
      */
-    virtual void startIndexing(CommonAPI::CallStatus& callStatus) = 0;
+    virtual void startIndexing(CommonAPI::CallStatus& callStatus, Indexer::IndexerError& e) = 0;
     virtual std::future<CommonAPI::CallStatus> startIndexingAsync(StartIndexingAsyncCallback callback) = 0;
 };
 

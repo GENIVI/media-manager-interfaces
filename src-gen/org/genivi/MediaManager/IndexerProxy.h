@@ -64,7 +64,7 @@ class IndexerProxy: virtual public Indexer, virtual public IndexerProxyBase, pub
      * "SUCCESS" or which type of error has occurred. In case of an error, ONLY the CallStatus
      * will be set.
      */
-    virtual COMMONAPI_DEPRECATED void getDatabasePath(CommonAPI::CallStatus& callStatus, std::string& output);
+    virtual COMMONAPI_DEPRECATED void getDatabasePath(CommonAPI::CallStatus& callStatus, std::string& output, Indexer::IndexerError& e);
     /**
      * Calls getDatabasePath with asynchronous semantics.
      * 
@@ -87,11 +87,12 @@ class IndexerProxy: virtual public Indexer, virtual public IndexerProxyBase, pub
      * 
      * Calls stopIndexing with synchronous semantics.
      * 
+    * All non-const parameters will be filled with the returned values.
      * The CallStatus will be filled when the method returns and indicate either
      * "SUCCESS" or which type of error has occurred. In case of an error, ONLY the CallStatus
      * will be set.
      */
-    virtual void stopIndexing(CommonAPI::CallStatus& callStatus);
+    virtual void stopIndexing(CommonAPI::CallStatus& callStatus, Indexer::IndexerError& e);
     /**
      * Calls stopIndexing with asynchronous semantics.
      * 
@@ -116,11 +117,12 @@ class IndexerProxy: virtual public Indexer, virtual public IndexerProxyBase, pub
      * 
      * Calls startIndexing with synchronous semantics.
      * 
+    * All non-const parameters will be filled with the returned values.
      * The CallStatus will be filled when the method returns and indicate either
      * "SUCCESS" or which type of error has occurred. In case of an error, ONLY the CallStatus
      * will be set.
      */
-    virtual void startIndexing(CommonAPI::CallStatus& callStatus);
+    virtual void startIndexing(CommonAPI::CallStatus& callStatus, Indexer::IndexerError& e);
     /**
      * Calls startIndexing with asynchronous semantics.
      * 
@@ -226,8 +228,8 @@ IndexerProxy<_AttributeExtensions...>::~IndexerProxy() {
  * @deprecated This is only used for terting purposes ansd will be removed
  */
 template <typename ... _AttributeExtensions>
-COMMONAPI_DEPRECATED void IndexerProxy<_AttributeExtensions...>::getDatabasePath(CommonAPI::CallStatus& callStatus, std::string& output) {
-    delegate_->getDatabasePath(callStatus, output);
+COMMONAPI_DEPRECATED void IndexerProxy<_AttributeExtensions...>::getDatabasePath(CommonAPI::CallStatus& callStatus, std::string& output, Indexer::IndexerError& e) {
+    delegate_->getDatabasePath(callStatus, output, e);
 }
 
 template <typename ... _AttributeExtensions>
@@ -244,8 +246,8 @@ std::future<CommonAPI::CallStatus> IndexerProxy<_AttributeExtensions...>::getDat
  *  taken
  */
 template <typename ... _AttributeExtensions>
-void IndexerProxy<_AttributeExtensions...>::stopIndexing(CommonAPI::CallStatus& callStatus) {
-    delegate_->stopIndexing(callStatus);
+void IndexerProxy<_AttributeExtensions...>::stopIndexing(CommonAPI::CallStatus& callStatus, Indexer::IndexerError& e) {
+    delegate_->stopIndexing(callStatus, e);
 }
 
 template <typename ... _AttributeExtensions>
@@ -264,8 +266,8 @@ std::future<CommonAPI::CallStatus> IndexerProxy<_AttributeExtensions...>::stopIn
  *  after issuing this call, if no files are to be indexed
  */
 template <typename ... _AttributeExtensions>
-void IndexerProxy<_AttributeExtensions...>::startIndexing(CommonAPI::CallStatus& callStatus) {
-    delegate_->startIndexing(callStatus);
+void IndexerProxy<_AttributeExtensions...>::startIndexing(CommonAPI::CallStatus& callStatus, Indexer::IndexerError& e) {
+    delegate_->startIndexing(callStatus, e);
 }
 
 template <typename ... _AttributeExtensions>

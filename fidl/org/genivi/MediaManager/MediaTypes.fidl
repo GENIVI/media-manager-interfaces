@@ -11,9 +11,20 @@
   * file, You can obtain one at http://mozilla.org/MPL/2.0/.
   */
 
-import "classpath:/deployment/DBusSpecification.fdepl"
+package org.genivi.MediaManager
 
-import "MediaTypes.fidl"
-import "Indexer.fidl"
 
-define org.genivi.commonapi.dbus.deployment.deployment for interface org.genivi.MediaManager.Indexer {}
+typeCollection MediaTypes {
+    version {
+        major 1
+        minor 0
+    }
+
+    enumeration BackendError extends MediaManagerError{
+        BACKEND_UNREACHABLE
+    }
+
+    enumeration MediaManagerError {
+        NO_ERROR
+    }
+}

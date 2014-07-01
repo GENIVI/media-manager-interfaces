@@ -57,11 +57,11 @@ bool IndexerStubDefault::validateIndexerStatusAttributeRequestedValue(const Inde
  * @param output: Path to database file in host file system
  * @deprecated This is only used for terting purposes ansd will be removed
  */
-void IndexerStubDefault::getDatabasePath(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string& output) {
+void IndexerStubDefault::getDatabasePath(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string& output, Indexer::IndexerError& e) {
     // Call old style methods in default 
-    getDatabasePath(output);
+    getDatabasePath(output, e);
 }
-void IndexerStubDefault::getDatabasePath(std::string& output) {
+void IndexerStubDefault::getDatabasePath(std::string& output, Indexer::IndexerError& e) {
     // No operation in default
 }
 
@@ -74,11 +74,11 @@ void IndexerStubDefault::getDatabasePath(std::string& output) {
                       If indexer is currently STOPPED, no action is
  *  taken
  */
-void IndexerStubDefault::stopIndexing(const std::shared_ptr<CommonAPI::ClientId> clientId) {
+void IndexerStubDefault::stopIndexing(const std::shared_ptr<CommonAPI::ClientId> clientId, Indexer::IndexerError& e) {
     // Call old style methods in default 
-    stopIndexing();
+    stopIndexing(e);
 }
-void IndexerStubDefault::stopIndexing() {
+void IndexerStubDefault::stopIndexing(Indexer::IndexerError& e) {
     // No operation in default
 }
 
@@ -93,11 +93,11 @@ void IndexerStubDefault::stopIndexing() {
                      
  *  after issuing this call, if no files are to be indexed
  */
-void IndexerStubDefault::startIndexing(const std::shared_ptr<CommonAPI::ClientId> clientId) {
+void IndexerStubDefault::startIndexing(const std::shared_ptr<CommonAPI::ClientId> clientId, Indexer::IndexerError& e) {
     // Call old style methods in default 
-    startIndexing();
+    startIndexing(e);
 }
-void IndexerStubDefault::startIndexing() {
+void IndexerStubDefault::startIndexing(Indexer::IndexerError& e) {
     // No operation in default
 }
 

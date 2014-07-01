@@ -67,11 +67,11 @@ const Indexer::IndexerStatus& getIndexerStatusAttribute(const std::shared_ptr<Co
  * @param output: Path to database file in host file system
  * @deprecated This is only used for terting purposes ansd will be removed
  */
-virtual void getDatabasePath(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string& output) {
+virtual void getDatabasePath(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string& output, Indexer::IndexerError& e) {
     // Call old style methods in default 
-    return getDatabasePath(output);
+    return getDatabasePath(output, e);
 }
-virtual void getDatabasePath(std::string& output) = 0;
+virtual void getDatabasePath(std::string& output, Indexer::IndexerError& e) = 0;
 
 /**
  * If the indexer is currently IDLE or RUNNING
@@ -82,11 +82,11 @@ virtual void getDatabasePath(std::string& output) = 0;
                       If indexer is currently STOPPED, no action is
  *  taken
  */
-virtual void stopIndexing(const std::shared_ptr<CommonAPI::ClientId> clientId) {
+virtual void stopIndexing(const std::shared_ptr<CommonAPI::ClientId> clientId, Indexer::IndexerError& e) {
     // Call old style methods in default 
-    return stopIndexing();
+    return stopIndexing(e);
 }
-virtual void stopIndexing() = 0;
+virtual void stopIndexing(Indexer::IndexerError& e) = 0;
 
 /**
  * If indexer is currently STOPPED (see IndexerStatus),
@@ -99,11 +99,11 @@ virtual void stopIndexing() = 0;
                      
  *  after issuing this call, if no files are to be indexed
  */
-virtual void startIndexing(const std::shared_ptr<CommonAPI::ClientId> clientId) {
+virtual void startIndexing(const std::shared_ptr<CommonAPI::ClientId> clientId, Indexer::IndexerError& e) {
     // Call old style methods in default 
-    return startIndexing();
+    return startIndexing(e);
 }
-virtual void startIndexing() = 0;
+virtual void startIndexing(Indexer::IndexerError& e) = 0;
 
 
 

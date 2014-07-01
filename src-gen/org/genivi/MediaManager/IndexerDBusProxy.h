@@ -58,7 +58,7 @@ class IndexerDBusProxy: virtual public IndexerProxyBase, virtual public CommonAP
      * @param output: Path to database file in host file system
      * @deprecated This is only used for terting purposes ansd will be removed
      */
-    virtual COMMONAPI_DEPRECATED void getDatabasePath(CommonAPI::CallStatus& callStatus, std::string& output);
+    virtual COMMONAPI_DEPRECATED void getDatabasePath(CommonAPI::CallStatus& callStatus, std::string& output, Indexer::IndexerError& e);
     virtual std::future<CommonAPI::CallStatus> getDatabasePathAsync(GetDatabasePathAsyncCallback callback);
     /**
      * If the indexer is currently IDLE or RUNNING
@@ -69,7 +69,7 @@ class IndexerDBusProxy: virtual public IndexerProxyBase, virtual public CommonAP
                           If indexer is currently STOPPED, no action is
      *  taken
      */
-    virtual void stopIndexing(CommonAPI::CallStatus& callStatus);
+    virtual void stopIndexing(CommonAPI::CallStatus& callStatus, Indexer::IndexerError& e);
     virtual std::future<CommonAPI::CallStatus> stopIndexingAsync(StopIndexingAsyncCallback callback);
     /**
      * If indexer is currently STOPPED (see IndexerStatus),
@@ -82,7 +82,7 @@ class IndexerDBusProxy: virtual public IndexerProxyBase, virtual public CommonAP
                          
      *  after issuing this call, if no files are to be indexed
      */
-    virtual void startIndexing(CommonAPI::CallStatus& callStatus);
+    virtual void startIndexing(CommonAPI::CallStatus& callStatus, Indexer::IndexerError& e);
     virtual std::future<CommonAPI::CallStatus> startIndexingAsync(StartIndexingAsyncCallback callback);
     
 

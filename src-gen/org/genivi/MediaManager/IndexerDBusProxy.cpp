@@ -60,18 +60,18 @@ IndexerDBusProxy::IndexerStatusAttribute& IndexerDBusProxy::getIndexerStatusAttr
  * @param output: Path to database file in host file system
  * @deprecated This is only used for terting purposes ansd will be removed
  */
-COMMONAPI_DEPRECATED void IndexerDBusProxy::getDatabasePath(CommonAPI::CallStatus& callStatus, std::string& output) {
+COMMONAPI_DEPRECATED void IndexerDBusProxy::getDatabasePath(CommonAPI::CallStatus& callStatus, std::string& output, Indexer::IndexerError& e) {
     CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<>,
-                                     CommonAPI::DBus::DBusSerializableArguments<std::string> >::callMethodWithReply(
+                                     CommonAPI::DBus::DBusSerializableArguments<std::string, Indexer::IndexerError> >::callMethodWithReply(
         *this,
         "getDatabasePath",
         "",
         callStatus
-        , output);
+        , output, e);
 }
 std::future<CommonAPI::CallStatus> IndexerDBusProxy::getDatabasePathAsync(GetDatabasePathAsyncCallback callback) {
     return CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<>,
-                                     CommonAPI::DBus::DBusSerializableArguments<std::string> >::callMethodAsync(
+                                     CommonAPI::DBus::DBusSerializableArguments<std::string, Indexer::IndexerError> >::callMethodAsync(
         *this,
         "getDatabasePath",
         "",
@@ -86,18 +86,18 @@ std::future<CommonAPI::CallStatus> IndexerDBusProxy::getDatabasePathAsync(GetDat
                       If indexer is currently STOPPED, no action is
  *  taken
  */
-void IndexerDBusProxy::stopIndexing(CommonAPI::CallStatus& callStatus) {
+void IndexerDBusProxy::stopIndexing(CommonAPI::CallStatus& callStatus, Indexer::IndexerError& e) {
     CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<>,
-                                     CommonAPI::DBus::DBusSerializableArguments<> >::callMethodWithReply(
+                                     CommonAPI::DBus::DBusSerializableArguments<Indexer::IndexerError> >::callMethodWithReply(
         *this,
         "stopIndexing",
         "",
         callStatus
-        );
+        , e);
 }
 std::future<CommonAPI::CallStatus> IndexerDBusProxy::stopIndexingAsync(StopIndexingAsyncCallback callback) {
     return CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<>,
-                                     CommonAPI::DBus::DBusSerializableArguments<> >::callMethodAsync(
+                                     CommonAPI::DBus::DBusSerializableArguments<Indexer::IndexerError> >::callMethodAsync(
         *this,
         "stopIndexing",
         "",
@@ -114,18 +114,18 @@ std::future<CommonAPI::CallStatus> IndexerDBusProxy::stopIndexingAsync(StopIndex
                      
  *  after issuing this call, if no files are to be indexed
  */
-void IndexerDBusProxy::startIndexing(CommonAPI::CallStatus& callStatus) {
+void IndexerDBusProxy::startIndexing(CommonAPI::CallStatus& callStatus, Indexer::IndexerError& e) {
     CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<>,
-                                     CommonAPI::DBus::DBusSerializableArguments<> >::callMethodWithReply(
+                                     CommonAPI::DBus::DBusSerializableArguments<Indexer::IndexerError> >::callMethodWithReply(
         *this,
         "startIndexing",
         "",
         callStatus
-        );
+        , e);
 }
 std::future<CommonAPI::CallStatus> IndexerDBusProxy::startIndexingAsync(StartIndexingAsyncCallback callback) {
     return CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<>,
-                                     CommonAPI::DBus::DBusSerializableArguments<> >::callMethodAsync(
+                                     CommonAPI::DBus::DBusSerializableArguments<Indexer::IndexerError> >::callMethodAsync(
         *this,
         "startIndexing",
         "",

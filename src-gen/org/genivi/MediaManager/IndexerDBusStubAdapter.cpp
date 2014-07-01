@@ -67,6 +67,7 @@ const char* IndexerDBusStubAdapter::getMethodsDBusIntrospectionXmlData() const {
          */
         "<method name=\"getDatabasePath\">\n"
             "<arg name=\"output\" type=\"s\" direction=\"out\" />\n"
+            "<arg name=\"e\" type=\"i\" direction=\"out\" />\n"
         "</method>\n"
         /**
          * If the indexer is currently IDLE or RUNNING
@@ -78,6 +79,7 @@ const char* IndexerDBusStubAdapter::getMethodsDBusIntrospectionXmlData() const {
          *  taken
          */
         "<method name=\"stopIndexing\">\n"
+            "<arg name=\"e\" type=\"i\" direction=\"out\" />\n"
         "</method>\n"
         /**
          * If indexer is currently STOPPED (see IndexerStatus),
@@ -91,6 +93,7 @@ const char* IndexerDBusStubAdapter::getMethodsDBusIntrospectionXmlData() const {
          *  after issuing this call, if no files are to be indexed
          */
         "<method name=\"startIndexing\">\n"
+            "<arg name=\"e\" type=\"i\" direction=\"out\" />\n"
         "</method>\n"
         
     ;
@@ -117,8 +120,8 @@ static CommonAPI::DBus::DBusGetAttributeStubDispatcher<
 static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     IndexerStub,
     std::tuple<>,
-    std::tuple<std::string>
-    > getDatabasePathStubDispatcher(&IndexerStub::getDatabasePath, "s");
+    std::tuple<std::string, Indexer::IndexerError>
+    > getDatabasePathStubDispatcher(&IndexerStub::getDatabasePath, "si");
 /**
  * If the indexer is currently IDLE or RUNNING
                       (see
@@ -131,8 +134,8 @@ static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
 static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     IndexerStub,
     std::tuple<>,
-    std::tuple<>
-    > stopIndexingStubDispatcher(&IndexerStub::stopIndexing, "");
+    std::tuple<Indexer::IndexerError>
+    > stopIndexingStubDispatcher(&IndexerStub::stopIndexing, "i");
 /**
  * If indexer is currently STOPPED (see IndexerStatus),
                      
@@ -147,8 +150,8 @@ static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
 static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     IndexerStub,
     std::tuple<>,
-    std::tuple<>
-    > startIndexingStubDispatcher(&IndexerStub::startIndexing, "");
+    std::tuple<Indexer::IndexerError>
+    > startIndexingStubDispatcher(&IndexerStub::startIndexing, "i");
 
 /**
  * Get the current status of the indexer.

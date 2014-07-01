@@ -19,6 +19,7 @@
 #define ORG_GENIVI_MEDIAMANAGER_Indexer_H_
 
 
+#include <org/genivi/MediaManager/MediaTypes.h>
 
 
 #if !defined (COMMONAPI_INTERNAL_COMPILATION)
@@ -62,6 +63,7 @@ class Indexer {
     
     // Definition of a comparator still is necessary for GCC 4.4.1, topic is fixed since 4.5.1
     struct IndexerStatusComparator;
+    typedef MediaTypes::BackendError IndexerError;
 };
 
 const char* Indexer::getInterfaceId() {

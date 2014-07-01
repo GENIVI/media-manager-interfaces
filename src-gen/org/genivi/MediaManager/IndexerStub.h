@@ -20,6 +20,7 @@
 
 
 
+#include <org/genivi/MediaManager/MediaTypes.h>
 
 #include "Indexer.h"
 
@@ -107,7 +108,7 @@ class IndexerStub : public CommonAPI::Stub<IndexerStubAdapter , IndexerStubRemot
      * @deprecated This is only used for terting purposes ansd will be removed
      */
     /// This is the method that will be called on remote calls on the method getDatabasePath.
-    virtual void getDatabasePath(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string& output) = 0;
+    virtual void getDatabasePath(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string& output, Indexer::IndexerError& e) = 0;
     /**
      * If the indexer is currently IDLE or RUNNING
                           (see
@@ -118,7 +119,7 @@ class IndexerStub : public CommonAPI::Stub<IndexerStubAdapter , IndexerStubRemot
      *  taken
      */
     /// This is the method that will be called on remote calls on the method stopIndexing.
-    virtual void stopIndexing(const std::shared_ptr<CommonAPI::ClientId> clientId) = 0;
+    virtual void stopIndexing(const std::shared_ptr<CommonAPI::ClientId> clientId, Indexer::IndexerError& e) = 0;
     /**
      * If indexer is currently STOPPED (see IndexerStatus),
                          
@@ -131,7 +132,7 @@ class IndexerStub : public CommonAPI::Stub<IndexerStubAdapter , IndexerStubRemot
      *  after issuing this call, if no files are to be indexed
      */
     /// This is the method that will be called on remote calls on the method startIndexing.
-    virtual void startIndexing(const std::shared_ptr<CommonAPI::ClientId> clientId) = 0;
+    virtual void startIndexing(const std::shared_ptr<CommonAPI::ClientId> clientId, Indexer::IndexerError& e) = 0;
     
 };
 

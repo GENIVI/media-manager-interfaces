@@ -13,6 +13,8 @@
 
 package org.genivi.MediaManager
 
+import org.genivi.MediaManager.MediaTypes.* from "MediaTypes.fidl"
+
 <** @description: Indexer control interface. Allows administrational tasks for
                   the indexer backend, such as starting, stopping and requesting
                   status of the indexer.
@@ -31,7 +33,7 @@ interface Indexer {
     attribute IndexerStatus indexerStatus readonly
 
     // Methods
-    <**    @description: Get the path to the database file in the host file system.
+    <** @description: Get the path to the database file in the host file system.
                       This is the database file used by LMS to store metadata
         @param: output: Path to database file in host file system
         @deprecated: This is only used for terting purposes ansd will be removed
@@ -39,6 +41,7 @@ interface Indexer {
     method getDatabasePath {
         out {
             String output
+            IndexerError e
         }
     }
 
@@ -47,7 +50,11 @@ interface Indexer {
                       to STOPPED.
                       If indexer is currently STOPPED, no action is taken
     **>
-    method stopIndexing {}
+    method stopIndexing {
+        out {
+            IndexerError e
+        }
+    }
 
     <** @description: If indexer is currently STOPPED (see IndexerStatus),
                       status is changed to RUNNING and indexing is RUNNING. If
@@ -55,7 +62,11 @@ interface Indexer {
                       Note that the status may go from RUNNING to IDLE directly
                       after issuing this call, if no files are to be indexed
     **>
-    method startIndexing {}
+    method startIndexing {
+        out {
+            IndexerError e
+        }
+    }
 
     // Data structures
     <** @description: RUNNING: The indexer is currently traversing files and/or
@@ -70,4 +81,6 @@ interface Indexer {
         STOPPED
         IDLE
     }
+
+    typedef IndexerError is BackendError
 }
