@@ -52,6 +52,10 @@ void BrowserDBusStubAdapter::deactivateManagedInstances() {
 
 const char* BrowserDBusStubAdapter::getMethodsDBusIntrospectionXmlData() const {
     static const char* introspectionData =
+        "<method name=\"discoverMediaManagers\">\n"
+            "<arg name=\"identifiers\" type=\"as\" direction=\"out\" />\n"
+            "<arg name=\"e\" type=\"u\" direction=\"out\" />\n"
+        "</method>\n"
         /**
          * List all containers below the given path.
                  returns: A JSON list of all
@@ -283,6 +287,11 @@ const char* BrowserDBusStubAdapter::getMethodsDBusIntrospectionXmlData() const {
 
 
 
+static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
+    BrowserStub,
+    std::tuple<>,
+    std::tuple<std::vector<std::string>, Browser::BrowserError>
+    > discoverMediaManagersStubDispatcher(&BrowserStub::discoverMediaManagers, "asu");
 /**
  * List all containers below the given path.
          returns: A JSON list of all
@@ -476,6 +485,7 @@ static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
 
 const BrowserDBusStubAdapter::StubDispatcherTable& BrowserDBusStubAdapter::getStubDispatcherTable() {
     static const BrowserDBusStubAdapter::StubDispatcherTable stubDispatcherTable = {
+            { { "discoverMediaManagers", "" }, &org::genivi::MediaManager::discoverMediaManagersStubDispatcher },
             /**
              * List all containers below the given path.
                      returns: A JSON list of all

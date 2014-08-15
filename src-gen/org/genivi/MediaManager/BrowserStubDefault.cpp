@@ -21,6 +21,14 @@ BrowserStubRemoteEvent* BrowserStubDefault::initStubAdapter(const std::shared_pt
 }
 
 
+void BrowserStubDefault::discoverMediaManagers(const std::shared_ptr<CommonAPI::ClientId> clientId, std::vector<std::string>& identifiers, Browser::BrowserError& e) {
+    // Call old style methods in default 
+    discoverMediaManagers(identifiers, e);
+}
+void BrowserStubDefault::discoverMediaManagers(std::vector<std::string>& identifiers, Browser::BrowserError& e) {
+    // No operation in default
+}
+
 /**
  * List all containers below the given path.
          returns: A JSON list of all

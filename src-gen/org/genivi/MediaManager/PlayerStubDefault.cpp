@@ -499,11 +499,11 @@ bool PlayerStubDefault::validatePositionAttributeRequestedValue(const uint64_t& 
                       
  *  played once playback is activated
  */
-void PlayerStubDefault::next(const std::shared_ptr<CommonAPI::ClientId> clientId) {
+void PlayerStubDefault::next(const std::shared_ptr<CommonAPI::ClientId> clientId, Player::PlayerError& e) {
     // Call old style methods in default 
-    next();
+    next(e);
 }
-void PlayerStubDefault::next() {
+void PlayerStubDefault::next(Player::PlayerError& e) {
     // No operation in default
 }
 
@@ -549,11 +549,11 @@ void PlayerStubDefault::openPlaylist(std::string uri, Player::PlayerError& e) {
                        Note: If CanPause is false,
  *  this has no effect
  */
-void PlayerStubDefault::pause(const std::shared_ptr<CommonAPI::ClientId> clientId) {
+void PlayerStubDefault::pause(const std::shared_ptr<CommonAPI::ClientId> clientId, Player::PlayerError& e) {
     // Call old style methods in default 
-    pause();
+    pause(e);
 }
-void PlayerStubDefault::pause() {
+void PlayerStubDefault::pause(Player::PlayerError& e) {
     // No operation in default
 }
 
@@ -568,11 +568,11 @@ void PlayerStubDefault::pause() {
                       
  *  Note: If CanPlay is false, this has no effect
  */
-void PlayerStubDefault::play(const std::shared_ptr<CommonAPI::ClientId> clientId) {
+void PlayerStubDefault::play(const std::shared_ptr<CommonAPI::ClientId> clientId, Player::PlayerError& e) {
     // Call old style methods in default 
-    play();
+    play(e);
 }
-void PlayerStubDefault::play() {
+void PlayerStubDefault::play(Player::PlayerError& e) {
     // No operation in default
 }
 
@@ -581,11 +581,11 @@ void PlayerStubDefault::play() {
                       Pauses playback (see
  *  Pause) is playing
  */
-void PlayerStubDefault::playPause(const std::shared_ptr<CommonAPI::ClientId> clientId) {
+void PlayerStubDefault::playPause(const std::shared_ptr<CommonAPI::ClientId> clientId, Player::PlayerError& e) {
     // Call old style methods in default 
-    playPause();
+    playPause(e);
 }
-void PlayerStubDefault::playPause() {
+void PlayerStubDefault::playPause(Player::PlayerError& e) {
     // No operation in default
 }
 
@@ -601,11 +601,11 @@ void PlayerStubDefault::playPause() {
        
  *                Note: If CanGoPrevious is false, this has no effect
  */
-void PlayerStubDefault::previous(const std::shared_ptr<CommonAPI::ClientId> clientId) {
+void PlayerStubDefault::previous(const std::shared_ptr<CommonAPI::ClientId> clientId, Player::PlayerError& e) {
     // Call old style methods in default 
-    previous();
+    previous(e);
 }
-void PlayerStubDefault::previous() {
+void PlayerStubDefault::previous(Player::PlayerError& e) {
     // No operation in default
 }
 
@@ -622,11 +622,11 @@ void PlayerStubDefault::previous() {
                       Note: If CanSeek is false, this has no effect
  * @param pos Relative seek amount in microseconds
  */
-void PlayerStubDefault::seek(const std::shared_ptr<CommonAPI::ClientId> clientId, int64_t pos) {
+void PlayerStubDefault::seek(const std::shared_ptr<CommonAPI::ClientId> clientId, int64_t pos, Player::PlayerError& e) {
     // Call old style methods in default 
-    seek(pos);
+    seek(pos, e);
 }
-void PlayerStubDefault::seek(int64_t pos) {
+void PlayerStubDefault::seek(int64_t pos, Player::PlayerError& e) {
     // No operation in default
 }
 
@@ -639,11 +639,11 @@ void PlayerStubDefault::seek(int64_t pos) {
          Note: If CanSeek is false, this has no effect
  * @param pos Absolute position in microseconds
  */
-void PlayerStubDefault::setPosition(const std::shared_ptr<CommonAPI::ClientId> clientId, uint64_t pos) {
+void PlayerStubDefault::setPosition(const std::shared_ptr<CommonAPI::ClientId> clientId, uint64_t pos, Player::PlayerError& e) {
     // Call old style methods in default 
-    setPosition(pos);
+    setPosition(pos, e);
 }
-void PlayerStubDefault::setPosition(uint64_t pos) {
+void PlayerStubDefault::setPosition(uint64_t pos, Player::PlayerError& e) {
     // No operation in default
 }
 

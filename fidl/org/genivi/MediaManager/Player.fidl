@@ -78,7 +78,11 @@ interface Player {
                        stopped, this function will set the next plack to be
                        played once playback is activated
     **>
-    method next {}
+    method next {
+        out {
+            PlayerError e
+        }
+    }
 
     <** @description: Open the supplied Uri for playback in the playback engine.
          returns: INVALID_URI When an invalid URI is supplied
@@ -115,7 +119,11 @@ interface Player {
                        If already paused, this has no effect
                        Note: If CanPause is false, this has no effect
      **>
-    method pause {}
+    method pause {
+        out {
+            PlayerError e
+        }
+    }
 
     <** @description: Start or resume playback in the playback engine.
                        If playback is already commencing, this has not effect.
@@ -123,14 +131,22 @@ interface Player {
                        If there is no track to play, calling this has no effect
                        Note: If CanPlay is false, this has no effect
     **>
-    method play {}
+    method play {
+        out {
+            PlayerError e
+        }
+    }
 
     <** @description: Starts playback (see Play) if paused
                       Pauses playback (see Pause) is playing
         @see: Play
         @see: Pause
     **>
-    method playPause {}
+    method playPause {
+        out {
+            PlayerError e
+        }
+    }
 
     <** @description: Loads previous track in play queue
                       If there is no previous track, playback is stopped
@@ -139,7 +155,11 @@ interface Player {
                       by this function
                       Note: If CanGoPrevious is false, this has no effect
     **>
-    method previous {}
+    method previous {
+        out {
+            PlayerError e
+        }
+    }
 
     <** @description: Seek relatively in the current track
                       If a negative seek leads to a play position less than 0,
@@ -154,6 +174,9 @@ interface Player {
         in {
             Int64 pos
         }
+        out {
+            PlayerError e
+        }
     }
 
     <** @description: Jump to the specified position in the current
@@ -166,6 +189,9 @@ interface Player {
         in {
             UInt64 pos
         }
+        out {
+            PlayerError e
+        }
     }
 
     // Data structures
@@ -174,10 +200,11 @@ interface Player {
         UNMUTED
     }
 
-    enumeration PlayerError {
+    enumeration PlayerError{
         NO_ERROR
 
         BAD_PLAYLIST
+        BACKEND_UNREACHABLE
     }
 
     enumeration ShuffleStatus {

@@ -85,8 +85,8 @@ class PlayerStubDefault : public PlayerStub {
                           
      *  played once playback is activated
      */
-    virtual void next(const std::shared_ptr<CommonAPI::ClientId> clientId);
-    virtual void next();
+    virtual void next(const std::shared_ptr<CommonAPI::ClientId> clientId, Player::PlayerError& e);
+    virtual void next(Player::PlayerError& e);
 
     /**
      * Open the supplied Uri for playback in the playback engine.
@@ -120,8 +120,8 @@ class PlayerStubDefault : public PlayerStub {
                            Note: If CanPause is false,
      *  this has no effect
      */
-    virtual void pause(const std::shared_ptr<CommonAPI::ClientId> clientId);
-    virtual void pause();
+    virtual void pause(const std::shared_ptr<CommonAPI::ClientId> clientId, Player::PlayerError& e);
+    virtual void pause(Player::PlayerError& e);
 
     /**
      * Start or resume playback in the playback engine.
@@ -134,16 +134,16 @@ class PlayerStubDefault : public PlayerStub {
                           
      *  Note: If CanPlay is false, this has no effect
      */
-    virtual void play(const std::shared_ptr<CommonAPI::ClientId> clientId);
-    virtual void play();
+    virtual void play(const std::shared_ptr<CommonAPI::ClientId> clientId, Player::PlayerError& e);
+    virtual void play(Player::PlayerError& e);
 
     /**
      * Starts playback (see Play) if paused
                           Pauses playback (see
      *  Pause) is playing
      */
-    virtual void playPause(const std::shared_ptr<CommonAPI::ClientId> clientId);
-    virtual void playPause();
+    virtual void playPause(const std::shared_ptr<CommonAPI::ClientId> clientId, Player::PlayerError& e);
+    virtual void playPause(Player::PlayerError& e);
 
     /**
      * Loads previous track in play queue
@@ -157,8 +157,8 @@ class PlayerStubDefault : public PlayerStub {
            
      *                Note: If CanGoPrevious is false, this has no effect
      */
-    virtual void previous(const std::shared_ptr<CommonAPI::ClientId> clientId);
-    virtual void previous();
+    virtual void previous(const std::shared_ptr<CommonAPI::ClientId> clientId, Player::PlayerError& e);
+    virtual void previous(Player::PlayerError& e);
 
     /**
      * Seek relatively in the current track
@@ -173,8 +173,8 @@ class PlayerStubDefault : public PlayerStub {
                           Note: If CanSeek is false, this has no effect
      * @param pos Relative seek amount in microseconds
      */
-    virtual void seek(const std::shared_ptr<CommonAPI::ClientId> clientId, int64_t pos);
-    virtual void seek(int64_t pos);
+    virtual void seek(const std::shared_ptr<CommonAPI::ClientId> clientId, int64_t pos, Player::PlayerError& e);
+    virtual void seek(int64_t pos, Player::PlayerError& e);
 
     /**
      * Jump to the specified position in the current
@@ -185,8 +185,8 @@ class PlayerStubDefault : public PlayerStub {
              Note: If CanSeek is false, this has no effect
      * @param pos Absolute position in microseconds
      */
-    virtual void setPosition(const std::shared_ptr<CommonAPI::ClientId> clientId, uint64_t pos);
-    virtual void setPosition(uint64_t pos);
+    virtual void setPosition(const std::shared_ptr<CommonAPI::ClientId> clientId, uint64_t pos, Player::PlayerError& e);
+    virtual void setPosition(uint64_t pos, Player::PlayerError& e);
 
 
     

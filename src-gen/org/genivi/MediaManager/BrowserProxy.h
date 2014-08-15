@@ -30,6 +30,26 @@ class BrowserProxy: virtual public Browser, virtual public BrowserProxyBase, pub
 
 
     /**
+     * Calls discoverMediaManagers with synchronous semantics.
+     * 
+    * All non-const parameters will be filled with the returned values.
+     * The CallStatus will be filled when the method returns and indicate either
+     * "SUCCESS" or which type of error has occurred. In case of an error, ONLY the CallStatus
+     * will be set.
+     */
+    virtual void discoverMediaManagers(CommonAPI::CallStatus& callStatus, std::vector<std::string>& identifiers, Browser::BrowserError& e);
+    /**
+     * Calls discoverMediaManagers with asynchronous semantics.
+     * 
+     * The provided callback will be called when the reply to this call arrives or
+     * an error occurs during the call. The CallStatus will indicate either "SUCCESS"
+     * or which type of error has occurred. In case of any error, ONLY the CallStatus
+     * will have a defined value.
+     * The std::future returned by this method will be fulfilled at arrival of the reply.
+     * It will provide the same value for CallStatus as will be handed to the callback.
+     */
+    virtual std::future<CommonAPI::CallStatus> discoverMediaManagersAsync(DiscoverMediaManagersAsyncCallback callback);
+    /**
      * List all containers below the given path.
              returns: A JSON list of all
      *  containers with the given path as parent
@@ -444,6 +464,15 @@ template <typename ... _AttributeExtensions>
 BrowserProxy<_AttributeExtensions...>::~BrowserProxy() {
 }
 
+template <typename ... _AttributeExtensions>
+void BrowserProxy<_AttributeExtensions...>::discoverMediaManagers(CommonAPI::CallStatus& callStatus, std::vector<std::string>& identifiers, Browser::BrowserError& e) {
+    delegate_->discoverMediaManagers(callStatus, identifiers, e);
+}
+
+template <typename ... _AttributeExtensions>
+std::future<CommonAPI::CallStatus> BrowserProxy<_AttributeExtensions...>::discoverMediaManagersAsync(DiscoverMediaManagersAsyncCallback callback) {
+    return delegate_->discoverMediaManagersAsync(callback);
+}
 /**
  * List all containers below the given path.
          returns: A JSON list of all

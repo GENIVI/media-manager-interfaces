@@ -228,7 +228,7 @@ class PlayerStub : public CommonAPI::Stub<PlayerStubAdapter , PlayerStubRemoteEv
      *  played once playback is activated
      */
     /// This is the method that will be called on remote calls on the method next.
-    virtual void next(const std::shared_ptr<CommonAPI::ClientId> clientId) = 0;
+    virtual void next(const std::shared_ptr<CommonAPI::ClientId> clientId, Player::PlayerError& e) = 0;
     /**
      * Open the supplied Uri for playback in the playback engine.
              returns:
@@ -260,7 +260,7 @@ class PlayerStub : public CommonAPI::Stub<PlayerStubAdapter , PlayerStubRemoteEv
      *  this has no effect
      */
     /// This is the method that will be called on remote calls on the method pause.
-    virtual void pause(const std::shared_ptr<CommonAPI::ClientId> clientId) = 0;
+    virtual void pause(const std::shared_ptr<CommonAPI::ClientId> clientId, Player::PlayerError& e) = 0;
     /**
      * Start or resume playback in the playback engine.
                            If
@@ -273,14 +273,14 @@ class PlayerStub : public CommonAPI::Stub<PlayerStubAdapter , PlayerStubRemoteEv
      *  Note: If CanPlay is false, this has no effect
      */
     /// This is the method that will be called on remote calls on the method play.
-    virtual void play(const std::shared_ptr<CommonAPI::ClientId> clientId) = 0;
+    virtual void play(const std::shared_ptr<CommonAPI::ClientId> clientId, Player::PlayerError& e) = 0;
     /**
      * Starts playback (see Play) if paused
                           Pauses playback (see
      *  Pause) is playing
      */
     /// This is the method that will be called on remote calls on the method playPause.
-    virtual void playPause(const std::shared_ptr<CommonAPI::ClientId> clientId) = 0;
+    virtual void playPause(const std::shared_ptr<CommonAPI::ClientId> clientId, Player::PlayerError& e) = 0;
     /**
      * Loads previous track in play queue
                           If there is no
@@ -294,7 +294,7 @@ class PlayerStub : public CommonAPI::Stub<PlayerStubAdapter , PlayerStubRemoteEv
      *                Note: If CanGoPrevious is false, this has no effect
      */
     /// This is the method that will be called on remote calls on the method previous.
-    virtual void previous(const std::shared_ptr<CommonAPI::ClientId> clientId) = 0;
+    virtual void previous(const std::shared_ptr<CommonAPI::ClientId> clientId, Player::PlayerError& e) = 0;
     /**
      * Seek relatively in the current track
                           If a negative seek
@@ -309,7 +309,7 @@ class PlayerStub : public CommonAPI::Stub<PlayerStubAdapter , PlayerStubRemoteEv
      * @param pos Relative seek amount in microseconds
      */
     /// This is the method that will be called on remote calls on the method seek.
-    virtual void seek(const std::shared_ptr<CommonAPI::ClientId> clientId, int64_t pos) = 0;
+    virtual void seek(const std::shared_ptr<CommonAPI::ClientId> clientId, int64_t pos, Player::PlayerError& e) = 0;
     /**
      * Jump to the specified position in the current
                            If the
@@ -320,7 +320,7 @@ class PlayerStub : public CommonAPI::Stub<PlayerStubAdapter , PlayerStubRemoteEv
      * @param pos Absolute position in microseconds
      */
     /// This is the method that will be called on remote calls on the method setPosition.
-    virtual void setPosition(const std::shared_ptr<CommonAPI::ClientId> clientId, uint64_t pos) = 0;
+    virtual void setPosition(const std::shared_ptr<CommonAPI::ClientId> clientId, uint64_t pos, Player::PlayerError& e) = 0;
     
 };
 

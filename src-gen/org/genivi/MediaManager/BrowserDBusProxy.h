@@ -39,6 +39,8 @@ class BrowserDBusProxy: virtual public BrowserProxyBase, virtual public CommonAP
 
 
 
+    virtual void discoverMediaManagers(CommonAPI::CallStatus& callStatus, std::vector<std::string>& identifiers, Browser::BrowserError& e);
+    virtual std::future<CommonAPI::CallStatus> discoverMediaManagersAsync(DiscoverMediaManagersAsyncCallback callback);
     /**
      * List all containers below the given path.
              returns: A JSON list of all

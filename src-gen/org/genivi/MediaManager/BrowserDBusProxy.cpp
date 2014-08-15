@@ -39,6 +39,23 @@ BrowserDBusProxy::BrowserDBusProxy(
 
 
 
+void BrowserDBusProxy::discoverMediaManagers(CommonAPI::CallStatus& callStatus, std::vector<std::string>& identifiers, Browser::BrowserError& e) {
+    CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<>,
+                                     CommonAPI::DBus::DBusSerializableArguments<std::vector<std::string>, Browser::BrowserError> >::callMethodWithReply(
+        *this,
+        "discoverMediaManagers",
+        "",
+        callStatus
+        , identifiers, e);
+}
+std::future<CommonAPI::CallStatus> BrowserDBusProxy::discoverMediaManagersAsync(DiscoverMediaManagersAsyncCallback callback) {
+    return CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<>,
+                                     CommonAPI::DBus::DBusSerializableArguments<std::vector<std::string>, Browser::BrowserError> >::callMethodAsync(
+        *this,
+        "discoverMediaManagers",
+        "",
+        std::move(callback));
+}
 /**
  * List all containers below the given path.
          returns: A JSON list of all

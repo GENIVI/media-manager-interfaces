@@ -24,6 +24,13 @@ interface Browser {
         minor 0
     }
 
+    method discoverMediaManagers {
+        out {
+            String[] identifiers
+            BrowserError e
+        }
+    }
+
     <** @description: List all containers below the given path.
          returns: A JSON list of all containers with the given path as parent
          errors: NO_CONNECTION if no connection can be established to underlying

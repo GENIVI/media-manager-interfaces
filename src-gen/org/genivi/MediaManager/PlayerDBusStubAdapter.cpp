@@ -157,6 +157,7 @@ const char* PlayerDBusStubAdapter::getMethodsDBusIntrospectionXmlData() const {
          *  played once playback is activated
          */
         "<method name=\"next\">\n"
+            "<arg name=\"e\" type=\"u\" direction=\"out\" />\n"
         "</method>\n"
         /**
          * Open the supplied Uri for playback in the playback engine.
@@ -193,6 +194,7 @@ const char* PlayerDBusStubAdapter::getMethodsDBusIntrospectionXmlData() const {
          *  this has no effect
          */
         "<method name=\"pause\">\n"
+            "<arg name=\"e\" type=\"u\" direction=\"out\" />\n"
         "</method>\n"
         /**
          * Start or resume playback in the playback engine.
@@ -206,6 +208,7 @@ const char* PlayerDBusStubAdapter::getMethodsDBusIntrospectionXmlData() const {
          *  Note: If CanPlay is false, this has no effect
          */
         "<method name=\"play\">\n"
+            "<arg name=\"e\" type=\"u\" direction=\"out\" />\n"
         "</method>\n"
         /**
          * Starts playback (see Play) if paused
@@ -213,6 +216,7 @@ const char* PlayerDBusStubAdapter::getMethodsDBusIntrospectionXmlData() const {
          *  Pause) is playing
          */
         "<method name=\"playPause\">\n"
+            "<arg name=\"e\" type=\"u\" direction=\"out\" />\n"
         "</method>\n"
         /**
          * Loads previous track in play queue
@@ -227,6 +231,7 @@ const char* PlayerDBusStubAdapter::getMethodsDBusIntrospectionXmlData() const {
          *                Note: If CanGoPrevious is false, this has no effect
          */
         "<method name=\"previous\">\n"
+            "<arg name=\"e\" type=\"u\" direction=\"out\" />\n"
         "</method>\n"
         /**
          * Seek relatively in the current track
@@ -243,6 +248,7 @@ const char* PlayerDBusStubAdapter::getMethodsDBusIntrospectionXmlData() const {
          */
         "<method name=\"seek\">\n"
             "<arg name=\"pos\" type=\"x\" direction=\"in\" />\n"
+            "<arg name=\"e\" type=\"u\" direction=\"out\" />\n"
         "</method>\n"
         /**
          * Jump to the specified position in the current
@@ -255,6 +261,7 @@ const char* PlayerDBusStubAdapter::getMethodsDBusIntrospectionXmlData() const {
          */
         "<method name=\"setPosition\">\n"
             "<arg name=\"pos\" type=\"t\" direction=\"in\" />\n"
+            "<arg name=\"e\" type=\"u\" direction=\"out\" />\n"
         "</method>\n"
         
     ;
@@ -439,8 +446,8 @@ static CommonAPI::DBus::DBusGetAttributeStubDispatcher<
 static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     PlayerStub,
     std::tuple<>,
-    std::tuple<>
-    > nextStubDispatcher(&PlayerStub::next, "");
+    std::tuple<Player::PlayerError>
+    > nextStubDispatcher(&PlayerStub::next, "u");
 /**
  * Open the supplied Uri for playback in the playback engine.
          returns:
@@ -480,8 +487,8 @@ static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
 static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     PlayerStub,
     std::tuple<>,
-    std::tuple<>
-    > pauseStubDispatcher(&PlayerStub::pause, "");
+    std::tuple<Player::PlayerError>
+    > pauseStubDispatcher(&PlayerStub::pause, "u");
 /**
  * Start or resume playback in the playback engine.
                        If
@@ -496,8 +503,8 @@ static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
 static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     PlayerStub,
     std::tuple<>,
-    std::tuple<>
-    > playStubDispatcher(&PlayerStub::play, "");
+    std::tuple<Player::PlayerError>
+    > playStubDispatcher(&PlayerStub::play, "u");
 /**
  * Starts playback (see Play) if paused
                       Pauses playback (see
@@ -506,8 +513,8 @@ static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
 static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     PlayerStub,
     std::tuple<>,
-    std::tuple<>
-    > playPauseStubDispatcher(&PlayerStub::playPause, "");
+    std::tuple<Player::PlayerError>
+    > playPauseStubDispatcher(&PlayerStub::playPause, "u");
 /**
  * Loads previous track in play queue
                       If there is no
@@ -523,8 +530,8 @@ static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
 static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     PlayerStub,
     std::tuple<>,
-    std::tuple<>
-    > previousStubDispatcher(&PlayerStub::previous, "");
+    std::tuple<Player::PlayerError>
+    > previousStubDispatcher(&PlayerStub::previous, "u");
 /**
  * Seek relatively in the current track
                       If a negative seek
@@ -541,8 +548,8 @@ static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
 static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     PlayerStub,
     std::tuple<int64_t>,
-    std::tuple<>
-    > seekStubDispatcher(&PlayerStub::seek, "");
+    std::tuple<Player::PlayerError>
+    > seekStubDispatcher(&PlayerStub::seek, "u");
 /**
  * Jump to the specified position in the current
                        If the
@@ -555,8 +562,8 @@ static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
 static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     PlayerStub,
     std::tuple<uint64_t>,
-    std::tuple<>
-    > setPositionStubDispatcher(&PlayerStub::setPosition, "");
+    std::tuple<Player::PlayerError>
+    > setPositionStubDispatcher(&PlayerStub::setPosition, "u");
 
 /**
  * Mute or unmute audio. When muted, the player backend will

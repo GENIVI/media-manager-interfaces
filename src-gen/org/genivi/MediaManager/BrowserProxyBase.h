@@ -36,6 +36,7 @@ namespace MediaManager {
 class BrowserProxyBase: virtual public CommonAPI::Proxy {
  public:
 
+    typedef std::function<void(const CommonAPI::CallStatus&, const std::vector<std::string>&, const Browser::BrowserError&)> DiscoverMediaManagersAsyncCallback;
     typedef std::function<void(const CommonAPI::CallStatus&, const std::string&, const Browser::BrowserError&)> ListContainersAsyncCallback;
     typedef std::function<void(const CommonAPI::CallStatus&, const std::string&, const Browser::BrowserError&)> ListContainersExAsyncCallback;
     typedef std::function<void(const CommonAPI::CallStatus&, const std::string&, const Browser::BrowserError&)> ListItemsAsyncCallback;
@@ -50,6 +51,8 @@ class BrowserProxyBase: virtual public CommonAPI::Proxy {
 
 
 
+    virtual void discoverMediaManagers(CommonAPI::CallStatus& callStatus, std::vector<std::string>& identifiers, Browser::BrowserError& e) = 0;
+    virtual std::future<CommonAPI::CallStatus> discoverMediaManagersAsync(DiscoverMediaManagersAsyncCallback callback) = 0;
     /**
      * List all containers below the given path.
              returns: A JSON list of all

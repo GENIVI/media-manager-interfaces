@@ -41,7 +41,8 @@ class Player {
     struct MuteStatusComparator;
     enum class PlayerError: int32_t {
         NO_ERROR,
-        BAD_PLAYLIST
+        BAD_PLAYLIST,
+        BACKEND_UNREACHABLE
     };
     
     // Definition of a comparator still is necessary for GCC 4.4.1, topic is fixed since 4.5.1

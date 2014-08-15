@@ -100,18 +100,18 @@ PlayerDBusProxy::PositionAttribute& PlayerDBusProxy::getPositionAttribute() {
                       
  *  played once playback is activated
  */
-void PlayerDBusProxy::next(CommonAPI::CallStatus& callStatus) {
+void PlayerDBusProxy::next(CommonAPI::CallStatus& callStatus, Player::PlayerError& e) {
     CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<>,
-                                     CommonAPI::DBus::DBusSerializableArguments<> >::callMethodWithReply(
+                                     CommonAPI::DBus::DBusSerializableArguments<Player::PlayerError> >::callMethodWithReply(
         *this,
         "next",
         "",
         callStatus
-        );
+        , e);
 }
 std::future<CommonAPI::CallStatus> PlayerDBusProxy::nextAsync(NextAsyncCallback callback) {
     return CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<>,
-                                     CommonAPI::DBus::DBusSerializableArguments<> >::callMethodAsync(
+                                     CommonAPI::DBus::DBusSerializableArguments<Player::PlayerError> >::callMethodAsync(
         *this,
         "next",
         "",
@@ -181,18 +181,18 @@ std::future<CommonAPI::CallStatus> PlayerDBusProxy::openPlaylistAsync(const std:
                        Note: If CanPause is false,
  *  this has no effect
  */
-void PlayerDBusProxy::pause(CommonAPI::CallStatus& callStatus) {
+void PlayerDBusProxy::pause(CommonAPI::CallStatus& callStatus, Player::PlayerError& e) {
     CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<>,
-                                     CommonAPI::DBus::DBusSerializableArguments<> >::callMethodWithReply(
+                                     CommonAPI::DBus::DBusSerializableArguments<Player::PlayerError> >::callMethodWithReply(
         *this,
         "pause",
         "",
         callStatus
-        );
+        , e);
 }
 std::future<CommonAPI::CallStatus> PlayerDBusProxy::pauseAsync(PauseAsyncCallback callback) {
     return CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<>,
-                                     CommonAPI::DBus::DBusSerializableArguments<> >::callMethodAsync(
+                                     CommonAPI::DBus::DBusSerializableArguments<Player::PlayerError> >::callMethodAsync(
         *this,
         "pause",
         "",
@@ -209,18 +209,18 @@ std::future<CommonAPI::CallStatus> PlayerDBusProxy::pauseAsync(PauseAsyncCallbac
                       
  *  Note: If CanPlay is false, this has no effect
  */
-void PlayerDBusProxy::play(CommonAPI::CallStatus& callStatus) {
+void PlayerDBusProxy::play(CommonAPI::CallStatus& callStatus, Player::PlayerError& e) {
     CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<>,
-                                     CommonAPI::DBus::DBusSerializableArguments<> >::callMethodWithReply(
+                                     CommonAPI::DBus::DBusSerializableArguments<Player::PlayerError> >::callMethodWithReply(
         *this,
         "play",
         "",
         callStatus
-        );
+        , e);
 }
 std::future<CommonAPI::CallStatus> PlayerDBusProxy::playAsync(PlayAsyncCallback callback) {
     return CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<>,
-                                     CommonAPI::DBus::DBusSerializableArguments<> >::callMethodAsync(
+                                     CommonAPI::DBus::DBusSerializableArguments<Player::PlayerError> >::callMethodAsync(
         *this,
         "play",
         "",
@@ -231,18 +231,18 @@ std::future<CommonAPI::CallStatus> PlayerDBusProxy::playAsync(PlayAsyncCallback 
                       Pauses playback (see
  *  Pause) is playing
  */
-void PlayerDBusProxy::playPause(CommonAPI::CallStatus& callStatus) {
+void PlayerDBusProxy::playPause(CommonAPI::CallStatus& callStatus, Player::PlayerError& e) {
     CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<>,
-                                     CommonAPI::DBus::DBusSerializableArguments<> >::callMethodWithReply(
+                                     CommonAPI::DBus::DBusSerializableArguments<Player::PlayerError> >::callMethodWithReply(
         *this,
         "playPause",
         "",
         callStatus
-        );
+        , e);
 }
 std::future<CommonAPI::CallStatus> PlayerDBusProxy::playPauseAsync(PlayPauseAsyncCallback callback) {
     return CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<>,
-                                     CommonAPI::DBus::DBusSerializableArguments<> >::callMethodAsync(
+                                     CommonAPI::DBus::DBusSerializableArguments<Player::PlayerError> >::callMethodAsync(
         *this,
         "playPause",
         "",
@@ -260,18 +260,18 @@ std::future<CommonAPI::CallStatus> PlayerDBusProxy::playPauseAsync(PlayPauseAsyn
        
  *                Note: If CanGoPrevious is false, this has no effect
  */
-void PlayerDBusProxy::previous(CommonAPI::CallStatus& callStatus) {
+void PlayerDBusProxy::previous(CommonAPI::CallStatus& callStatus, Player::PlayerError& e) {
     CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<>,
-                                     CommonAPI::DBus::DBusSerializableArguments<> >::callMethodWithReply(
+                                     CommonAPI::DBus::DBusSerializableArguments<Player::PlayerError> >::callMethodWithReply(
         *this,
         "previous",
         "",
         callStatus
-        );
+        , e);
 }
 std::future<CommonAPI::CallStatus> PlayerDBusProxy::previousAsync(PreviousAsyncCallback callback) {
     return CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<>,
-                                     CommonAPI::DBus::DBusSerializableArguments<> >::callMethodAsync(
+                                     CommonAPI::DBus::DBusSerializableArguments<Player::PlayerError> >::callMethodAsync(
         *this,
         "previous",
         "",
@@ -290,19 +290,19 @@ std::future<CommonAPI::CallStatus> PlayerDBusProxy::previousAsync(PreviousAsyncC
                       Note: If CanSeek is false, this has no effect
  * @param pos Relative seek amount in microseconds
  */
-void PlayerDBusProxy::seek(const int64_t& pos, CommonAPI::CallStatus& callStatus) {
+void PlayerDBusProxy::seek(const int64_t& pos, CommonAPI::CallStatus& callStatus, Player::PlayerError& e) {
     CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<int64_t>,
-                                     CommonAPI::DBus::DBusSerializableArguments<> >::callMethodWithReply(
+                                     CommonAPI::DBus::DBusSerializableArguments<Player::PlayerError> >::callMethodWithReply(
         *this,
         "seek",
         "x",
         pos, 
         callStatus
-        );
+        , e);
 }
 std::future<CommonAPI::CallStatus> PlayerDBusProxy::seekAsync(const int64_t& pos, SeekAsyncCallback callback) {
     return CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<int64_t>,
-                                     CommonAPI::DBus::DBusSerializableArguments<> >::callMethodAsync(
+                                     CommonAPI::DBus::DBusSerializableArguments<Player::PlayerError> >::callMethodAsync(
         *this,
         "seek",
         "x",
@@ -318,19 +318,19 @@ std::future<CommonAPI::CallStatus> PlayerDBusProxy::seekAsync(const int64_t& pos
          Note: If CanSeek is false, this has no effect
  * @param pos Absolute position in microseconds
  */
-void PlayerDBusProxy::setPosition(const uint64_t& pos, CommonAPI::CallStatus& callStatus) {
+void PlayerDBusProxy::setPosition(const uint64_t& pos, CommonAPI::CallStatus& callStatus, Player::PlayerError& e) {
     CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<uint64_t>,
-                                     CommonAPI::DBus::DBusSerializableArguments<> >::callMethodWithReply(
+                                     CommonAPI::DBus::DBusSerializableArguments<Player::PlayerError> >::callMethodWithReply(
         *this,
         "setPosition",
         "t",
         pos, 
         callStatus
-        );
+        , e);
 }
 std::future<CommonAPI::CallStatus> PlayerDBusProxy::setPositionAsync(const uint64_t& pos, SetPositionAsyncCallback callback) {
     return CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<uint64_t>,
-                                     CommonAPI::DBus::DBusSerializableArguments<> >::callMethodAsync(
+                                     CommonAPI::DBus::DBusSerializableArguments<Player::PlayerError> >::callMethodAsync(
         *this,
         "setPosition",
         "t",

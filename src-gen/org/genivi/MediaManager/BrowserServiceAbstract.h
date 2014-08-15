@@ -38,6 +38,12 @@ class BrowserServiceAbstract : public BrowserStub {
 
 
 
+virtual void discoverMediaManagers(const std::shared_ptr<CommonAPI::ClientId> clientId, std::vector<std::string>& identifiers, Browser::BrowserError& e) {
+    // Call old style methods in default 
+    return discoverMediaManagers(identifiers, e);
+}
+virtual void discoverMediaManagers(std::vector<std::string>& identifiers, Browser::BrowserError& e) = 0;
+
 /**
  * List all containers below the given path.
          returns: A JSON list of all

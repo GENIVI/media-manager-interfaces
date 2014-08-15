@@ -174,11 +174,12 @@ class PlayerProxy: virtual public Player, virtual public PlayerProxyBase, public
      * 
      * Calls next with synchronous semantics.
      * 
+    * All non-const parameters will be filled with the returned values.
      * The CallStatus will be filled when the method returns and indicate either
      * "SUCCESS" or which type of error has occurred. In case of an error, ONLY the CallStatus
      * will be set.
      */
-    virtual void next(CommonAPI::CallStatus& callStatus);
+    virtual void next(CommonAPI::CallStatus& callStatus, Player::PlayerError& e);
     /**
      * Calls next with asynchronous semantics.
      * 
@@ -258,11 +259,12 @@ class PlayerProxy: virtual public Player, virtual public PlayerProxyBase, public
      * 
      * Calls pause with synchronous semantics.
      * 
+    * All non-const parameters will be filled with the returned values.
      * The CallStatus will be filled when the method returns and indicate either
      * "SUCCESS" or which type of error has occurred. In case of an error, ONLY the CallStatus
      * will be set.
      */
-    virtual void pause(CommonAPI::CallStatus& callStatus);
+    virtual void pause(CommonAPI::CallStatus& callStatus, Player::PlayerError& e);
     /**
      * Calls pause with asynchronous semantics.
      * 
@@ -287,11 +289,12 @@ class PlayerProxy: virtual public Player, virtual public PlayerProxyBase, public
      * 
      * Calls play with synchronous semantics.
      * 
+    * All non-const parameters will be filled with the returned values.
      * The CallStatus will be filled when the method returns and indicate either
      * "SUCCESS" or which type of error has occurred. In case of an error, ONLY the CallStatus
      * will be set.
      */
-    virtual void play(CommonAPI::CallStatus& callStatus);
+    virtual void play(CommonAPI::CallStatus& callStatus, Player::PlayerError& e);
     /**
      * Calls play with asynchronous semantics.
      * 
@@ -310,11 +313,12 @@ class PlayerProxy: virtual public Player, virtual public PlayerProxyBase, public
      * 
      * Calls playPause with synchronous semantics.
      * 
+    * All non-const parameters will be filled with the returned values.
      * The CallStatus will be filled when the method returns and indicate either
      * "SUCCESS" or which type of error has occurred. In case of an error, ONLY the CallStatus
      * will be set.
      */
-    virtual void playPause(CommonAPI::CallStatus& callStatus);
+    virtual void playPause(CommonAPI::CallStatus& callStatus, Player::PlayerError& e);
     /**
      * Calls playPause with asynchronous semantics.
      * 
@@ -340,11 +344,12 @@ class PlayerProxy: virtual public Player, virtual public PlayerProxyBase, public
      * 
      * Calls previous with synchronous semantics.
      * 
+    * All non-const parameters will be filled with the returned values.
      * The CallStatus will be filled when the method returns and indicate either
      * "SUCCESS" or which type of error has occurred. In case of an error, ONLY the CallStatus
      * will be set.
      */
-    virtual void previous(CommonAPI::CallStatus& callStatus);
+    virtual void previous(CommonAPI::CallStatus& callStatus, Player::PlayerError& e);
     /**
      * Calls previous with asynchronous semantics.
      * 
@@ -372,11 +377,12 @@ class PlayerProxy: virtual public Player, virtual public PlayerProxyBase, public
      * Calls seek with synchronous semantics.
      * 
     * All const parameters are input parameters to this method.
+    * All non-const parameters will be filled with the returned values.
      * The CallStatus will be filled when the method returns and indicate either
      * "SUCCESS" or which type of error has occurred. In case of an error, ONLY the CallStatus
      * will be set.
      */
-    virtual void seek(const int64_t& pos, CommonAPI::CallStatus& callStatus);
+    virtual void seek(const int64_t& pos, CommonAPI::CallStatus& callStatus, Player::PlayerError& e);
     /**
      * Calls seek with asynchronous semantics.
      * 
@@ -400,11 +406,12 @@ class PlayerProxy: virtual public Player, virtual public PlayerProxyBase, public
      * Calls setPosition with synchronous semantics.
      * 
     * All const parameters are input parameters to this method.
+    * All non-const parameters will be filled with the returned values.
      * The CallStatus will be filled when the method returns and indicate either
      * "SUCCESS" or which type of error has occurred. In case of an error, ONLY the CallStatus
      * will be set.
      */
-    virtual void setPosition(const uint64_t& pos, CommonAPI::CallStatus& callStatus);
+    virtual void setPosition(const uint64_t& pos, CommonAPI::CallStatus& callStatus, Player::PlayerError& e);
     /**
      * Calls setPosition with asynchronous semantics.
      * 
@@ -791,8 +798,8 @@ PlayerProxy<_AttributeExtensions...>::~PlayerProxy() {
  *  played once playback is activated
  */
 template <typename ... _AttributeExtensions>
-void PlayerProxy<_AttributeExtensions...>::next(CommonAPI::CallStatus& callStatus) {
-    delegate_->next(callStatus);
+void PlayerProxy<_AttributeExtensions...>::next(CommonAPI::CallStatus& callStatus, Player::PlayerError& e) {
+    delegate_->next(callStatus, e);
 }
 
 template <typename ... _AttributeExtensions>
@@ -844,8 +851,8 @@ std::future<CommonAPI::CallStatus> PlayerProxy<_AttributeExtensions...>::openPla
  *  this has no effect
  */
 template <typename ... _AttributeExtensions>
-void PlayerProxy<_AttributeExtensions...>::pause(CommonAPI::CallStatus& callStatus) {
-    delegate_->pause(callStatus);
+void PlayerProxy<_AttributeExtensions...>::pause(CommonAPI::CallStatus& callStatus, Player::PlayerError& e) {
+    delegate_->pause(callStatus, e);
 }
 
 template <typename ... _AttributeExtensions>
@@ -864,8 +871,8 @@ std::future<CommonAPI::CallStatus> PlayerProxy<_AttributeExtensions...>::pauseAs
  *  Note: If CanPlay is false, this has no effect
  */
 template <typename ... _AttributeExtensions>
-void PlayerProxy<_AttributeExtensions...>::play(CommonAPI::CallStatus& callStatus) {
-    delegate_->play(callStatus);
+void PlayerProxy<_AttributeExtensions...>::play(CommonAPI::CallStatus& callStatus, Player::PlayerError& e) {
+    delegate_->play(callStatus, e);
 }
 
 template <typename ... _AttributeExtensions>
@@ -878,8 +885,8 @@ std::future<CommonAPI::CallStatus> PlayerProxy<_AttributeExtensions...>::playAsy
  *  Pause) is playing
  */
 template <typename ... _AttributeExtensions>
-void PlayerProxy<_AttributeExtensions...>::playPause(CommonAPI::CallStatus& callStatus) {
-    delegate_->playPause(callStatus);
+void PlayerProxy<_AttributeExtensions...>::playPause(CommonAPI::CallStatus& callStatus, Player::PlayerError& e) {
+    delegate_->playPause(callStatus, e);
 }
 
 template <typename ... _AttributeExtensions>
@@ -899,8 +906,8 @@ std::future<CommonAPI::CallStatus> PlayerProxy<_AttributeExtensions...>::playPau
  *                Note: If CanGoPrevious is false, this has no effect
  */
 template <typename ... _AttributeExtensions>
-void PlayerProxy<_AttributeExtensions...>::previous(CommonAPI::CallStatus& callStatus) {
-    delegate_->previous(callStatus);
+void PlayerProxy<_AttributeExtensions...>::previous(CommonAPI::CallStatus& callStatus, Player::PlayerError& e) {
+    delegate_->previous(callStatus, e);
 }
 
 template <typename ... _AttributeExtensions>
@@ -921,8 +928,8 @@ std::future<CommonAPI::CallStatus> PlayerProxy<_AttributeExtensions...>::previou
  * @param pos Relative seek amount in microseconds
  */
 template <typename ... _AttributeExtensions>
-void PlayerProxy<_AttributeExtensions...>::seek(const int64_t& pos, CommonAPI::CallStatus& callStatus) {
-    delegate_->seek(pos, callStatus);
+void PlayerProxy<_AttributeExtensions...>::seek(const int64_t& pos, CommonAPI::CallStatus& callStatus, Player::PlayerError& e) {
+    delegate_->seek(pos, callStatus, e);
 }
 
 template <typename ... _AttributeExtensions>
@@ -939,8 +946,8 @@ std::future<CommonAPI::CallStatus> PlayerProxy<_AttributeExtensions...>::seekAsy
  * @param pos Absolute position in microseconds
  */
 template <typename ... _AttributeExtensions>
-void PlayerProxy<_AttributeExtensions...>::setPosition(const uint64_t& pos, CommonAPI::CallStatus& callStatus) {
-    delegate_->setPosition(pos, callStatus);
+void PlayerProxy<_AttributeExtensions...>::setPosition(const uint64_t& pos, CommonAPI::CallStatus& callStatus, Player::PlayerError& e) {
+    delegate_->setPosition(pos, callStatus, e);
 }
 
 template <typename ... _AttributeExtensions>

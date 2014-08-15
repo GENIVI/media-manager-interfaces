@@ -62,7 +62,7 @@ class PlayerDBusProxy: virtual public PlayerProxyBase, virtual public CommonAPI:
                           
      *  played once playback is activated
      */
-    virtual void next(CommonAPI::CallStatus& callStatus);
+    virtual void next(CommonAPI::CallStatus& callStatus, Player::PlayerError& e);
     virtual std::future<CommonAPI::CallStatus> nextAsync(NextAsyncCallback callback);
     /**
      * Open the supplied Uri for playback in the playback engine.
@@ -94,7 +94,7 @@ class PlayerDBusProxy: virtual public PlayerProxyBase, virtual public CommonAPI:
                            Note: If CanPause is false,
      *  this has no effect
      */
-    virtual void pause(CommonAPI::CallStatus& callStatus);
+    virtual void pause(CommonAPI::CallStatus& callStatus, Player::PlayerError& e);
     virtual std::future<CommonAPI::CallStatus> pauseAsync(PauseAsyncCallback callback);
     /**
      * Start or resume playback in the playback engine.
@@ -107,14 +107,14 @@ class PlayerDBusProxy: virtual public PlayerProxyBase, virtual public CommonAPI:
                           
      *  Note: If CanPlay is false, this has no effect
      */
-    virtual void play(CommonAPI::CallStatus& callStatus);
+    virtual void play(CommonAPI::CallStatus& callStatus, Player::PlayerError& e);
     virtual std::future<CommonAPI::CallStatus> playAsync(PlayAsyncCallback callback);
     /**
      * Starts playback (see Play) if paused
                           Pauses playback (see
      *  Pause) is playing
      */
-    virtual void playPause(CommonAPI::CallStatus& callStatus);
+    virtual void playPause(CommonAPI::CallStatus& callStatus, Player::PlayerError& e);
     virtual std::future<CommonAPI::CallStatus> playPauseAsync(PlayPauseAsyncCallback callback);
     /**
      * Loads previous track in play queue
@@ -128,7 +128,7 @@ class PlayerDBusProxy: virtual public PlayerProxyBase, virtual public CommonAPI:
            
      *                Note: If CanGoPrevious is false, this has no effect
      */
-    virtual void previous(CommonAPI::CallStatus& callStatus);
+    virtual void previous(CommonAPI::CallStatus& callStatus, Player::PlayerError& e);
     virtual std::future<CommonAPI::CallStatus> previousAsync(PreviousAsyncCallback callback);
     /**
      * Seek relatively in the current track
@@ -143,7 +143,7 @@ class PlayerDBusProxy: virtual public PlayerProxyBase, virtual public CommonAPI:
                           Note: If CanSeek is false, this has no effect
      * @param pos Relative seek amount in microseconds
      */
-    virtual void seek(const int64_t& pos, CommonAPI::CallStatus& callStatus);
+    virtual void seek(const int64_t& pos, CommonAPI::CallStatus& callStatus, Player::PlayerError& e);
     virtual std::future<CommonAPI::CallStatus> seekAsync(const int64_t& pos, SeekAsyncCallback callback);
     /**
      * Jump to the specified position in the current
@@ -154,7 +154,7 @@ class PlayerDBusProxy: virtual public PlayerProxyBase, virtual public CommonAPI:
              Note: If CanSeek is false, this has no effect
      * @param pos Absolute position in microseconds
      */
-    virtual void setPosition(const uint64_t& pos, CommonAPI::CallStatus& callStatus);
+    virtual void setPosition(const uint64_t& pos, CommonAPI::CallStatus& callStatus, Player::PlayerError& e);
     virtual std::future<CommonAPI::CallStatus> setPositionAsync(const uint64_t& pos, SetPositionAsyncCallback callback);
     
 

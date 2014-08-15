@@ -229,11 +229,11 @@ const uint64_t& getPositionAttribute(const std::shared_ptr<CommonAPI::ClientId> 
                       
  *  played once playback is activated
  */
-virtual void next(const std::shared_ptr<CommonAPI::ClientId> clientId) {
+virtual void next(const std::shared_ptr<CommonAPI::ClientId> clientId, Player::PlayerError& e) {
     // Call old style methods in default 
-    return next();
+    return next(e);
 }
-virtual void next() = 0;
+virtual void next(Player::PlayerError& e) = 0;
 
 /**
  * Open the supplied Uri for playback in the playback engine.
@@ -273,11 +273,11 @@ virtual void openPlaylist(std::string uri, Player::PlayerError& e) = 0;
                        Note: If CanPause is false,
  *  this has no effect
  */
-virtual void pause(const std::shared_ptr<CommonAPI::ClientId> clientId) {
+virtual void pause(const std::shared_ptr<CommonAPI::ClientId> clientId, Player::PlayerError& e) {
     // Call old style methods in default 
-    return pause();
+    return pause(e);
 }
-virtual void pause() = 0;
+virtual void pause(Player::PlayerError& e) = 0;
 
 /**
  * Start or resume playback in the playback engine.
@@ -290,22 +290,22 @@ virtual void pause() = 0;
                       
  *  Note: If CanPlay is false, this has no effect
  */
-virtual void play(const std::shared_ptr<CommonAPI::ClientId> clientId) {
+virtual void play(const std::shared_ptr<CommonAPI::ClientId> clientId, Player::PlayerError& e) {
     // Call old style methods in default 
-    return play();
+    return play(e);
 }
-virtual void play() = 0;
+virtual void play(Player::PlayerError& e) = 0;
 
 /**
  * Starts playback (see Play) if paused
                       Pauses playback (see
  *  Pause) is playing
  */
-virtual void playPause(const std::shared_ptr<CommonAPI::ClientId> clientId) {
+virtual void playPause(const std::shared_ptr<CommonAPI::ClientId> clientId, Player::PlayerError& e) {
     // Call old style methods in default 
-    return playPause();
+    return playPause(e);
 }
-virtual void playPause() = 0;
+virtual void playPause(Player::PlayerError& e) = 0;
 
 /**
  * Loads previous track in play queue
@@ -319,11 +319,11 @@ virtual void playPause() = 0;
        
  *                Note: If CanGoPrevious is false, this has no effect
  */
-virtual void previous(const std::shared_ptr<CommonAPI::ClientId> clientId) {
+virtual void previous(const std::shared_ptr<CommonAPI::ClientId> clientId, Player::PlayerError& e) {
     // Call old style methods in default 
-    return previous();
+    return previous(e);
 }
-virtual void previous() = 0;
+virtual void previous(Player::PlayerError& e) = 0;
 
 /**
  * Seek relatively in the current track
@@ -338,11 +338,11 @@ virtual void previous() = 0;
                       Note: If CanSeek is false, this has no effect
  * @param pos Relative seek amount in microseconds
  */
-virtual void seek(const std::shared_ptr<CommonAPI::ClientId> clientId, int64_t pos) {
+virtual void seek(const std::shared_ptr<CommonAPI::ClientId> clientId, int64_t pos, Player::PlayerError& e) {
     // Call old style methods in default 
-    return seek(pos);
+    return seek(pos, e);
 }
-virtual void seek(int64_t pos) = 0;
+virtual void seek(int64_t pos, Player::PlayerError& e) = 0;
 
 /**
  * Jump to the specified position in the current
@@ -353,11 +353,11 @@ virtual void seek(int64_t pos) = 0;
          Note: If CanSeek is false, this has no effect
  * @param pos Absolute position in microseconds
  */
-virtual void setPosition(const std::shared_ptr<CommonAPI::ClientId> clientId, uint64_t pos) {
+virtual void setPosition(const std::shared_ptr<CommonAPI::ClientId> clientId, uint64_t pos, Player::PlayerError& e) {
     // Call old style methods in default 
-    return setPosition(pos);
+    return setPosition(pos, e);
 }
-virtual void setPosition(uint64_t pos) = 0;
+virtual void setPosition(uint64_t pos, Player::PlayerError& e) = 0;
 
 
 

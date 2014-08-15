@@ -83,6 +83,8 @@ class BrowserStub : public CommonAPI::Stub<BrowserStubAdapter , BrowserStubRemot
     virtual ~BrowserStub() { }
 
 
+    /// This is the method that will be called on remote calls on the method discoverMediaManagers.
+    virtual void discoverMediaManagers(const std::shared_ptr<CommonAPI::ClientId> clientId, std::vector<std::string>& identifiers, Browser::BrowserError& e) = 0;
     /**
      * List all containers below the given path.
              returns: A JSON list of all

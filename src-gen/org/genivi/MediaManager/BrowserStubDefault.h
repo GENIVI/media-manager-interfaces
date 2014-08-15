@@ -32,6 +32,9 @@ class BrowserStubDefault : public BrowserStub {
     BrowserStubRemoteEvent* initStubAdapter(const std::shared_ptr<BrowserStubAdapter>& stubAdapter);
 
 
+    virtual void discoverMediaManagers(const std::shared_ptr<CommonAPI::ClientId> clientId, std::vector<std::string>& identifiers, Browser::BrowserError& e);
+    virtual void discoverMediaManagers(std::vector<std::string>& identifiers, Browser::BrowserError& e);
+
     /**
      * List all containers below the given path.
              returns: A JSON list of all
