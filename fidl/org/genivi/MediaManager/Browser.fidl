@@ -24,6 +24,10 @@ interface Browser {
         minor 0
     }
 
+    <** @description: Return a list of all media manager identifiers. These are
+         used to indicate which media manager we should interact with.
+         returns: A list of all media managers found
+    **>
     method discoverMediaManagers {
         out {
             String[] identifiers
