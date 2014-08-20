@@ -62,6 +62,11 @@ class Player {
     // Definition of a comparator still is necessary for GCC 4.4.1, topic is fixed since 4.5.1
     struct RepeatStatusComparator;
     enum class RateStatus: int32_t {
+        RATE_NEG_16,
+        RATE_NEG_8,
+        RATE_NEG_4,
+        RATE_NEG_2,
+        RATE_NEG_1,
         RATE_1,
         RATE_2,
         RATE_4,
