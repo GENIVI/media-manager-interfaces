@@ -101,6 +101,35 @@ class PlayerStubDefault : public PlayerStub {
     virtual void openUri(std::string uri, Player::PlayerError& e);
 
     /**
+     * Enqueue the supplied Uri for playback in the playback engine.
+             returns:
+     *  INVALID_URI When an invalid URI is supplied
+                                  
+     *  (decided by playback engine)
+                      NO_ERROR    On success
+     * @param uri URI of media to enqueue, uri format is decided by backend
+     */
+    virtual void enqueueUri(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string uri, Player::PlayerError& e);
+    virtual void enqueueUri(std::string uri, Player::PlayerError& e);
+
+    /**
+     * Dequeue the item with the supplied index in the playback
+                         
+     *  engine.
+     * @param pos index of media to dequeue
+     */
+    virtual void dequeueIndex(const std::shared_ptr<CommonAPI::ClientId> clientId, uint64_t pos, Player::PlayerError& e);
+    virtual void dequeueIndex(uint64_t pos, Player::PlayerError& e);
+
+    /**
+     * Retrieve the current play queue in JSON format
+             returns: Current play
+     *  queue in JSON format
+     */
+    virtual void getCurrentPlayQueue(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string& playQueue, Player::PlayerError& e);
+    virtual void getCurrentPlayQueue(std::string& playQueue, Player::PlayerError& e);
+
+    /**
      * Use the supplied playlist as the current play queue. If
                          
      *  the play queue is invalid, the old play queue is

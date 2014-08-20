@@ -525,6 +525,50 @@ void PlayerStubDefault::openUri(std::string uri, Player::PlayerError& e) {
 }
 
 /**
+ * Enqueue the supplied Uri for playback in the playback engine.
+         returns:
+ *  INVALID_URI When an invalid URI is supplied
+                              
+ *  (decided by playback engine)
+                  NO_ERROR    On success
+ * @param uri URI of media to enqueue, uri format is decided by backend
+ */
+void PlayerStubDefault::enqueueUri(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string uri, Player::PlayerError& e) {
+    // Call old style methods in default 
+    enqueueUri(uri, e);
+}
+void PlayerStubDefault::enqueueUri(std::string uri, Player::PlayerError& e) {
+    // No operation in default
+}
+
+/**
+ * Dequeue the item with the supplied index in the playback
+                     
+ *  engine.
+ * @param pos index of media to dequeue
+ */
+void PlayerStubDefault::dequeueIndex(const std::shared_ptr<CommonAPI::ClientId> clientId, uint64_t pos, Player::PlayerError& e) {
+    // Call old style methods in default 
+    dequeueIndex(pos, e);
+}
+void PlayerStubDefault::dequeueIndex(uint64_t pos, Player::PlayerError& e) {
+    // No operation in default
+}
+
+/**
+ * Retrieve the current play queue in JSON format
+         returns: Current play
+ *  queue in JSON format
+ */
+void PlayerStubDefault::getCurrentPlayQueue(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string& playQueue, Player::PlayerError& e) {
+    // Call old style methods in default 
+    getCurrentPlayQueue(playQueue, e);
+}
+void PlayerStubDefault::getCurrentPlayQueue(std::string& playQueue, Player::PlayerError& e) {
+    // No operation in default
+}
+
+/**
  * Use the supplied playlist as the current play queue. If
                      
  *  the play queue is invalid, the old play queue is

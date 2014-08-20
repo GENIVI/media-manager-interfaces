@@ -76,6 +76,32 @@ class PlayerDBusProxy: virtual public PlayerProxyBase, virtual public CommonAPI:
     virtual void openUri(const std::string& uri, CommonAPI::CallStatus& callStatus, Player::PlayerError& e);
     virtual std::future<CommonAPI::CallStatus> openUriAsync(const std::string& uri, OpenUriAsyncCallback callback);
     /**
+     * Enqueue the supplied Uri for playback in the playback engine.
+             returns:
+     *  INVALID_URI When an invalid URI is supplied
+                                  
+     *  (decided by playback engine)
+                      NO_ERROR    On success
+     * @param uri URI of media to enqueue, uri format is decided by backend
+     */
+    virtual void enqueueUri(const std::string& uri, CommonAPI::CallStatus& callStatus, Player::PlayerError& e);
+    virtual std::future<CommonAPI::CallStatus> enqueueUriAsync(const std::string& uri, EnqueueUriAsyncCallback callback);
+    /**
+     * Dequeue the item with the supplied index in the playback
+                         
+     *  engine.
+     * @param pos index of media to dequeue
+     */
+    virtual void dequeueIndex(const uint64_t& pos, CommonAPI::CallStatus& callStatus, Player::PlayerError& e);
+    virtual std::future<CommonAPI::CallStatus> dequeueIndexAsync(const uint64_t& pos, DequeueIndexAsyncCallback callback);
+    /**
+     * Retrieve the current play queue in JSON format
+             returns: Current play
+     *  queue in JSON format
+     */
+    virtual void getCurrentPlayQueue(CommonAPI::CallStatus& callStatus, std::string& playQueue, Player::PlayerError& e);
+    virtual std::future<CommonAPI::CallStatus> getCurrentPlayQueueAsync(GetCurrentPlayQueueAsyncCallback callback);
+    /**
      * Use the supplied playlist as the current play queue. If
                          
      *  the play queue is invalid, the old play queue is

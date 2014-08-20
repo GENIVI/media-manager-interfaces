@@ -221,6 +221,85 @@ class PlayerProxy: virtual public Player, virtual public PlayerProxyBase, public
      */
     virtual std::future<CommonAPI::CallStatus> openUriAsync(const std::string& uri, OpenUriAsyncCallback callback);
     /**
+     * Enqueue the supplied Uri for playback in the playback engine.
+             returns:
+     *  INVALID_URI When an invalid URI is supplied
+                                  
+     *  (decided by playback engine)
+                      NO_ERROR    On success
+     * @param uri URI of media to enqueue, uri format is decided by backend
+     * 
+     * Calls enqueueUri with synchronous semantics.
+     * 
+    * All const parameters are input parameters to this method.
+    * All non-const parameters will be filled with the returned values.
+     * The CallStatus will be filled when the method returns and indicate either
+     * "SUCCESS" or which type of error has occurred. In case of an error, ONLY the CallStatus
+     * will be set.
+     */
+    virtual void enqueueUri(const std::string& uri, CommonAPI::CallStatus& callStatus, Player::PlayerError& e);
+    /**
+     * Calls enqueueUri with asynchronous semantics.
+     * 
+     * The provided callback will be called when the reply to this call arrives or
+     * an error occurs during the call. The CallStatus will indicate either "SUCCESS"
+     * or which type of error has occurred. In case of any error, ONLY the CallStatus
+     * will have a defined value.
+     * The std::future returned by this method will be fulfilled at arrival of the reply.
+     * It will provide the same value for CallStatus as will be handed to the callback.
+     */
+    virtual std::future<CommonAPI::CallStatus> enqueueUriAsync(const std::string& uri, EnqueueUriAsyncCallback callback);
+    /**
+     * Dequeue the item with the supplied index in the playback
+                         
+     *  engine.
+     * @param pos index of media to dequeue
+     * 
+     * Calls dequeueIndex with synchronous semantics.
+     * 
+    * All const parameters are input parameters to this method.
+    * All non-const parameters will be filled with the returned values.
+     * The CallStatus will be filled when the method returns and indicate either
+     * "SUCCESS" or which type of error has occurred. In case of an error, ONLY the CallStatus
+     * will be set.
+     */
+    virtual void dequeueIndex(const uint64_t& pos, CommonAPI::CallStatus& callStatus, Player::PlayerError& e);
+    /**
+     * Calls dequeueIndex with asynchronous semantics.
+     * 
+     * The provided callback will be called when the reply to this call arrives or
+     * an error occurs during the call. The CallStatus will indicate either "SUCCESS"
+     * or which type of error has occurred. In case of any error, ONLY the CallStatus
+     * will have a defined value.
+     * The std::future returned by this method will be fulfilled at arrival of the reply.
+     * It will provide the same value for CallStatus as will be handed to the callback.
+     */
+    virtual std::future<CommonAPI::CallStatus> dequeueIndexAsync(const uint64_t& pos, DequeueIndexAsyncCallback callback);
+    /**
+     * Retrieve the current play queue in JSON format
+             returns: Current play
+     *  queue in JSON format
+     * 
+     * Calls getCurrentPlayQueue with synchronous semantics.
+     * 
+    * All non-const parameters will be filled with the returned values.
+     * The CallStatus will be filled when the method returns and indicate either
+     * "SUCCESS" or which type of error has occurred. In case of an error, ONLY the CallStatus
+     * will be set.
+     */
+    virtual void getCurrentPlayQueue(CommonAPI::CallStatus& callStatus, std::string& playQueue, Player::PlayerError& e);
+    /**
+     * Calls getCurrentPlayQueue with asynchronous semantics.
+     * 
+     * The provided callback will be called when the reply to this call arrives or
+     * an error occurs during the call. The CallStatus will indicate either "SUCCESS"
+     * or which type of error has occurred. In case of any error, ONLY the CallStatus
+     * will have a defined value.
+     * The std::future returned by this method will be fulfilled at arrival of the reply.
+     * It will provide the same value for CallStatus as will be handed to the callback.
+     */
+    virtual std::future<CommonAPI::CallStatus> getCurrentPlayQueueAsync(GetCurrentPlayQueueAsyncCallback callback);
+    /**
      * Use the supplied playlist as the current play queue. If
                          
      *  the play queue is invalid, the old play queue is
@@ -823,6 +902,53 @@ void PlayerProxy<_AttributeExtensions...>::openUri(const std::string& uri, Commo
 template <typename ... _AttributeExtensions>
 std::future<CommonAPI::CallStatus> PlayerProxy<_AttributeExtensions...>::openUriAsync(const std::string& uri, OpenUriAsyncCallback callback) {
     return delegate_->openUriAsync(uri, callback);
+}
+/**
+ * Enqueue the supplied Uri for playback in the playback engine.
+         returns:
+ *  INVALID_URI When an invalid URI is supplied
+                              
+ *  (decided by playback engine)
+                  NO_ERROR    On success
+ * @param uri URI of media to enqueue, uri format is decided by backend
+ */
+template <typename ... _AttributeExtensions>
+void PlayerProxy<_AttributeExtensions...>::enqueueUri(const std::string& uri, CommonAPI::CallStatus& callStatus, Player::PlayerError& e) {
+    delegate_->enqueueUri(uri, callStatus, e);
+}
+
+template <typename ... _AttributeExtensions>
+std::future<CommonAPI::CallStatus> PlayerProxy<_AttributeExtensions...>::enqueueUriAsync(const std::string& uri, EnqueueUriAsyncCallback callback) {
+    return delegate_->enqueueUriAsync(uri, callback);
+}
+/**
+ * Dequeue the item with the supplied index in the playback
+                     
+ *  engine.
+ * @param pos index of media to dequeue
+ */
+template <typename ... _AttributeExtensions>
+void PlayerProxy<_AttributeExtensions...>::dequeueIndex(const uint64_t& pos, CommonAPI::CallStatus& callStatus, Player::PlayerError& e) {
+    delegate_->dequeueIndex(pos, callStatus, e);
+}
+
+template <typename ... _AttributeExtensions>
+std::future<CommonAPI::CallStatus> PlayerProxy<_AttributeExtensions...>::dequeueIndexAsync(const uint64_t& pos, DequeueIndexAsyncCallback callback) {
+    return delegate_->dequeueIndexAsync(pos, callback);
+}
+/**
+ * Retrieve the current play queue in JSON format
+         returns: Current play
+ *  queue in JSON format
+ */
+template <typename ... _AttributeExtensions>
+void PlayerProxy<_AttributeExtensions...>::getCurrentPlayQueue(CommonAPI::CallStatus& callStatus, std::string& playQueue, Player::PlayerError& e) {
+    delegate_->getCurrentPlayQueue(callStatus, playQueue, e);
+}
+
+template <typename ... _AttributeExtensions>
+std::future<CommonAPI::CallStatus> PlayerProxy<_AttributeExtensions...>::getCurrentPlayQueueAsync(GetCurrentPlayQueueAsyncCallback callback) {
+    return delegate_->getCurrentPlayQueueAsync(callback);
 }
 /**
  * Use the supplied playlist as the current play queue. If

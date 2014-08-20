@@ -146,6 +146,81 @@ std::future<CommonAPI::CallStatus> PlayerDBusProxy::openUriAsync(const std::stri
         std::move(callback));
 }
 /**
+ * Enqueue the supplied Uri for playback in the playback engine.
+         returns:
+ *  INVALID_URI When an invalid URI is supplied
+                              
+ *  (decided by playback engine)
+                  NO_ERROR    On success
+ * @param uri URI of media to enqueue, uri format is decided by backend
+ */
+void PlayerDBusProxy::enqueueUri(const std::string& uri, CommonAPI::CallStatus& callStatus, Player::PlayerError& e) {
+    CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<std::string>,
+                                     CommonAPI::DBus::DBusSerializableArguments<Player::PlayerError> >::callMethodWithReply(
+        *this,
+        "enqueueUri",
+        "s",
+        uri, 
+        callStatus
+        , e);
+}
+std::future<CommonAPI::CallStatus> PlayerDBusProxy::enqueueUriAsync(const std::string& uri, EnqueueUriAsyncCallback callback) {
+    return CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<std::string>,
+                                     CommonAPI::DBus::DBusSerializableArguments<Player::PlayerError> >::callMethodAsync(
+        *this,
+        "enqueueUri",
+        "s",
+        uri, 
+        std::move(callback));
+}
+/**
+ * Dequeue the item with the supplied index in the playback
+                     
+ *  engine.
+ * @param pos index of media to dequeue
+ */
+void PlayerDBusProxy::dequeueIndex(const uint64_t& pos, CommonAPI::CallStatus& callStatus, Player::PlayerError& e) {
+    CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<uint64_t>,
+                                     CommonAPI::DBus::DBusSerializableArguments<Player::PlayerError> >::callMethodWithReply(
+        *this,
+        "dequeueIndex",
+        "t",
+        pos, 
+        callStatus
+        , e);
+}
+std::future<CommonAPI::CallStatus> PlayerDBusProxy::dequeueIndexAsync(const uint64_t& pos, DequeueIndexAsyncCallback callback) {
+    return CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<uint64_t>,
+                                     CommonAPI::DBus::DBusSerializableArguments<Player::PlayerError> >::callMethodAsync(
+        *this,
+        "dequeueIndex",
+        "t",
+        pos, 
+        std::move(callback));
+}
+/**
+ * Retrieve the current play queue in JSON format
+         returns: Current play
+ *  queue in JSON format
+ */
+void PlayerDBusProxy::getCurrentPlayQueue(CommonAPI::CallStatus& callStatus, std::string& playQueue, Player::PlayerError& e) {
+    CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<>,
+                                     CommonAPI::DBus::DBusSerializableArguments<std::string, Player::PlayerError> >::callMethodWithReply(
+        *this,
+        "getCurrentPlayQueue",
+        "",
+        callStatus
+        , playQueue, e);
+}
+std::future<CommonAPI::CallStatus> PlayerDBusProxy::getCurrentPlayQueueAsync(GetCurrentPlayQueueAsyncCallback callback) {
+    return CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<>,
+                                     CommonAPI::DBus::DBusSerializableArguments<std::string, Player::PlayerError> >::callMethodAsync(
+        *this,
+        "getCurrentPlayQueue",
+        "",
+        std::move(callback));
+}
+/**
  * Use the supplied playlist as the current play queue. If
                      
  *  the play queue is invalid, the old play queue is

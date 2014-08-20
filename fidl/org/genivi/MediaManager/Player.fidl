@@ -100,6 +100,46 @@ interface Player {
         }
     }
 
+    <** @description: Enqueue the supplied Uri for playback in the playback engine.
+         returns: INVALID_URI When an invalid URI is supplied
+                               (decided by playback engine)
+                  NO_ERROR    On success
+        @param:   uri URI of media to enqueue, uri format is decided by backend
+    **>
+
+    method enqueueUri {
+        in {
+            String uri
+        }
+        out {
+            PlayerError e
+        }
+    }
+
+    <** @description: Dequeue the item with the supplied index in the playback
+                      engine.
+        @param: pos index of media to dequeue
+    **>
+
+    method dequeueIndex {
+        in {
+            UInt64 pos
+        }
+        out {
+            PlayerError e
+        }
+    }
+
+    <** @description: Retrieve the current play queue in JSON format
+         returns: Current play queue in JSON format
+    **>
+    method getCurrentPlayQueue {
+        out {
+            String playQueue
+            PlayerError e
+        }
+    }
+
     <** @description: Use the supplied playlist as the current play queue. If
                       the play queue is invalid, the old play queue is
                       untouched.

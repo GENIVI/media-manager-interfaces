@@ -173,6 +173,38 @@ const char* PlayerDBusStubAdapter::getMethodsDBusIntrospectionXmlData() const {
             "<arg name=\"e\" type=\"u\" direction=\"out\" />\n"
         "</method>\n"
         /**
+         * Enqueue the supplied Uri for playback in the playback engine.
+                 returns:
+         *  INVALID_URI When an invalid URI is supplied
+                                      
+         *  (decided by playback engine)
+                          NO_ERROR    On success
+         * @param uri URI of media to enqueue, uri format is decided by backend
+         */
+        "<method name=\"enqueueUri\">\n"
+            "<arg name=\"uri\" type=\"s\" direction=\"in\" />\n"
+            "<arg name=\"e\" type=\"u\" direction=\"out\" />\n"
+        "</method>\n"
+        /**
+         * Dequeue the item with the supplied index in the playback
+                             
+         *  engine.
+         * @param pos index of media to dequeue
+         */
+        "<method name=\"dequeueIndex\">\n"
+            "<arg name=\"pos\" type=\"t\" direction=\"in\" />\n"
+            "<arg name=\"e\" type=\"u\" direction=\"out\" />\n"
+        "</method>\n"
+        /**
+         * Retrieve the current play queue in JSON format
+                 returns: Current play
+         *  queue in JSON format
+         */
+        "<method name=\"getCurrentPlayQueue\">\n"
+            "<arg name=\"playQueue\" type=\"s\" direction=\"out\" />\n"
+            "<arg name=\"e\" type=\"u\" direction=\"out\" />\n"
+        "</method>\n"
+        /**
          * Use the supplied playlist as the current play queue. If
                              
          *  the play queue is invalid, the old play queue is
@@ -462,6 +494,41 @@ static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     std::tuple<std::string>,
     std::tuple<Player::PlayerError>
     > openUriStubDispatcher(&PlayerStub::openUri, "u");
+/**
+ * Enqueue the supplied Uri for playback in the playback engine.
+         returns:
+ *  INVALID_URI When an invalid URI is supplied
+                              
+ *  (decided by playback engine)
+                  NO_ERROR    On success
+ * @param uri URI of media to enqueue, uri format is decided by backend
+ */
+static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
+    PlayerStub,
+    std::tuple<std::string>,
+    std::tuple<Player::PlayerError>
+    > enqueueUriStubDispatcher(&PlayerStub::enqueueUri, "u");
+/**
+ * Dequeue the item with the supplied index in the playback
+                     
+ *  engine.
+ * @param pos index of media to dequeue
+ */
+static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
+    PlayerStub,
+    std::tuple<uint64_t>,
+    std::tuple<Player::PlayerError>
+    > dequeueIndexStubDispatcher(&PlayerStub::dequeueIndex, "u");
+/**
+ * Retrieve the current play queue in JSON format
+         returns: Current play
+ *  queue in JSON format
+ */
+static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
+    PlayerStub,
+    std::tuple<>,
+    std::tuple<std::string, Player::PlayerError>
+    > getCurrentPlayQueueStubDispatcher(&PlayerStub::getCurrentPlayQueue, "su");
 /**
  * Use the supplied playlist as the current play queue. If
                      
@@ -824,6 +891,29 @@ const PlayerDBusStubAdapter::StubDispatcherTable& PlayerDBusStubAdapter::getStub
              * @param uri URI of media to play, uri format is decided by backend
              */
             { { "openUri", "s" }, &org::genivi::MediaManager::openUriStubDispatcher },
+            /**
+             * Enqueue the supplied Uri for playback in the playback engine.
+                     returns:
+             *  INVALID_URI When an invalid URI is supplied
+                                          
+             *  (decided by playback engine)
+                              NO_ERROR    On success
+             * @param uri URI of media to enqueue, uri format is decided by backend
+             */
+            { { "enqueueUri", "s" }, &org::genivi::MediaManager::enqueueUriStubDispatcher },
+            /**
+             * Dequeue the item with the supplied index in the playback
+                                 
+             *  engine.
+             * @param pos index of media to dequeue
+             */
+            { { "dequeueIndex", "t" }, &org::genivi::MediaManager::dequeueIndexStubDispatcher },
+            /**
+             * Retrieve the current play queue in JSON format
+                     returns: Current play
+             *  queue in JSON format
+             */
+            { { "getCurrentPlayQueue", "" }, &org::genivi::MediaManager::getCurrentPlayQueueStubDispatcher },
             /**
              * Use the supplied playlist as the current play queue. If
                                  

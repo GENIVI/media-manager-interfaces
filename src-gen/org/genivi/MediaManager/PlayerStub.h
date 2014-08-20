@@ -241,6 +241,32 @@ class PlayerStub : public CommonAPI::Stub<PlayerStubAdapter , PlayerStubRemoteEv
     /// This is the method that will be called on remote calls on the method openUri.
     virtual void openUri(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string uri, Player::PlayerError& e) = 0;
     /**
+     * Enqueue the supplied Uri for playback in the playback engine.
+             returns:
+     *  INVALID_URI When an invalid URI is supplied
+                                  
+     *  (decided by playback engine)
+                      NO_ERROR    On success
+     * @param uri URI of media to enqueue, uri format is decided by backend
+     */
+    /// This is the method that will be called on remote calls on the method enqueueUri.
+    virtual void enqueueUri(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string uri, Player::PlayerError& e) = 0;
+    /**
+     * Dequeue the item with the supplied index in the playback
+                         
+     *  engine.
+     * @param pos index of media to dequeue
+     */
+    /// This is the method that will be called on remote calls on the method dequeueIndex.
+    virtual void dequeueIndex(const std::shared_ptr<CommonAPI::ClientId> clientId, uint64_t pos, Player::PlayerError& e) = 0;
+    /**
+     * Retrieve the current play queue in JSON format
+             returns: Current play
+     *  queue in JSON format
+     */
+    /// This is the method that will be called on remote calls on the method getCurrentPlayQueue.
+    virtual void getCurrentPlayQueue(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string& playQueue, Player::PlayerError& e) = 0;
+    /**
      * Use the supplied playlist as the current play queue. If
                          
      *  the play queue is invalid, the old play queue is
