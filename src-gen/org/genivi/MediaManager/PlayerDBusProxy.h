@@ -102,6 +102,11 @@ class PlayerDBusProxy: virtual public PlayerProxyBase, virtual public CommonAPI:
     virtual void getCurrentPlayQueue(CommonAPI::CallStatus& callStatus, std::string& playQueue, Player::PlayerError& e);
     virtual std::future<CommonAPI::CallStatus> getCurrentPlayQueueAsync(GetCurrentPlayQueueAsyncCallback callback);
     /**
+     * Dequeue all elementrs, emptying the play queue
+     */
+    virtual void dequeueAll(CommonAPI::CallStatus& callStatus, Player::PlayerError& e);
+    virtual std::future<CommonAPI::CallStatus> dequeueAllAsync(DequeueAllAsyncCallback callback);
+    /**
      * Use the supplied playlist as the current play queue. If
                          
      *  the play queue is invalid, the old play queue is

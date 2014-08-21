@@ -569,6 +569,17 @@ void PlayerStubDefault::getCurrentPlayQueue(std::string& playQueue, Player::Play
 }
 
 /**
+ * Dequeue all elementrs, emptying the play queue
+ */
+void PlayerStubDefault::dequeueAll(const std::shared_ptr<CommonAPI::ClientId> clientId, Player::PlayerError& e) {
+    // Call old style methods in default 
+    dequeueAll(e);
+}
+void PlayerStubDefault::dequeueAll(Player::PlayerError& e) {
+    // No operation in default
+}
+
+/**
  * Use the supplied playlist as the current play queue. If
                      
  *  the play queue is invalid, the old play queue is

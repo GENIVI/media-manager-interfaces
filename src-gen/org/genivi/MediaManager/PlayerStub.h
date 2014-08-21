@@ -267,6 +267,11 @@ class PlayerStub : public CommonAPI::Stub<PlayerStubAdapter , PlayerStubRemoteEv
     /// This is the method that will be called on remote calls on the method getCurrentPlayQueue.
     virtual void getCurrentPlayQueue(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string& playQueue, Player::PlayerError& e) = 0;
     /**
+     * Dequeue all elementrs, emptying the play queue
+     */
+    /// This is the method that will be called on remote calls on the method dequeueAll.
+    virtual void dequeueAll(const std::shared_ptr<CommonAPI::ClientId> clientId, Player::PlayerError& e) = 0;
+    /**
      * Use the supplied playlist as the current play queue. If
                          
      *  the play queue is invalid, the old play queue is

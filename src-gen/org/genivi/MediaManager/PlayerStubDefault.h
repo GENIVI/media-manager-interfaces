@@ -130,6 +130,12 @@ class PlayerStubDefault : public PlayerStub {
     virtual void getCurrentPlayQueue(std::string& playQueue, Player::PlayerError& e);
 
     /**
+     * Dequeue all elementrs, emptying the play queue
+     */
+    virtual void dequeueAll(const std::shared_ptr<CommonAPI::ClientId> clientId, Player::PlayerError& e);
+    virtual void dequeueAll(Player::PlayerError& e);
+
+    /**
      * Use the supplied playlist as the current play queue. If
                          
      *  the play queue is invalid, the old play queue is

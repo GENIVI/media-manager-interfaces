@@ -53,6 +53,7 @@ class PlayerProxyBase: virtual public CommonAPI::Proxy {
     typedef std::function<void(const CommonAPI::CallStatus&, const Player::PlayerError&)> EnqueueUriAsyncCallback;
     typedef std::function<void(const CommonAPI::CallStatus&, const Player::PlayerError&)> DequeueIndexAsyncCallback;
     typedef std::function<void(const CommonAPI::CallStatus&, const std::string&, const Player::PlayerError&)> GetCurrentPlayQueueAsyncCallback;
+    typedef std::function<void(const CommonAPI::CallStatus&, const Player::PlayerError&)> DequeueAllAsyncCallback;
     typedef std::function<void(const CommonAPI::CallStatus&, const Player::PlayerError&)> OpenPlaylistAsyncCallback;
     typedef std::function<void(const CommonAPI::CallStatus&, const Player::PlayerError&)> PauseAsyncCallback;
     typedef std::function<void(const CommonAPI::CallStatus&, const Player::PlayerError&)> PlayAsyncCallback;
@@ -178,6 +179,11 @@ class PlayerProxyBase: virtual public CommonAPI::Proxy {
      */
     virtual void getCurrentPlayQueue(CommonAPI::CallStatus& callStatus, std::string& playQueue, Player::PlayerError& e) = 0;
     virtual std::future<CommonAPI::CallStatus> getCurrentPlayQueueAsync(GetCurrentPlayQueueAsyncCallback callback) = 0;
+    /**
+     * Dequeue all elementrs, emptying the play queue
+     */
+    virtual void dequeueAll(CommonAPI::CallStatus& callStatus, Player::PlayerError& e) = 0;
+    virtual std::future<CommonAPI::CallStatus> dequeueAllAsync(DequeueAllAsyncCallback callback) = 0;
     /**
      * Use the supplied playlist as the current play queue. If
                          

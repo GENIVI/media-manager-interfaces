@@ -289,6 +289,15 @@ virtual void getCurrentPlayQueue(const std::shared_ptr<CommonAPI::ClientId> clie
 virtual void getCurrentPlayQueue(std::string& playQueue, Player::PlayerError& e) = 0;
 
 /**
+ * Dequeue all elementrs, emptying the play queue
+ */
+virtual void dequeueAll(const std::shared_ptr<CommonAPI::ClientId> clientId, Player::PlayerError& e) {
+    // Call old style methods in default 
+    return dequeueAll(e);
+}
+virtual void dequeueAll(Player::PlayerError& e) = 0;
+
+/**
  * Use the supplied playlist as the current play queue. If
                      
  *  the play queue is invalid, the old play queue is

@@ -300,6 +300,28 @@ class PlayerProxy: virtual public Player, virtual public PlayerProxyBase, public
      */
     virtual std::future<CommonAPI::CallStatus> getCurrentPlayQueueAsync(GetCurrentPlayQueueAsyncCallback callback);
     /**
+     * Dequeue all elementrs, emptying the play queue
+     * 
+     * Calls dequeueAll with synchronous semantics.
+     * 
+    * All non-const parameters will be filled with the returned values.
+     * The CallStatus will be filled when the method returns and indicate either
+     * "SUCCESS" or which type of error has occurred. In case of an error, ONLY the CallStatus
+     * will be set.
+     */
+    virtual void dequeueAll(CommonAPI::CallStatus& callStatus, Player::PlayerError& e);
+    /**
+     * Calls dequeueAll with asynchronous semantics.
+     * 
+     * The provided callback will be called when the reply to this call arrives or
+     * an error occurs during the call. The CallStatus will indicate either "SUCCESS"
+     * or which type of error has occurred. In case of any error, ONLY the CallStatus
+     * will have a defined value.
+     * The std::future returned by this method will be fulfilled at arrival of the reply.
+     * It will provide the same value for CallStatus as will be handed to the callback.
+     */
+    virtual std::future<CommonAPI::CallStatus> dequeueAllAsync(DequeueAllAsyncCallback callback);
+    /**
      * Use the supplied playlist as the current play queue. If
                          
      *  the play queue is invalid, the old play queue is
@@ -949,6 +971,18 @@ void PlayerProxy<_AttributeExtensions...>::getCurrentPlayQueue(CommonAPI::CallSt
 template <typename ... _AttributeExtensions>
 std::future<CommonAPI::CallStatus> PlayerProxy<_AttributeExtensions...>::getCurrentPlayQueueAsync(GetCurrentPlayQueueAsyncCallback callback) {
     return delegate_->getCurrentPlayQueueAsync(callback);
+}
+/**
+ * Dequeue all elementrs, emptying the play queue
+ */
+template <typename ... _AttributeExtensions>
+void PlayerProxy<_AttributeExtensions...>::dequeueAll(CommonAPI::CallStatus& callStatus, Player::PlayerError& e) {
+    delegate_->dequeueAll(callStatus, e);
+}
+
+template <typename ... _AttributeExtensions>
+std::future<CommonAPI::CallStatus> PlayerProxy<_AttributeExtensions...>::dequeueAllAsync(DequeueAllAsyncCallback callback) {
+    return delegate_->dequeueAllAsync(callback);
 }
 /**
  * Use the supplied playlist as the current play queue. If

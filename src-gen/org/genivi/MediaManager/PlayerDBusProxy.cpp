@@ -221,6 +221,26 @@ std::future<CommonAPI::CallStatus> PlayerDBusProxy::getCurrentPlayQueueAsync(Get
         std::move(callback));
 }
 /**
+ * Dequeue all elementrs, emptying the play queue
+ */
+void PlayerDBusProxy::dequeueAll(CommonAPI::CallStatus& callStatus, Player::PlayerError& e) {
+    CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<>,
+                                     CommonAPI::DBus::DBusSerializableArguments<Player::PlayerError> >::callMethodWithReply(
+        *this,
+        "dequeueAll",
+        "",
+        callStatus
+        , e);
+}
+std::future<CommonAPI::CallStatus> PlayerDBusProxy::dequeueAllAsync(DequeueAllAsyncCallback callback) {
+    return CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<>,
+                                     CommonAPI::DBus::DBusSerializableArguments<Player::PlayerError> >::callMethodAsync(
+        *this,
+        "dequeueAll",
+        "",
+        std::move(callback));
+}
+/**
  * Use the supplied playlist as the current play queue. If
                      
  *  the play queue is invalid, the old play queue is

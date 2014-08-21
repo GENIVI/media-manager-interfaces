@@ -140,6 +140,15 @@ interface Player {
         }
     }
 
+    <** @description: Dequeue all elementrs, emptying the play queue
+    **>
+
+    method dequeueAll {
+        out {
+            PlayerError e
+        }
+    }
+
     <** @description: Use the supplied playlist as the current play queue. If
                       the play queue is invalid, the old play queue is
                       untouched.

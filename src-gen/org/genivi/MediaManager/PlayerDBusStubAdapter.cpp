@@ -205,6 +205,12 @@ const char* PlayerDBusStubAdapter::getMethodsDBusIntrospectionXmlData() const {
             "<arg name=\"e\" type=\"u\" direction=\"out\" />\n"
         "</method>\n"
         /**
+         * Dequeue all elementrs, emptying the play queue
+         */
+        "<method name=\"dequeueAll\">\n"
+            "<arg name=\"e\" type=\"u\" direction=\"out\" />\n"
+        "</method>\n"
+        /**
          * Use the supplied playlist as the current play queue. If
                              
          *  the play queue is invalid, the old play queue is
@@ -529,6 +535,14 @@ static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     std::tuple<>,
     std::tuple<std::string, Player::PlayerError>
     > getCurrentPlayQueueStubDispatcher(&PlayerStub::getCurrentPlayQueue, "su");
+/**
+ * Dequeue all elementrs, emptying the play queue
+ */
+static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
+    PlayerStub,
+    std::tuple<>,
+    std::tuple<Player::PlayerError>
+    > dequeueAllStubDispatcher(&PlayerStub::dequeueAll, "u");
 /**
  * Use the supplied playlist as the current play queue. If
                      
@@ -914,6 +928,10 @@ const PlayerDBusStubAdapter::StubDispatcherTable& PlayerDBusStubAdapter::getStub
              *  queue in JSON format
              */
             { { "getCurrentPlayQueue", "" }, &org::genivi::MediaManager::getCurrentPlayQueueStubDispatcher },
+            /**
+             * Dequeue all elementrs, emptying the play queue
+             */
+            { { "dequeueAll", "" }, &org::genivi::MediaManager::dequeueAllStubDispatcher },
             /**
              * Use the supplied playlist as the current play queue. If
                                  
