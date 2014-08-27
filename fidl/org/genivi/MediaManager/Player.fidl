@@ -263,6 +263,7 @@ interface Player {
 
     enumeration RepeatStatus {
         REPEAT
+        REPEAT_SINGLE
         NO_REPEAT
     }
 

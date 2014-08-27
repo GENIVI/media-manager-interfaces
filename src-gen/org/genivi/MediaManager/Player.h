@@ -56,6 +56,7 @@ class Player {
     struct ShuffleStatusComparator;
     enum class RepeatStatus: int32_t {
         REPEAT,
+        REPEAT_SINGLE,
         NO_REPEAT
     };
     
