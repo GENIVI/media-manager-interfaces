@@ -16,6 +16,9 @@
 
 package org.genivi.mediamanager
 
+import org.genivi.mediamanager.PlayerTypes.* from "PlayerTypes.fidl"
+
+
 interface Player {
     version {
         major 1
@@ -243,45 +246,4 @@ interface Player {
         }
     }
 
-    // Data structures
-    enumeration MuteStatus {
-        MUTED
-        UNMUTED
-    }
-
-    enumeration PlayerError{
-        NO_ERROR
-
-        BAD_PLAYLIST
-        BACKEND_UNREACHABLE
-    }
-
-    enumeration ShuffleStatus {
-        SHUFFLE
-        UNSHUFFLE
-    }
-
-    enumeration RepeatStatus {
-        REPEAT
-        REPEAT_SINGLE
-        NO_REPEAT
-    }
-
-    enumeration RateStatus {
-        RATE_NEG_16
-        RATE_NEG_8
-        RATE_NEG_4
-        RATE_NEG_2
-        RATE_NEG_1
-        RATE_1
-        RATE_2
-        RATE_4
-        RATE_8
-        RATE_16
-    }
-
-    enumeration PlaybackStatus {
-        PLAYING
-        PAUSED
-    }
 }
