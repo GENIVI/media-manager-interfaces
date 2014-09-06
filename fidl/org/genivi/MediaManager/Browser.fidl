@@ -18,6 +18,9 @@
 
 package org.genivi.mediamanager
 
+import org.genivi.mediamanager.BrowserTypes.* from "BrowserTypes.fidl"
+
+
 interface Browser {
     version {
         major 1
@@ -280,23 +283,5 @@ interface Browser {
             String pathIdentifier
             BrowserError e
         }
-    }
-    // Data structures
-
-    struct SortKey {
-        SortOrder order
-        String keyName
-    }
-
-    enumeration SortOrder {
-        ASCENDING
-        DESCENDING
-    }
-
-    enumeration BrowserError {
-        NO_ERROR
-
-        NO_CONNECTION
-        BAD_PATH
     }
 }
