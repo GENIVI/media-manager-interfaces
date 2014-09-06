@@ -143,7 +143,7 @@ interface Player {
         }
     }
 
-    <** @description: Dequeue all elementrs, emptying the play queue
+    <** @description: Dequeue all elements, emptying the play queue
     **>
 
     method dequeueAll {

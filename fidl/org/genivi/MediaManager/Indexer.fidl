@@ -15,7 +15,7 @@ package org.genivi.mediamanager
 
 import org.genivi.mediamanager.MediaTypes.* from "MediaTypes.fidl"
 
-<** @description: Indexer control interface. Allows administrational tasks for
+<** @description: Indexer control interface. Allows administerial tasks for
                   the indexer backend, such as starting, stopping and requesting
                   status of the indexer.
                   For querying the database, please see
@@ -36,7 +36,7 @@ interface Indexer {
     <** @description: Get the path to the database file in the host file system.
                       This is the database file used by LMS to store metadata
         @param: output: Path to database file in host file system
-        @deprecated: This is only used for terting purposes ansd will be removed
+        @deprecated: This is only used for testing purposes and will be removed
     **>
     method getDatabasePath {
         out {
