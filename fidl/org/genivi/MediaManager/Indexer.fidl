@@ -11,9 +11,9 @@
   * file, You can obtain one at http://mozilla.org/MPL/2.0/.
   */
 
-package org.genivi.MediaManager
+package org.genivi.mediamanager
 
-import org.genivi.MediaManager.MediaTypes.* from "MediaTypes.fidl"
+import org.genivi.mediamanager.MediaTypes.* from "MediaTypes.fidl"
 
 <** @description: Indexer control interface. Allows administrational tasks for
                   the indexer backend, such as starting, stopping and requesting

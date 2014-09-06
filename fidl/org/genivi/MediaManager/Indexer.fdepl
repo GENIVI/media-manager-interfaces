@@ -16,4 +16,4 @@ import "classpath:/deployment/DBusSpecification.fdepl"
 import "MediaTypes.fidl"
 import "Indexer.fidl"
 
-define org.genivi.commonapi.dbus.deployment.deployment for interface org.genivi.MediaManager.Indexer {}
+define org.genivi.commonapi.dbus.deployment.deployment for interface org.genivi.mediamanager.Indexer {}
