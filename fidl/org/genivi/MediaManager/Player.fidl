@@ -75,6 +75,9 @@ interface Player {
                       track **>
     attribute UInt64 position readonly noSubscriptions
 
+    <** @description: Indicates duration of the current track **>
+    attribute UInt64 duration readonly
+
     // Methods
     <** @description: Skip to the next track in the play queue. If there is no
                        next track, playback is stopped. If playback is paused or
