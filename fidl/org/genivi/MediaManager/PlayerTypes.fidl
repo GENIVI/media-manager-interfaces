@@ -45,19 +45,6 @@ typeCollection PlayerTypes {
         NO_REPEAT
     }
 
-    enumeration RateStatus {
-        RATE_NEG_16
-        RATE_NEG_8
-        RATE_NEG_4
-        RATE_NEG_2
-        RATE_NEG_1
-        RATE_1
-        RATE_2
-        RATE_4
-        RATE_8
-        RATE_16
-    }
-
     enumeration PlaybackStatus {
         PLAYING
         PAUSED

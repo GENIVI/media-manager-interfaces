@@ -169,22 +169,22 @@ bool PlayerStubDefault::RemoteEventHandler::onRemoteSetRepeatAttribute(const std
     return onRemoteSetRepeatAttribute(value);
 }
 
-const PlayerTypes::RateStatus& PlayerStubDefault::getRateAttribute() {
+const double& PlayerStubDefault::getRateAttribute() {
     return rateAttributeValue_;
 }
 
-const PlayerTypes::RateStatus& PlayerStubDefault::getRateAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId) {
+const double& PlayerStubDefault::getRateAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId) {
     return getRateAttribute();
 }
 
-void PlayerStubDefault::setRateAttribute(PlayerTypes::RateStatus value) {
+void PlayerStubDefault::setRateAttribute(double value) {
     const bool valueChanged = trySetRateAttribute(std::move(value));
     if (valueChanged && stubAdapter_ != NULL) {
         stubAdapter_->fireRateAttributeChanged(rateAttributeValue_);
     }
 }
 
-bool PlayerStubDefault::trySetRateAttribute(PlayerTypes::RateStatus value) {
+bool PlayerStubDefault::trySetRateAttribute(double value) {
     if (!validateRateAttributeRequestedValue(value))
         return false;
 
@@ -193,11 +193,11 @@ bool PlayerStubDefault::trySetRateAttribute(PlayerTypes::RateStatus value) {
     return valueChanged;
 }
 
-bool PlayerStubDefault::validateRateAttributeRequestedValue(const PlayerTypes::RateStatus& value) {
+bool PlayerStubDefault::validateRateAttributeRequestedValue(const double& value) {
     return true;
 }
 
-void PlayerStubDefault::setRateAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId, PlayerTypes::RateStatus value) {
+void PlayerStubDefault::setRateAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId, double value) {
     setRateAttribute(value);
 }
 
@@ -209,11 +209,11 @@ void PlayerStubDefault::RemoteEventHandler::onRemoteRateAttributeChanged() {
     defaultStub_->onRemoteRateAttributeChanged();
 }
 
-bool PlayerStubDefault::RemoteEventHandler::onRemoteSetRateAttribute(PlayerTypes::RateStatus value) {
+bool PlayerStubDefault::RemoteEventHandler::onRemoteSetRateAttribute(double value) {
     return defaultStub_->trySetRateAttribute(std::move(value));
 }
 
-bool PlayerStubDefault::RemoteEventHandler::onRemoteSetRateAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId, PlayerTypes::RateStatus value) {
+bool PlayerStubDefault::RemoteEventHandler::onRemoteSetRateAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId, double value) {
     return onRemoteSetRateAttribute(value);
 }
 

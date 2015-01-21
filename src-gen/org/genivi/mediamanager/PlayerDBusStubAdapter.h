@@ -67,7 +67,7 @@ class PlayerDBusStubAdapterInternal: public virtual PlayerStubAdapter, public Pl
     /**
      * Set the playback rate
      */
-    void fireRateAttributeChanged(const PlayerTypes::RateStatus& value);
+    void fireRateAttributeChanged(const double& value);
     /**
      * Get or set volume, 0 is muted, and 1.0 means maximum
                          
@@ -170,11 +170,11 @@ static CommonAPI::DBus::DBusSetObservableAttributeStubDispatcher<
  */
 static CommonAPI::DBus::DBusGetAttributeStubDispatcher<
         PlayerStub,
-        PlayerTypes::RateStatus
+        double
         > getRateAttributeStubDispatcher;
 static CommonAPI::DBus::DBusSetObservableAttributeStubDispatcher<
         PlayerStub,
-        PlayerTypes::RateStatus
+        double
         > setRateAttributeStubDispatcher;
 /**
  * Get or set volume, 0 is muted, and 1.0 means maximum

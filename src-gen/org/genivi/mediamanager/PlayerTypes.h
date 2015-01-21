@@ -56,21 +56,6 @@ namespace PlayerTypes {
     
     // Definition of a comparator still is necessary for GCC 4.4.1, topic is fixed since 4.5.1
     struct RepeatStatusComparator;
-    enum class RateStatus: int32_t {
-        RATE_NEG_16,
-        RATE_NEG_8,
-        RATE_NEG_4,
-        RATE_NEG_2,
-        RATE_NEG_1,
-        RATE_1,
-        RATE_2,
-        RATE_4,
-        RATE_8,
-        RATE_16
-    };
-    
-    // Definition of a comparator still is necessary for GCC 4.4.1, topic is fixed since 4.5.1
-    struct RateStatusComparator;
     enum class PlaybackStatus: int32_t {
         PLAYING,
         PAUSED
@@ -131,20 +116,6 @@ inline CommonAPI::OutputStream& operator<<(CommonAPI::OutputStream& outputStream
 
 struct RepeatStatusComparator {
     inline bool operator()(const RepeatStatus& lhs, const RepeatStatus& rhs) const {
-        return static_cast<int32_t>(lhs) < static_cast<int32_t>(rhs);
-    }
-};
-
-inline CommonAPI::InputStream& operator>>(CommonAPI::InputStream& inputStream, RateStatus& enumValue) {
-    return inputStream.readEnumValue<int32_t>(enumValue);
-}
-
-inline CommonAPI::OutputStream& operator<<(CommonAPI::OutputStream& outputStream, const RateStatus& enumValue) {
-    return outputStream.writeEnumValue(static_cast<int32_t>(enumValue));
-}
-
-struct RateStatusComparator {
-    inline bool operator()(const RateStatus& lhs, const RateStatus& rhs) const {
         return static_cast<int32_t>(lhs) < static_cast<int32_t>(rhs);
     }
 };
@@ -263,26 +234,6 @@ namespace CommonAPI {
         }
     };
     template<>
-    struct BasicTypeWriter<org::genivi::mediamanager::PlayerTypes::RateStatus> {
-        inline static void writeType (CommonAPI::TypeOutputStream& typeStream) {
-            typeStream.writeInt32EnumType();
-        }
-    };
-    
-    template<>
-    struct InputStreamVectorHelper<org::genivi::mediamanager::PlayerTypes::RateStatus> {
-        static void beginReadVector(InputStream& inputStream, const std::vector<org::genivi::mediamanager::PlayerTypes::RateStatus>& vectorValue) {
-            inputStream.beginReadInt32EnumVector();
-        }
-    };
-    
-    template <>
-    struct OutputStreamVectorHelper<org::genivi::mediamanager::PlayerTypes::RateStatus> {
-        static void beginWriteVector(OutputStream& outputStream, const std::vector<org::genivi::mediamanager::PlayerTypes::RateStatus>& vectorValue) {
-            outputStream.beginWriteInt32EnumVector(vectorValue.size());
-        }
-    };
-    template<>
     struct BasicTypeWriter<org::genivi::mediamanager::PlayerTypes::PlaybackStatus> {
         inline static void writeType (CommonAPI::TypeOutputStream& typeStream) {
             typeStream.writeInt32EnumType();
@@ -333,13 +284,6 @@ namespace std {
     struct hash<org::genivi::mediamanager::PlayerTypes::RepeatStatus> {
         inline size_t operator()(const org::genivi::mediamanager::PlayerTypes::RepeatStatus& repeatStatus) const {
             return static_cast<int32_t>(repeatStatus);
-        }
-    };
-    //Hash for RateStatus
-    template<>
-    struct hash<org::genivi::mediamanager::PlayerTypes::RateStatus> {
-        inline size_t operator()(const org::genivi::mediamanager::PlayerTypes::RateStatus& rateStatus) const {
-            return static_cast<int32_t>(rateStatus);
         }
     };
     //Hash for PlaybackStatus

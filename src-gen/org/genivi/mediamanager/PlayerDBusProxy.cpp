@@ -37,7 +37,7 @@ PlayerDBusProxy::PlayerDBusProxy(
 ,mute_(*this, "onMuteAttributeChanged", "setMuteAttribute", "i", "getMuteAttribute"),
 shuffle_(*this, "onShuffleAttributeChanged", "setShuffleAttribute", "i", "getShuffleAttribute"),
 repeat_(*this, "onRepeatAttributeChanged", "setRepeatAttribute", "i", "getRepeatAttribute"),
-rate_(*this, "onRateAttributeChanged", "setRateAttribute", "i", "getRateAttribute"),
+rate_(*this, "onRateAttributeChanged", "setRateAttribute", "d", "getRateAttribute"),
 volume_(*this, "onVolumeAttributeChanged", "setVolumeAttribute", "d", "getVolumeAttribute"),
 canGoNext_(*this, "onCanGoNextAttributeChanged", "b", "getCanGoNextAttribute"),
 canGoPrevious_(*this, "onCanGoPreviousAttributeChanged", "b", "getCanGoPreviousAttribute"),

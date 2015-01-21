@@ -46,7 +46,7 @@ class PlayerStubAdapter: virtual public CommonAPI::StubAdapter, public Player {
     ///Notifies all remote listeners about a change of value of the attribute repeat.
     virtual void fireRepeatAttributeChanged(const PlayerTypes::RepeatStatus& repeat) = 0;
     ///Notifies all remote listeners about a change of value of the attribute rate.
-    virtual void fireRateAttributeChanged(const PlayerTypes::RateStatus& rate) = 0;
+    virtual void fireRateAttributeChanged(const double& rate) = 0;
     ///Notifies all remote listeners about a change of value of the attribute volume.
     virtual void fireVolumeAttributeChanged(const double& volume) = 0;
     ///Notifies all remote listeners about a change of value of the attribute canGoNext.
@@ -109,7 +109,7 @@ class PlayerStubRemoteEvent {
     virtual void onRemoteRepeatAttributeChanged() = 0;
 
     /// Verification callback for remote set requests on the attribute rate
-    virtual bool onRemoteSetRateAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId, PlayerTypes::RateStatus rate) = 0;
+    virtual bool onRemoteSetRateAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId, double rate) = 0;
     /// Action callback for remote set requests on the attribute rate
     virtual void onRemoteRateAttributeChanged() = 0;
 
@@ -170,7 +170,7 @@ public:
      * Set the playback rate
      */
     /// Provides getter access to the attribute rate
-    virtual const PlayerTypes::RateStatus& getRateAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId) = 0;
+    virtual const double& getRateAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId) = 0;
     /**
      * Get or set volume, 0 is muted, and 1.0 means maximum
                          

@@ -38,7 +38,7 @@ class PlayerProxyBase: virtual public CommonAPI::Proxy {
     typedef CommonAPI::ObservableAttribute<PlayerTypes::MuteStatus> MuteAttribute;
     typedef CommonAPI::ObservableAttribute<PlayerTypes::ShuffleStatus> ShuffleAttribute;
     typedef CommonAPI::ObservableAttribute<PlayerTypes::RepeatStatus> RepeatAttribute;
-    typedef CommonAPI::ObservableAttribute<PlayerTypes::RateStatus> RateAttribute;
+    typedef CommonAPI::ObservableAttribute<double> RateAttribute;
     typedef CommonAPI::ObservableAttribute<double> VolumeAttribute;
     typedef CommonAPI::ObservableReadonlyAttribute<bool> CanGoNextAttribute;
     typedef CommonAPI::ObservableReadonlyAttribute<bool> CanGoPreviousAttribute;

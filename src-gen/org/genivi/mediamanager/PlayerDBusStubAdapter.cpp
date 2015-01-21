@@ -75,14 +75,14 @@ const char* PlayerDBusStubAdapterInternal::getMethodsDBusIntrospectionXmlData() 
             "<arg name=\"changedValue\" type=\"i\" />\n"
         "</signal>\n"
         "<method name=\"getRateAttribute\">\n"
-            "<arg name=\"value\" type=\"i\" direction=\"out\" />"
+            "<arg name=\"value\" type=\"d\" direction=\"out\" />"
         "</method>\n"
         "<method name=\"setRateAttribute\">\n"
-            "<arg name=\"requestedValue\" type=\"i\" direction=\"in\" />\n"
-            "<arg name=\"setValue\" type=\"i\" direction=\"out\" />\n"
+            "<arg name=\"requestedValue\" type=\"d\" direction=\"in\" />\n"
+            "<arg name=\"setValue\" type=\"d\" direction=\"out\" />\n"
         "</method>\n"
         "<signal name=\"onRateAttributeChanged\">\n"
-            "<arg name=\"changedValue\" type=\"i\" />\n"
+            "<arg name=\"changedValue\" type=\"d\" />\n"
         "</signal>\n"
         "<method name=\"getVolumeAttribute\">\n"
             "<arg name=\"value\" type=\"d\" direction=\"out\" />"
@@ -375,17 +375,17 @@ CommonAPI::DBus::DBusSetObservableAttributeStubDispatcher<
  */
 CommonAPI::DBus::DBusGetAttributeStubDispatcher<
         PlayerStub,
-        PlayerTypes::RateStatus
-        > PlayerDBusStubAdapterInternal::getRateAttributeStubDispatcher(&PlayerStub::getRateAttribute, "i");
+        double
+        > PlayerDBusStubAdapterInternal::getRateAttributeStubDispatcher(&PlayerStub::getRateAttribute, "d");
 CommonAPI::DBus::DBusSetObservableAttributeStubDispatcher<
         PlayerStub,
-        PlayerTypes::RateStatus
+        double
         > PlayerDBusStubAdapterInternal::setRateAttributeStubDispatcher(
                 &PlayerStub::getRateAttribute,
                 &PlayerStubRemoteEvent::onRemoteSetRateAttribute,
                 &PlayerStubRemoteEvent::onRemoteRateAttributeChanged
                 ,&PlayerStubAdapter::fireRateAttributeChanged
-                ,"i"
+                ,"d"
                 );
 /**
  * Get or set volume, 0 is muted, and 1.0 means maximum
@@ -698,12 +698,12 @@ void PlayerDBusStubAdapterInternal::fireRepeatAttributeChanged(const PlayerTypes
 /**
  * Set the playback rate
  */
-void PlayerDBusStubAdapterInternal::fireRateAttributeChanged(const PlayerTypes::RateStatus& value) {
-    CommonAPI::DBus::DBusStubSignalHelper<CommonAPI::DBus::DBusSerializableArguments<PlayerTypes::RateStatus>>
+void PlayerDBusStubAdapterInternal::fireRateAttributeChanged(const double& value) {
+    CommonAPI::DBus::DBusStubSignalHelper<CommonAPI::DBus::DBusSerializableArguments<double>>
         ::sendSignal(
             *this,
             "onRateAttributeChanged",
-            "i",
+            "d",
             value
     );
 }
@@ -885,7 +885,7 @@ PlayerDBusStubAdapterInternal::PlayerDBusStubAdapterInternal(
              * Set the playback rate
              */
             { { "getRateAttribute", "" }, &org::genivi::mediamanager::PlayerDBusStubAdapterInternal::getRateAttributeStubDispatcher }
-            , { { "setRateAttribute", "i" }, &org::genivi::mediamanager::PlayerDBusStubAdapterInternal::setRateAttributeStubDispatcher },
+            , { { "setRateAttribute", "d" }, &org::genivi::mediamanager::PlayerDBusStubAdapterInternal::setRateAttributeStubDispatcher },
             /**
              * Get or set volume, 0 is muted, and 1.0 means maximum
                                  

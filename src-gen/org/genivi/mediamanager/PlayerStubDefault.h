@@ -46,10 +46,10 @@ public:
     virtual const PlayerTypes::RepeatStatus& getRepeatAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId);
     virtual void setRepeatAttribute(PlayerTypes::RepeatStatus value);
     virtual void setRepeatAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId, PlayerTypes::RepeatStatus value);
-    virtual const PlayerTypes::RateStatus& getRateAttribute();
-    virtual const PlayerTypes::RateStatus& getRateAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId);
-    virtual void setRateAttribute(PlayerTypes::RateStatus value);
-    virtual void setRateAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId, PlayerTypes::RateStatus value);
+    virtual const double& getRateAttribute();
+    virtual const double& getRateAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId);
+    virtual void setRateAttribute(double value);
+    virtual void setRateAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId, double value);
     virtual const double& getVolumeAttribute();
     virtual const double& getVolumeAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId);
     virtual void setVolumeAttribute(double value);
@@ -264,8 +264,8 @@ protected:
     /**
      * Set the playback rate
      */
-    virtual bool trySetRateAttribute(PlayerTypes::RateStatus value);
-    virtual bool validateRateAttributeRequestedValue(const PlayerTypes::RateStatus& value);
+    virtual bool trySetRateAttribute(double value);
+    virtual bool validateRateAttributeRequestedValue(const double& value);
     virtual void onRemoteRateAttributeChanged();
     /**
      * Get or set volume, 0 is muted, and 1.0 means maximum
@@ -361,8 +361,8 @@ protected:
         /**
          * Set the playback rate
          */
-        virtual bool onRemoteSetRateAttribute(PlayerTypes::RateStatus value);
-        virtual bool onRemoteSetRateAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId, PlayerTypes::RateStatus value);
+        virtual bool onRemoteSetRateAttribute(double value);
+        virtual bool onRemoteSetRateAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId, double value);
         virtual void onRemoteRateAttributeChanged();
 
         /**
@@ -445,7 +445,7 @@ private:
     /**
      * Set the playback rate
      */
-    PlayerTypes::RateStatus rateAttributeValue_;
+    double rateAttributeValue_;
     /**
      * Get or set volume, 0 is muted, and 1.0 means maximum
                          

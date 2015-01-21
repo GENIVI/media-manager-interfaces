@@ -87,22 +87,22 @@ void setRepeatAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId, Pla
 virtual void setRepeatAttribute(PlayerTypes::RepeatStatus value) = 0;
 
 
-virtual const PlayerTypes::RateStatus& getRateAttribute() = 0 ;
+virtual const double& getRateAttribute() = 0 ;
 
 void fireRateAttributeChangedNotification() {
     for (auto& stubAdapter_ : stubAdapters_)
 	                stubAdapter_->fireRateAttributeChanged(getRateAttribute());
 }
 
-const PlayerTypes::RateStatus& getRateAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId) {
+const double& getRateAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId) {
     return getRateAttribute();
 }
 
-void setRateAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId, PlayerTypes::RateStatus value) {
+void setRateAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId, double value) {
     setRateAttribute(value);
 }
 
-virtual void setRateAttribute(PlayerTypes::RateStatus value) = 0;
+virtual void setRateAttribute(double value) = 0;
 
 
 virtual const double& getVolumeAttribute() = 0 ;
@@ -551,12 +551,12 @@ void onRemoteRateAttributeChanged() {
 	assert(false);  // we don't expect this method to be called
 }
 
-bool onRemoteSetRateAttribute(PlayerTypes::RateStatus value) {
+bool onRemoteSetRateAttribute(double value) {
     defaultStub_->setRateAttribute(value);
     return false;	// We let the service implementation take care of triggering the "property changed"" notifications
 }
 
-bool onRemoteSetRateAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId, PlayerTypes::RateStatus value) {
+bool onRemoteSetRateAttribute(const std::shared_ptr<CommonAPI::ClientId> clientId, double value) {
     return onRemoteSetRateAttribute(value);
 }
 
