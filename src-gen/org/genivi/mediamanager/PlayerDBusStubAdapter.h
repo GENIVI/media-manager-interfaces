@@ -311,14 +311,15 @@ static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     std::tuple<PlayerTypes::PlayerError>
     > dequeueIndexStubDispatcher;
 /**
- * Retrieve the current play queue in JSON format
-         returns: Current play
- *  queue in JSON format
+ * Retrieve the current play queue. The format of the result
+                     
+ *  object is described in MediaTypes.fidl
+         returns: Current play queue
  */
 static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     PlayerStub,
     std::tuple<>,
-    std::tuple<std::string, PlayerTypes::PlayerError>
+    std::tuple<MediaTypes::ResultMapList, PlayerTypes::PlayerError>
     > getCurrentPlayQueueStubDispatcher;
 /**
  * Dequeue all elements, emptying the play queue

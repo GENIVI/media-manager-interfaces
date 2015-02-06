@@ -17,6 +17,8 @@
 package org.genivi.mediamanager
 
 import org.genivi.mediamanager.PlayerTypes.* from "PlayerTypes.fidl"
+import org.genivi.mediamanager.MediaTypes.* from "MediaTypes.fidl"
+
 
 
 interface Player {
@@ -136,12 +138,13 @@ interface Player {
         }
     }
 
-    <** @description: Retrieve the current play queue in JSON format
-         returns: Current play queue in JSON format
+    <** @description: Retrieve the current play queue. The format of the result
+                      object is described in MediaTypes.fidl
+         returns: Current play queue
     **>
     method getCurrentPlayQueue {
         out {
-            String playQueue
+            ResultMapList playQueue
             PlayerError e
         }
     }

@@ -11,6 +11,7 @@
 #include "Player.h"
 
 
+#include <org/genivi/mediamanager/MediaTypes.h>
 #include <org/genivi/mediamanager/PlayerTypes.h>
 
 #if !defined (COMMONAPI_INTERNAL_COMPILATION)
@@ -54,7 +55,7 @@ class PlayerProxyBase: virtual public CommonAPI::Proxy {
     typedef std::function<void(const CommonAPI::CallStatus&, const PlayerTypes::PlayerError&)> OpenUriAsyncCallback;
     typedef std::function<void(const CommonAPI::CallStatus&, const PlayerTypes::PlayerError&)> EnqueueUriAsyncCallback;
     typedef std::function<void(const CommonAPI::CallStatus&, const PlayerTypes::PlayerError&)> DequeueIndexAsyncCallback;
-    typedef std::function<void(const CommonAPI::CallStatus&, const std::string&, const PlayerTypes::PlayerError&)> GetCurrentPlayQueueAsyncCallback;
+    typedef std::function<void(const CommonAPI::CallStatus&, const MediaTypes::ResultMapList&, const PlayerTypes::PlayerError&)> GetCurrentPlayQueueAsyncCallback;
     typedef std::function<void(const CommonAPI::CallStatus&, const PlayerTypes::PlayerError&)> DequeueAllAsyncCallback;
     typedef std::function<void(const CommonAPI::CallStatus&, const PlayerTypes::PlayerError&)> OpenPlaylistAsyncCallback;
     typedef std::function<void(const CommonAPI::CallStatus&, const PlayerTypes::PlayerError&)> PauseAsyncCallback;
@@ -179,11 +180,12 @@ class PlayerProxyBase: virtual public CommonAPI::Proxy {
     virtual void dequeueIndex(const uint64_t& pos, CommonAPI::CallStatus& callStatus, PlayerTypes::PlayerError& e) = 0;
     virtual std::future<CommonAPI::CallStatus> dequeueIndexAsync(const uint64_t& pos, DequeueIndexAsyncCallback callback) = 0;
     /**
-     * Retrieve the current play queue in JSON format
-             returns: Current play
-     *  queue in JSON format
+     * Retrieve the current play queue. The format of the result
+                         
+     *  object is described in MediaTypes.fidl
+             returns: Current play queue
      */
-    virtual void getCurrentPlayQueue(CommonAPI::CallStatus& callStatus, std::string& playQueue, PlayerTypes::PlayerError& e) = 0;
+    virtual void getCurrentPlayQueue(CommonAPI::CallStatus& callStatus, MediaTypes::ResultMapList& playQueue, PlayerTypes::PlayerError& e) = 0;
     virtual std::future<CommonAPI::CallStatus> getCurrentPlayQueueAsync(GetCurrentPlayQueueAsyncCallback callback) = 0;
     /**
      * Dequeue all elements, emptying the play queue

@@ -194,12 +194,13 @@ const char* PlayerDBusStubAdapterInternal::getMethodsDBusIntrospectionXmlData() 
             "<arg name=\"e\" type=\"i\" direction=\"out\" />\n"
         "</method>\n"
         /**
-         * Retrieve the current play queue in JSON format
-                 returns: Current play
-         *  queue in JSON format
+         * Retrieve the current play queue. The format of the result
+                             
+         *  object is described in MediaTypes.fidl
+                 returns: Current play queue
          */
         "<method name=\"getCurrentPlayQueue\">\n"
-            "<arg name=\"playQueue\" type=\"s\" direction=\"out\" />\n"
+            "<arg name=\"playQueue\" type=\"aa{s(yv)}\" direction=\"out\" />\n"
             "<arg name=\"e\" type=\"i\" direction=\"out\" />\n"
         "</method>\n"
         /**
@@ -528,15 +529,16 @@ CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     std::tuple<PlayerTypes::PlayerError>
     > PlayerDBusStubAdapterInternal::dequeueIndexStubDispatcher(&PlayerStub::dequeueIndex, "i");
 /**
- * Retrieve the current play queue in JSON format
-         returns: Current play
- *  queue in JSON format
+ * Retrieve the current play queue. The format of the result
+                     
+ *  object is described in MediaTypes.fidl
+         returns: Current play queue
  */
 CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     PlayerStub,
     std::tuple<>,
-    std::tuple<std::string, PlayerTypes::PlayerError>
-    > PlayerDBusStubAdapterInternal::getCurrentPlayQueueStubDispatcher(&PlayerStub::getCurrentPlayQueue, "si");
+    std::tuple<MediaTypes::ResultMapList, PlayerTypes::PlayerError>
+    > PlayerDBusStubAdapterInternal::getCurrentPlayQueueStubDispatcher(&PlayerStub::getCurrentPlayQueue, "aa{s(yv)}i");
 /**
  * Dequeue all elements, emptying the play queue
  */
@@ -971,9 +973,10 @@ PlayerDBusStubAdapterInternal::PlayerDBusStubAdapterInternal(
              */
             { { "dequeueIndex", "t" }, &org::genivi::mediamanager::PlayerDBusStubAdapterInternal::dequeueIndexStubDispatcher },
             /**
-             * Retrieve the current play queue in JSON format
-                     returns: Current play
-             *  queue in JSON format
+             * Retrieve the current play queue. The format of the result
+                                 
+             *  object is described in MediaTypes.fidl
+                     returns: Current play queue
              */
             { { "getCurrentPlayQueue", "" }, &org::genivi::mediamanager::PlayerDBusStubAdapterInternal::getCurrentPlayQueueStubDispatcher },
             /**

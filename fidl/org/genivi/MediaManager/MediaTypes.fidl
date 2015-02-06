@@ -27,4 +27,70 @@ typeCollection MediaTypes {
     enumeration MediaManagerError {
         NO_ERROR
     }
+    
+    map ResultMap {
+        String to ResultUnion
+    }
+    
+    union ResultUnion {
+		StringList 			l
+        Int32       		v0
+        UInt32      		v1
+        Int64       		v2
+        UInt64      		v3
+        Boolean     		v4
+        Float       		v5
+        Double      		v6
+        String      		v7
+    }
+
+    array ResultMapList 	of ResultMap
+    array StringList        of String
+    
+    /**
+     * ResultMap usage in Browser and Player
+     * -------------------------------------
+     * The ResultMap structure defined above is used by the Browser 
+     * and Player interfaces, and when used by these interfaces,
+     * the following keys are legal:
+     * 
+     * For both containers and items:
+     * - DisplayName (String): The name of the container/item. This
+     *   could be the name of an album or a track.
+     * 
+     * - Path (String): Some sort of path identifier. The format
+     * 	 is implementation specific.
+     * 
+	 * - Parent (String): Parent path. Again, format is 
+	 * 	 implementation specific.
+	 * 
+	 * - Type (String): High-level type, indicating the type of the
+	 *   item/container. The value is one of the following:
+  	 * 		- item: A generic item, could be any type of item
+  	 *		- container: A generic container, could be any type of
+  	 * 		  container
+  	 * 		- music: Playable music item
+  	 * 
+	 * - TypeEx (String): More specific type identifier of the
+	 * 	 item/container. The value is one of the following:
+  	 * 		- Any "Type" value - if no further type is known
+  	 * 		- container.album.musicAlbum Indicates an album
+  	 * 		- container.person.musicArtist Indicates an artist
+  	 * 		- container.genre.musicGenre Indicates an artist
+  	 * 
+	 * - Artists (String array): Artists participating in this
+	 * 	 container. E.g. Artists on an album
+	 * 
+	 * For containers only:
+	 * - Searchable (boolean): Indicates whether the container
+	 * 	 can be searched
+	 * 
+	 * For items only:
+	 * - MIMEType (String): The MIME of the item
+	 * - Album (String): Name of the album
+	 * - URI (String): URI for retrieving resource
+	 * - Genre (String): One of the genres defined in ID3v2
+	 * - Size (long int): Size of the resource in bytes
+	 * - Duration (long int): Duration of resource in microseconds
+     */
 }

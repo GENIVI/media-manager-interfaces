@@ -290,9 +290,10 @@ public:
      */
     virtual std::future<CommonAPI::CallStatus> dequeueIndexAsync(const uint64_t& pos, DequeueIndexAsyncCallback callback);
     /**
-     * Retrieve the current play queue in JSON format
-             returns: Current play
-     *  queue in JSON format
+     * Retrieve the current play queue. The format of the result
+                         
+     *  object is described in MediaTypes.fidl
+             returns: Current play queue
      * 
      * Calls getCurrentPlayQueue with synchronous semantics.
      * 
@@ -301,7 +302,7 @@ public:
      * "SUCCESS" or which type of error has occurred. In case of an error, ONLY the CallStatus
      * will be set.
      */
-    virtual void getCurrentPlayQueue(CommonAPI::CallStatus& callStatus, std::string& playQueue, PlayerTypes::PlayerError& e);
+    virtual void getCurrentPlayQueue(CommonAPI::CallStatus& callStatus, MediaTypes::ResultMapList& playQueue, PlayerTypes::PlayerError& e);
     /**
      * Calls getCurrentPlayQueue with asynchronous semantics.
      * 
@@ -1043,12 +1044,13 @@ std::future<CommonAPI::CallStatus> PlayerProxy<_AttributeExtensions...>::dequeue
     return delegate_->dequeueIndexAsync(pos, callback);
 }
 /**
- * Retrieve the current play queue in JSON format
-         returns: Current play
- *  queue in JSON format
+ * Retrieve the current play queue. The format of the result
+                     
+ *  object is described in MediaTypes.fidl
+         returns: Current play queue
  */
 template <typename ... _AttributeExtensions>
-void PlayerProxy<_AttributeExtensions...>::getCurrentPlayQueue(CommonAPI::CallStatus& callStatus, std::string& playQueue, PlayerTypes::PlayerError& e) {
+void PlayerProxy<_AttributeExtensions...>::getCurrentPlayQueue(CommonAPI::CallStatus& callStatus, MediaTypes::ResultMapList& playQueue, PlayerTypes::PlayerError& e) {
     delegate_->getCurrentPlayQueue(callStatus, playQueue, e);
 }
 

@@ -203,13 +203,14 @@ std::future<CommonAPI::CallStatus> PlayerDBusProxy::dequeueIndexAsync(const uint
         std::move(callback));
 }
 /**
- * Retrieve the current play queue in JSON format
-         returns: Current play
- *  queue in JSON format
+ * Retrieve the current play queue. The format of the result
+                     
+ *  object is described in MediaTypes.fidl
+         returns: Current play queue
  */
-void PlayerDBusProxy::getCurrentPlayQueue(CommonAPI::CallStatus& callStatus, std::string& playQueue, PlayerTypes::PlayerError& e) {
+void PlayerDBusProxy::getCurrentPlayQueue(CommonAPI::CallStatus& callStatus, MediaTypes::ResultMapList& playQueue, PlayerTypes::PlayerError& e) {
     CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<>,
-                                     CommonAPI::DBus::DBusSerializableArguments<std::string, PlayerTypes::PlayerError> >::callMethodWithReply(
+                                     CommonAPI::DBus::DBusSerializableArguments<MediaTypes::ResultMapList, PlayerTypes::PlayerError> >::callMethodWithReply(
         *this,
         "getCurrentPlayQueue",
         "",
@@ -218,7 +219,7 @@ void PlayerDBusProxy::getCurrentPlayQueue(CommonAPI::CallStatus& callStatus, std
 }
 std::future<CommonAPI::CallStatus> PlayerDBusProxy::getCurrentPlayQueueAsync(GetCurrentPlayQueueAsyncCallback callback) {
     return CommonAPI::DBus::DBusProxyHelper<CommonAPI::DBus::DBusSerializableArguments<>,
-                                     CommonAPI::DBus::DBusSerializableArguments<std::string, PlayerTypes::PlayerError> >::callMethodAsync(
+                                     CommonAPI::DBus::DBusSerializableArguments<MediaTypes::ResultMapList, PlayerTypes::PlayerError> >::callMethodAsync(
         *this,
         "getCurrentPlayQueue",
         "",

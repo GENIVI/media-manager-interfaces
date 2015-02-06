@@ -96,11 +96,12 @@ class PlayerDBusProxy: virtual public PlayerProxyBase, virtual public CommonAPI:
     virtual void dequeueIndex(const uint64_t& pos, CommonAPI::CallStatus& callStatus, PlayerTypes::PlayerError& e);
     virtual std::future<CommonAPI::CallStatus> dequeueIndexAsync(const uint64_t& pos, DequeueIndexAsyncCallback callback);
     /**
-     * Retrieve the current play queue in JSON format
-             returns: Current play
-     *  queue in JSON format
+     * Retrieve the current play queue. The format of the result
+                         
+     *  object is described in MediaTypes.fidl
+             returns: Current play queue
      */
-    virtual void getCurrentPlayQueue(CommonAPI::CallStatus& callStatus, std::string& playQueue, PlayerTypes::PlayerError& e);
+    virtual void getCurrentPlayQueue(CommonAPI::CallStatus& callStatus, MediaTypes::ResultMapList& playQueue, PlayerTypes::PlayerError& e);
     virtual std::future<CommonAPI::CallStatus> getCurrentPlayQueueAsync(GetCurrentPlayQueueAsyncCallback callback);
     /**
      * Dequeue all elements, emptying the play queue

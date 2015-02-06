@@ -57,31 +57,33 @@ const char* BrowserDBusStubAdapterInternal::getMethodsDBusIntrospectionXmlData()
         "</method>\n"
         /**
          * List all containers below the given path.
-                 returns: A JSON list of all
-         *  containers with the given path as parent
-                 errors: NO_CONNECTION if no
-         *  connection can be established to underlying
-                          browsing engine
-        
-         *                   BAD_PATH if path parameter is invalid
+                 returns: ResultMapList of
+         *  all containers with the given path as parent.
+                 	   	  See
+         *  MediaTypes.fidl for a list of allowed keys.
+                 errors: NO_CONNECTION if
+         *  no connection can be established to underlying
+                         browsing
+         *  engine
+                         BAD_PATH if path parameter is invalid
          * @param path The path to search for containers. The format of the path
                        
          *  depends on the underlying browsing backend
          * @param offset: The offset to use for indexing the results list
          * @param count: The number of results to return, starting from offset
-         * @param filter: Array of keys to include in resulting JSON elements
+         * @param filter: Array of keys to include in resulting ResultMapList
          */
         "<method name=\"listContainers\">\n"
             "<arg name=\"path\" type=\"s\" direction=\"in\" />\n"
             "<arg name=\"offset\" type=\"t\" direction=\"in\" />\n"
             "<arg name=\"count\" type=\"t\" direction=\"in\" />\n"
             "<arg name=\"filter\" type=\"as\" direction=\"in\" />\n"
-            "<arg name=\"containers\" type=\"s\" direction=\"out\" />\n"
+            "<arg name=\"m\" type=\"aa{s(yv)}\" direction=\"out\" />\n"
             "<arg name=\"e\" type=\"i\" direction=\"out\" />\n"
         "</method>\n"
         /**
          * Extends ListContainers with sorting capabilities
-         * @param sortKey Key to sort JSON result list on
+         * @param sortKey Key to sort ResultMapList on
          */
         "<method name=\"listContainersEx\">\n"
             "<arg name=\"path\" type=\"s\" direction=\"in\" />\n"
@@ -89,37 +91,39 @@ const char* BrowserDBusStubAdapterInternal::getMethodsDBusIntrospectionXmlData()
             "<arg name=\"count\" type=\"t\" direction=\"in\" />\n"
             "<arg name=\"filter\" type=\"as\" direction=\"in\" />\n"
             "<arg name=\"sortKey\" type=\"(is)\" direction=\"in\" />\n"
-            "<arg name=\"containers\" type=\"s\" direction=\"out\" />\n"
+            "<arg name=\"m\" type=\"aa{s(yv)}\" direction=\"out\" />\n"
             "<arg name=\"e\" type=\"i\" direction=\"out\" />\n"
         "</method>\n"
         /**
          * List all items in the given container
-                 returns: A JSON list of all
-         *  items with the given container as parent
-                 errors: NO_CONNECTION if no
-         *  connection can be established to underlying
-                          browsing engine
-        
-         *                   BAD_PATH if path parameter is invalid
+                 returns: A ResultMapList of all
+         *  items with the given container as parent.
+                 		  See MediaTypes.fidl for
+         *  a list of allowed keys.
+                 errors: NO_CONNECTION if no connection can be
+         *  established to underlying
+                         browsing engine
+                        
+         *  BAD_PATH if path parameter is invalid
          * @param path The path of the container to search for items.
                         The format
          *  of the path depends on the underlying browsing
                         backend
          * @param offset: The offset to use for indexing the results list
          * @param count: The number of results to return, starting from offset
-         * @param filter: Array of keys to include in resulting JSON elements
+         * @param filter: Array of keys to include in resulting ResultMapList
          */
         "<method name=\"listItems\">\n"
             "<arg name=\"path\" type=\"s\" direction=\"in\" />\n"
             "<arg name=\"offset\" type=\"t\" direction=\"in\" />\n"
             "<arg name=\"count\" type=\"t\" direction=\"in\" />\n"
             "<arg name=\"filter\" type=\"as\" direction=\"in\" />\n"
-            "<arg name=\"items\" type=\"s\" direction=\"out\" />\n"
+            "<arg name=\"m\" type=\"aa{s(yv)}\" direction=\"out\" />\n"
             "<arg name=\"e\" type=\"i\" direction=\"out\" />\n"
         "</method>\n"
         /**
          * Extends ListItems with sorting capabilities
-         * @param sortKey Key to sort JSON result list on
+         * @param sortKey Key to sort ResultMapList
          */
         "<method name=\"listItemsEx\">\n"
             "<arg name=\"path\" type=\"s\" direction=\"in\" />\n"
@@ -127,13 +131,15 @@ const char* BrowserDBusStubAdapterInternal::getMethodsDBusIntrospectionXmlData()
             "<arg name=\"count\" type=\"t\" direction=\"in\" />\n"
             "<arg name=\"filter\" type=\"as\" direction=\"in\" />\n"
             "<arg name=\"sortKey\" type=\"(is)\" direction=\"in\" />\n"
-            "<arg name=\"items\" type=\"s\" direction=\"out\" />\n"
+            "<arg name=\"m\" type=\"aa{s(yv)}\" direction=\"out\" />\n"
             "<arg name=\"e\" type=\"i\" direction=\"out\" />\n"
         "</method>\n"
         /**
          * List all children in the given container
-                 returns: A JSON list of all
-         *  children with the given container as parent
+                 returns: A ResultMapList of
+         *  all children with the given container as parent.
+                 		  See
+         *  MediaTypes.fidl for a list of allowed keys.
                  errors: NO_CONNECTION if
          *  no connection can be established to underlying
                           browsing
@@ -145,19 +151,19 @@ const char* BrowserDBusStubAdapterInternal::getMethodsDBusIntrospectionXmlData()
                         backend
          * @param offset: The offset to use for indexing the results list
          * @param count: The number of results to return, starting from offset
-         * @param filter: Array of keys to include in resulting JSON elements
+         * @param filter: Array of keys to include in resulting ResultMapList
          */
         "<method name=\"listChildren\">\n"
             "<arg name=\"path\" type=\"s\" direction=\"in\" />\n"
             "<arg name=\"offset\" type=\"t\" direction=\"in\" />\n"
             "<arg name=\"count\" type=\"t\" direction=\"in\" />\n"
             "<arg name=\"filter\" type=\"as\" direction=\"in\" />\n"
-            "<arg name=\"children\" type=\"s\" direction=\"out\" />\n"
+            "<arg name=\"m\" type=\"aa{s(yv)}\" direction=\"out\" />\n"
             "<arg name=\"e\" type=\"i\" direction=\"out\" />\n"
         "</method>\n"
         /**
          * Extends ListChildren with sorting capabilities
-         * @param sortKey Key to sort JSON result list on
+         * @param sortKey Key to sort ResultMapList on
          */
         "<method name=\"listChildrenEx\">\n"
             "<arg name=\"path\" type=\"s\" direction=\"in\" />\n"
@@ -165,19 +171,21 @@ const char* BrowserDBusStubAdapterInternal::getMethodsDBusIntrospectionXmlData()
             "<arg name=\"count\" type=\"t\" direction=\"in\" />\n"
             "<arg name=\"filter\" type=\"as\" direction=\"in\" />\n"
             "<arg name=\"sortKey\" type=\"(is)\" direction=\"in\" />\n"
-            "<arg name=\"children\" type=\"s\" direction=\"out\" />\n"
+            "<arg name=\"m\" type=\"aa{s(yv)}\" direction=\"out\" />\n"
             "<arg name=\"e\" type=\"i\" direction=\"out\" />\n"
         "</method>\n"
         /**
          * Search for children in the given container
-                 returns: A JSON list of all
-         *  children matching the search criteria with
+                 returns: A ResultMapList of
+         *  all children matching the search criteria with
                            the given
-         *  container as parent
+         *  container as parent.See MediaTypes.fidl for a list of
+                          
+         *  allowed keys.
                  errors: NO_CONNECTION if no connection can be
          *  established to underlying
-                          browsing engine
-                         
+                         browsing engine
+                        
          *  BAD_PATH if path parameter is invalid
          * @param path The path of the container to search for children.
                         The
@@ -188,7 +196,7 @@ const char* BrowserDBusStubAdapterInternal::getMethodsDBusIntrospectionXmlData()
          *  query depends on the underlying browsing backend
          * @param offset: The offset to use for indexing the results list
          * @param count: The number of results to return, starting from offset
-         * @param filter: Array of keys to include in resulting JSON elements
+         * @param filter: Array of keys to include in resulting ResultMapList
          */
         "<method name=\"searchObjects\">\n"
             "<arg name=\"path\" type=\"s\" direction=\"in\" />\n"
@@ -196,12 +204,12 @@ const char* BrowserDBusStubAdapterInternal::getMethodsDBusIntrospectionXmlData()
             "<arg name=\"offset\" type=\"t\" direction=\"in\" />\n"
             "<arg name=\"count\" type=\"t\" direction=\"in\" />\n"
             "<arg name=\"filter\" type=\"as\" direction=\"in\" />\n"
-            "<arg name=\"objects\" type=\"s\" direction=\"out\" />\n"
+            "<arg name=\"m\" type=\"aa{s(yv)}\" direction=\"out\" />\n"
             "<arg name=\"e\" type=\"i\" direction=\"out\" />\n"
         "</method>\n"
         /**
          * Extends SearchObjects with sorting capabilities
-         * @param sortKey Key to sort JSON result list on
+         * @param sortKey Key to sort ResultMapList on
          */
         "<method name=\"searchObjectsEx\">\n"
             "<arg name=\"path\" type=\"s\" direction=\"in\" />\n"
@@ -210,22 +218,22 @@ const char* BrowserDBusStubAdapterInternal::getMethodsDBusIntrospectionXmlData()
             "<arg name=\"count\" type=\"t\" direction=\"in\" />\n"
             "<arg name=\"filter\" type=\"as\" direction=\"in\" />\n"
             "<arg name=\"sortKey\" type=\"(is)\" direction=\"in\" />\n"
-            "<arg name=\"objects\" type=\"s\" direction=\"out\" />\n"
+            "<arg name=\"m\" type=\"aa{s(yv)}\" direction=\"out\" />\n"
             "<arg name=\"e\" type=\"i\" direction=\"out\" />\n"
         "</method>\n"
         /**
          * Get a list of all initial letters and their index in the
                              
          *  given container
-                 returns: A JSON list of tuples of initial letters and
+                 returns: A list of tuples of initial letters and
          *  their first
                            observed position when sorting according to
          *  sortKey
                  errors: NO_CONNECTION if no connection can be established to
          *  underlying
-                          browsing engine
-                          BAD_PATH if
-         *  path parameter is invalid
+                         browsing engine
+                         BAD_PATH if path
+         *  parameter is invalid
          * @param container: Container to build index list for
          * @param count: How many (unsorted) items should be traversed to build
                          
@@ -305,69 +313,75 @@ CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     > BrowserDBusStubAdapterInternal::discoverMediaManagersStubDispatcher(&BrowserStub::discoverMediaManagers, "asi");
 /**
  * List all containers below the given path.
-         returns: A JSON list of all
- *  containers with the given path as parent
-         errors: NO_CONNECTION if no
- *  connection can be established to underlying
-                  browsing engine
-
- *                   BAD_PATH if path parameter is invalid
+         returns: ResultMapList of
+ *  all containers with the given path as parent.
+         	   	  See
+ *  MediaTypes.fidl for a list of allowed keys.
+         errors: NO_CONNECTION if
+ *  no connection can be established to underlying
+                 browsing
+ *  engine
+                 BAD_PATH if path parameter is invalid
  * @param path The path to search for containers. The format of the path
                
  *  depends on the underlying browsing backend
  * @param offset: The offset to use for indexing the results list
  * @param count: The number of results to return, starting from offset
- * @param filter: Array of keys to include in resulting JSON elements
+ * @param filter: Array of keys to include in resulting ResultMapList
  */
 CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     BrowserStub,
     std::tuple<std::string, uint64_t, uint64_t, std::vector<std::string>>,
-    std::tuple<std::string, BrowserTypes::BrowserError>
-    > BrowserDBusStubAdapterInternal::listContainersStubDispatcher(&BrowserStub::listContainers, "si");
+    std::tuple<MediaTypes::ResultMapList, BrowserTypes::BrowserError>
+    > BrowserDBusStubAdapterInternal::listContainersStubDispatcher(&BrowserStub::listContainers, "aa{s(yv)}i");
 /**
  * Extends ListContainers with sorting capabilities
- * @param sortKey Key to sort JSON result list on
+ * @param sortKey Key to sort ResultMapList on
  */
 CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     BrowserStub,
     std::tuple<std::string, uint64_t, uint64_t, std::vector<std::string>, BrowserTypes::SortKey>,
-    std::tuple<std::string, BrowserTypes::BrowserError>
-    > BrowserDBusStubAdapterInternal::listContainersExStubDispatcher(&BrowserStub::listContainersEx, "si");
+    std::tuple<MediaTypes::ResultMapList, BrowserTypes::BrowserError>
+    > BrowserDBusStubAdapterInternal::listContainersExStubDispatcher(&BrowserStub::listContainersEx, "aa{s(yv)}i");
 /**
  * List all items in the given container
-         returns: A JSON list of all
- *  items with the given container as parent
-         errors: NO_CONNECTION if no
- *  connection can be established to underlying
-                  browsing engine
-
- *                   BAD_PATH if path parameter is invalid
+         returns: A ResultMapList of all
+ *  items with the given container as parent.
+         		  See MediaTypes.fidl for
+ *  a list of allowed keys.
+         errors: NO_CONNECTION if no connection can be
+ *  established to underlying
+                 browsing engine
+                
+ *  BAD_PATH if path parameter is invalid
  * @param path The path of the container to search for items.
                 The format
  *  of the path depends on the underlying browsing
                 backend
  * @param offset: The offset to use for indexing the results list
  * @param count: The number of results to return, starting from offset
- * @param filter: Array of keys to include in resulting JSON elements
+ * @param filter: Array of keys to include in resulting ResultMapList
  */
 CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     BrowserStub,
     std::tuple<std::string, uint64_t, uint64_t, std::vector<std::string>>,
-    std::tuple<std::string, BrowserTypes::BrowserError>
-    > BrowserDBusStubAdapterInternal::listItemsStubDispatcher(&BrowserStub::listItems, "si");
+    std::tuple<MediaTypes::ResultMapList, BrowserTypes::BrowserError>
+    > BrowserDBusStubAdapterInternal::listItemsStubDispatcher(&BrowserStub::listItems, "aa{s(yv)}i");
 /**
  * Extends ListItems with sorting capabilities
- * @param sortKey Key to sort JSON result list on
+ * @param sortKey Key to sort ResultMapList
  */
 CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     BrowserStub,
     std::tuple<std::string, uint64_t, uint64_t, std::vector<std::string>, BrowserTypes::SortKey>,
-    std::tuple<std::string, BrowserTypes::BrowserError>
-    > BrowserDBusStubAdapterInternal::listItemsExStubDispatcher(&BrowserStub::listItemsEx, "si");
+    std::tuple<MediaTypes::ResultMapList, BrowserTypes::BrowserError>
+    > BrowserDBusStubAdapterInternal::listItemsExStubDispatcher(&BrowserStub::listItemsEx, "aa{s(yv)}i");
 /**
  * List all children in the given container
-         returns: A JSON list of all
- *  children with the given container as parent
+         returns: A ResultMapList of
+ *  all children with the given container as parent.
+         		  See
+ *  MediaTypes.fidl for a list of allowed keys.
          errors: NO_CONNECTION if
  *  no connection can be established to underlying
                   browsing
@@ -379,32 +393,34 @@ CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
                 backend
  * @param offset: The offset to use for indexing the results list
  * @param count: The number of results to return, starting from offset
- * @param filter: Array of keys to include in resulting JSON elements
+ * @param filter: Array of keys to include in resulting ResultMapList
  */
 CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     BrowserStub,
     std::tuple<std::string, uint64_t, uint64_t, std::vector<std::string>>,
-    std::tuple<std::string, BrowserTypes::BrowserError>
-    > BrowserDBusStubAdapterInternal::listChildrenStubDispatcher(&BrowserStub::listChildren, "si");
+    std::tuple<MediaTypes::ResultMapList, BrowserTypes::BrowserError>
+    > BrowserDBusStubAdapterInternal::listChildrenStubDispatcher(&BrowserStub::listChildren, "aa{s(yv)}i");
 /**
  * Extends ListChildren with sorting capabilities
- * @param sortKey Key to sort JSON result list on
+ * @param sortKey Key to sort ResultMapList on
  */
 CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     BrowserStub,
     std::tuple<std::string, uint64_t, uint64_t, std::vector<std::string>, BrowserTypes::SortKey>,
-    std::tuple<std::string, BrowserTypes::BrowserError>
-    > BrowserDBusStubAdapterInternal::listChildrenExStubDispatcher(&BrowserStub::listChildrenEx, "si");
+    std::tuple<MediaTypes::ResultMapList, BrowserTypes::BrowserError>
+    > BrowserDBusStubAdapterInternal::listChildrenExStubDispatcher(&BrowserStub::listChildrenEx, "aa{s(yv)}i");
 /**
  * Search for children in the given container
-         returns: A JSON list of all
- *  children matching the search criteria with
+         returns: A ResultMapList of
+ *  all children matching the search criteria with
                    the given
- *  container as parent
+ *  container as parent.See MediaTypes.fidl for a list of
+                  
+ *  allowed keys.
          errors: NO_CONNECTION if no connection can be
  *  established to underlying
-                  browsing engine
-                 
+                 browsing engine
+                
  *  BAD_PATH if path parameter is invalid
  * @param path The path of the container to search for children.
                 The
@@ -415,35 +431,35 @@ CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
  *  query depends on the underlying browsing backend
  * @param offset: The offset to use for indexing the results list
  * @param count: The number of results to return, starting from offset
- * @param filter: Array of keys to include in resulting JSON elements
+ * @param filter: Array of keys to include in resulting ResultMapList
  */
 CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     BrowserStub,
     std::tuple<std::string, std::string, uint64_t, uint64_t, std::vector<std::string>>,
-    std::tuple<std::string, BrowserTypes::BrowserError>
-    > BrowserDBusStubAdapterInternal::searchObjectsStubDispatcher(&BrowserStub::searchObjects, "si");
+    std::tuple<MediaTypes::ResultMapList, BrowserTypes::BrowserError>
+    > BrowserDBusStubAdapterInternal::searchObjectsStubDispatcher(&BrowserStub::searchObjects, "aa{s(yv)}i");
 /**
  * Extends SearchObjects with sorting capabilities
- * @param sortKey Key to sort JSON result list on
+ * @param sortKey Key to sort ResultMapList on
  */
 CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     BrowserStub,
     std::tuple<std::string, std::string, uint64_t, uint64_t, std::vector<std::string>, BrowserTypes::SortKey>,
-    std::tuple<std::string, BrowserTypes::BrowserError>
-    > BrowserDBusStubAdapterInternal::searchObjectsExStubDispatcher(&BrowserStub::searchObjectsEx, "si");
+    std::tuple<MediaTypes::ResultMapList, BrowserTypes::BrowserError>
+    > BrowserDBusStubAdapterInternal::searchObjectsExStubDispatcher(&BrowserStub::searchObjectsEx, "aa{s(yv)}i");
 /**
  * Get a list of all initial letters and their index in the
                      
  *  given container
-         returns: A JSON list of tuples of initial letters and
+         returns: A list of tuples of initial letters and
  *  their first
                    observed position when sorting according to
  *  sortKey
          errors: NO_CONNECTION if no connection can be established to
  *  underlying
-                  browsing engine
-                  BAD_PATH if
- *  path parameter is invalid
+                 browsing engine
+                 BAD_PATH if path
+ *  parameter is invalid
  * @param container: Container to build index list for
  * @param count: How many (unsorted) items should be traversed to build
                  
@@ -540,53 +556,59 @@ BrowserDBusStubAdapterInternal::BrowserDBusStubAdapterInternal(
             { { "discoverMediaManagers", "" }, &org::genivi::mediamanager::BrowserDBusStubAdapterInternal::discoverMediaManagersStubDispatcher },
             /**
              * List all containers below the given path.
-                     returns: A JSON list of all
-             *  containers with the given path as parent
-                     errors: NO_CONNECTION if no
-             *  connection can be established to underlying
-                              browsing engine
-            
-             *                   BAD_PATH if path parameter is invalid
+                     returns: ResultMapList of
+             *  all containers with the given path as parent.
+                     	   	  See
+             *  MediaTypes.fidl for a list of allowed keys.
+                     errors: NO_CONNECTION if
+             *  no connection can be established to underlying
+                             browsing
+             *  engine
+                             BAD_PATH if path parameter is invalid
              * @param path The path to search for containers. The format of the path
                            
              *  depends on the underlying browsing backend
              * @param offset: The offset to use for indexing the results list
              * @param count: The number of results to return, starting from offset
-             * @param filter: Array of keys to include in resulting JSON elements
+             * @param filter: Array of keys to include in resulting ResultMapList
              */
             { { "listContainers", "sttas" }, &org::genivi::mediamanager::BrowserDBusStubAdapterInternal::listContainersStubDispatcher },
             /**
              * Extends ListContainers with sorting capabilities
-             * @param sortKey Key to sort JSON result list on
+             * @param sortKey Key to sort ResultMapList on
              */
             { { "listContainersEx", "sttas(is)" }, &org::genivi::mediamanager::BrowserDBusStubAdapterInternal::listContainersExStubDispatcher },
             /**
              * List all items in the given container
-                     returns: A JSON list of all
-             *  items with the given container as parent
-                     errors: NO_CONNECTION if no
-             *  connection can be established to underlying
-                              browsing engine
-            
-             *                   BAD_PATH if path parameter is invalid
+                     returns: A ResultMapList of all
+             *  items with the given container as parent.
+                     		  See MediaTypes.fidl for
+             *  a list of allowed keys.
+                     errors: NO_CONNECTION if no connection can be
+             *  established to underlying
+                             browsing engine
+                            
+             *  BAD_PATH if path parameter is invalid
              * @param path The path of the container to search for items.
                             The format
              *  of the path depends on the underlying browsing
                             backend
              * @param offset: The offset to use for indexing the results list
              * @param count: The number of results to return, starting from offset
-             * @param filter: Array of keys to include in resulting JSON elements
+             * @param filter: Array of keys to include in resulting ResultMapList
              */
             { { "listItems", "sttas" }, &org::genivi::mediamanager::BrowserDBusStubAdapterInternal::listItemsStubDispatcher },
             /**
              * Extends ListItems with sorting capabilities
-             * @param sortKey Key to sort JSON result list on
+             * @param sortKey Key to sort ResultMapList
              */
             { { "listItemsEx", "sttas(is)" }, &org::genivi::mediamanager::BrowserDBusStubAdapterInternal::listItemsExStubDispatcher },
             /**
              * List all children in the given container
-                     returns: A JSON list of all
-             *  children with the given container as parent
+                     returns: A ResultMapList of
+             *  all children with the given container as parent.
+                     		  See
+             *  MediaTypes.fidl for a list of allowed keys.
                      errors: NO_CONNECTION if
              *  no connection can be established to underlying
                               browsing
@@ -598,24 +620,26 @@ BrowserDBusStubAdapterInternal::BrowserDBusStubAdapterInternal(
                             backend
              * @param offset: The offset to use for indexing the results list
              * @param count: The number of results to return, starting from offset
-             * @param filter: Array of keys to include in resulting JSON elements
+             * @param filter: Array of keys to include in resulting ResultMapList
              */
             { { "listChildren", "sttas" }, &org::genivi::mediamanager::BrowserDBusStubAdapterInternal::listChildrenStubDispatcher },
             /**
              * Extends ListChildren with sorting capabilities
-             * @param sortKey Key to sort JSON result list on
+             * @param sortKey Key to sort ResultMapList on
              */
             { { "listChildrenEx", "sttas(is)" }, &org::genivi::mediamanager::BrowserDBusStubAdapterInternal::listChildrenExStubDispatcher },
             /**
              * Search for children in the given container
-                     returns: A JSON list of all
-             *  children matching the search criteria with
+                     returns: A ResultMapList of
+             *  all children matching the search criteria with
                                the given
-             *  container as parent
+             *  container as parent.See MediaTypes.fidl for a list of
+                              
+             *  allowed keys.
                      errors: NO_CONNECTION if no connection can be
              *  established to underlying
-                              browsing engine
-                             
+                             browsing engine
+                            
              *  BAD_PATH if path parameter is invalid
              * @param path The path of the container to search for children.
                             The
@@ -626,27 +650,27 @@ BrowserDBusStubAdapterInternal::BrowserDBusStubAdapterInternal(
              *  query depends on the underlying browsing backend
              * @param offset: The offset to use for indexing the results list
              * @param count: The number of results to return, starting from offset
-             * @param filter: Array of keys to include in resulting JSON elements
+             * @param filter: Array of keys to include in resulting ResultMapList
              */
             { { "searchObjects", "ssttas" }, &org::genivi::mediamanager::BrowserDBusStubAdapterInternal::searchObjectsStubDispatcher },
             /**
              * Extends SearchObjects with sorting capabilities
-             * @param sortKey Key to sort JSON result list on
+             * @param sortKey Key to sort ResultMapList on
              */
             { { "searchObjectsEx", "ssttas(is)" }, &org::genivi::mediamanager::BrowserDBusStubAdapterInternal::searchObjectsExStubDispatcher },
             /**
              * Get a list of all initial letters and their index in the
                                  
              *  given container
-                     returns: A JSON list of tuples of initial letters and
+                     returns: A list of tuples of initial letters and
              *  their first
                                observed position when sorting according to
              *  sortKey
                      errors: NO_CONNECTION if no connection can be established to
              *  underlying
-                              browsing engine
-                              BAD_PATH if
-             *  path parameter is invalid
+                             browsing engine
+                             BAD_PATH if path
+             *  parameter is invalid
              * @param container: Container to build index list for
              * @param count: How many (unsorted) items should be traversed to build
                              

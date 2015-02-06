@@ -10,6 +10,7 @@
 
 
 
+#include <org/genivi/mediamanager/MediaTypes.h>
 #include <org/genivi/mediamanager/PlayerTypes.h>
 
 #include "Player.h"
@@ -269,12 +270,13 @@ public:
     /// This is the method that will be called on remote calls on the method dequeueIndex.
     virtual void dequeueIndex(const std::shared_ptr<CommonAPI::ClientId> clientId, uint64_t pos, PlayerTypes::PlayerError& e) = 0;
     /**
-     * Retrieve the current play queue in JSON format
-             returns: Current play
-     *  queue in JSON format
+     * Retrieve the current play queue. The format of the result
+                         
+     *  object is described in MediaTypes.fidl
+             returns: Current play queue
      */
     /// This is the method that will be called on remote calls on the method getCurrentPlayQueue.
-    virtual void getCurrentPlayQueue(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string& playQueue, PlayerTypes::PlayerError& e) = 0;
+    virtual void getCurrentPlayQueue(const std::shared_ptr<CommonAPI::ClientId> clientId, MediaTypes::ResultMapList& playQueue, PlayerTypes::PlayerError& e) = 0;
     /**
      * Dequeue all elements, emptying the play queue
      */

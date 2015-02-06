@@ -72,69 +72,75 @@ static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     > discoverMediaManagersStubDispatcher;
 /**
  * List all containers below the given path.
-         returns: A JSON list of all
- *  containers with the given path as parent
-         errors: NO_CONNECTION if no
- *  connection can be established to underlying
-                  browsing engine
-
- *                   BAD_PATH if path parameter is invalid
+         returns: ResultMapList of
+ *  all containers with the given path as parent.
+         	   	  See
+ *  MediaTypes.fidl for a list of allowed keys.
+         errors: NO_CONNECTION if
+ *  no connection can be established to underlying
+                 browsing
+ *  engine
+                 BAD_PATH if path parameter is invalid
  * @param path The path to search for containers. The format of the path
                
  *  depends on the underlying browsing backend
  * @param offset: The offset to use for indexing the results list
  * @param count: The number of results to return, starting from offset
- * @param filter: Array of keys to include in resulting JSON elements
+ * @param filter: Array of keys to include in resulting ResultMapList
  */
 static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     BrowserStub,
     std::tuple<std::string, uint64_t, uint64_t, std::vector<std::string>>,
-    std::tuple<std::string, BrowserTypes::BrowserError>
+    std::tuple<MediaTypes::ResultMapList, BrowserTypes::BrowserError>
     > listContainersStubDispatcher;
 /**
  * Extends ListContainers with sorting capabilities
- * @param sortKey Key to sort JSON result list on
+ * @param sortKey Key to sort ResultMapList on
  */
 static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     BrowserStub,
     std::tuple<std::string, uint64_t, uint64_t, std::vector<std::string>, BrowserTypes::SortKey>,
-    std::tuple<std::string, BrowserTypes::BrowserError>
+    std::tuple<MediaTypes::ResultMapList, BrowserTypes::BrowserError>
     > listContainersExStubDispatcher;
 /**
  * List all items in the given container
-         returns: A JSON list of all
- *  items with the given container as parent
-         errors: NO_CONNECTION if no
- *  connection can be established to underlying
-                  browsing engine
-
- *                   BAD_PATH if path parameter is invalid
+         returns: A ResultMapList of all
+ *  items with the given container as parent.
+         		  See MediaTypes.fidl for
+ *  a list of allowed keys.
+         errors: NO_CONNECTION if no connection can be
+ *  established to underlying
+                 browsing engine
+                
+ *  BAD_PATH if path parameter is invalid
  * @param path The path of the container to search for items.
                 The format
  *  of the path depends on the underlying browsing
                 backend
  * @param offset: The offset to use for indexing the results list
  * @param count: The number of results to return, starting from offset
- * @param filter: Array of keys to include in resulting JSON elements
+ * @param filter: Array of keys to include in resulting ResultMapList
  */
 static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     BrowserStub,
     std::tuple<std::string, uint64_t, uint64_t, std::vector<std::string>>,
-    std::tuple<std::string, BrowserTypes::BrowserError>
+    std::tuple<MediaTypes::ResultMapList, BrowserTypes::BrowserError>
     > listItemsStubDispatcher;
 /**
  * Extends ListItems with sorting capabilities
- * @param sortKey Key to sort JSON result list on
+ * @param sortKey Key to sort ResultMapList
  */
 static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     BrowserStub,
     std::tuple<std::string, uint64_t, uint64_t, std::vector<std::string>, BrowserTypes::SortKey>,
-    std::tuple<std::string, BrowserTypes::BrowserError>
+    std::tuple<MediaTypes::ResultMapList, BrowserTypes::BrowserError>
     > listItemsExStubDispatcher;
 /**
  * List all children in the given container
-         returns: A JSON list of all
- *  children with the given container as parent
+         returns: A ResultMapList of
+ *  all children with the given container as parent.
+         		  See
+ *  MediaTypes.fidl for a list of allowed keys.
          errors: NO_CONNECTION if
  *  no connection can be established to underlying
                   browsing
@@ -146,32 +152,34 @@ static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
                 backend
  * @param offset: The offset to use for indexing the results list
  * @param count: The number of results to return, starting from offset
- * @param filter: Array of keys to include in resulting JSON elements
+ * @param filter: Array of keys to include in resulting ResultMapList
  */
 static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     BrowserStub,
     std::tuple<std::string, uint64_t, uint64_t, std::vector<std::string>>,
-    std::tuple<std::string, BrowserTypes::BrowserError>
+    std::tuple<MediaTypes::ResultMapList, BrowserTypes::BrowserError>
     > listChildrenStubDispatcher;
 /**
  * Extends ListChildren with sorting capabilities
- * @param sortKey Key to sort JSON result list on
+ * @param sortKey Key to sort ResultMapList on
  */
 static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     BrowserStub,
     std::tuple<std::string, uint64_t, uint64_t, std::vector<std::string>, BrowserTypes::SortKey>,
-    std::tuple<std::string, BrowserTypes::BrowserError>
+    std::tuple<MediaTypes::ResultMapList, BrowserTypes::BrowserError>
     > listChildrenExStubDispatcher;
 /**
  * Search for children in the given container
-         returns: A JSON list of all
- *  children matching the search criteria with
+         returns: A ResultMapList of
+ *  all children matching the search criteria with
                    the given
- *  container as parent
+ *  container as parent.See MediaTypes.fidl for a list of
+                  
+ *  allowed keys.
          errors: NO_CONNECTION if no connection can be
  *  established to underlying
-                  browsing engine
-                 
+                 browsing engine
+                
  *  BAD_PATH if path parameter is invalid
  * @param path The path of the container to search for children.
                 The
@@ -182,35 +190,35 @@ static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
  *  query depends on the underlying browsing backend
  * @param offset: The offset to use for indexing the results list
  * @param count: The number of results to return, starting from offset
- * @param filter: Array of keys to include in resulting JSON elements
+ * @param filter: Array of keys to include in resulting ResultMapList
  */
 static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     BrowserStub,
     std::tuple<std::string, std::string, uint64_t, uint64_t, std::vector<std::string>>,
-    std::tuple<std::string, BrowserTypes::BrowserError>
+    std::tuple<MediaTypes::ResultMapList, BrowserTypes::BrowserError>
     > searchObjectsStubDispatcher;
 /**
  * Extends SearchObjects with sorting capabilities
- * @param sortKey Key to sort JSON result list on
+ * @param sortKey Key to sort ResultMapList on
  */
 static CommonAPI::DBus::DBusMethodWithReplyStubDispatcher<
     BrowserStub,
     std::tuple<std::string, std::string, uint64_t, uint64_t, std::vector<std::string>, BrowserTypes::SortKey>,
-    std::tuple<std::string, BrowserTypes::BrowserError>
+    std::tuple<MediaTypes::ResultMapList, BrowserTypes::BrowserError>
     > searchObjectsExStubDispatcher;
 /**
  * Get a list of all initial letters and their index in the
                      
  *  given container
-         returns: A JSON list of tuples of initial letters and
+         returns: A list of tuples of initial letters and
  *  their first
                    observed position when sorting according to
  *  sortKey
          errors: NO_CONNECTION if no connection can be established to
  *  underlying
-                  browsing engine
-                  BAD_PATH if
- *  path parameter is invalid
+                 browsing engine
+                 BAD_PATH if path
+ *  parameter is invalid
  * @param container: Container to build index list for
  * @param count: How many (unsorted) items should be traversed to build
                  

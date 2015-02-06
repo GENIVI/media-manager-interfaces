@@ -16,8 +16,13 @@
 
 #include <CommonAPI/InputStream.h>
 #include <CommonAPI/OutputStream.h>
+#include <CommonAPI/SerializableVariant.h>
 #include <CommonAPI/types.h>
 #include <cstdint>
+#include <memory>
+#include <string>
+#include <unordered_map>
+#include <vector>
 
 #undef COMMONAPI_INTERNAL_COMPILATION
 
@@ -40,6 +45,10 @@ namespace MediaTypes {
     
     // Definition of a comparator still is necessary for GCC 4.4.1, topic is fixed since 4.5.1
     struct BackendErrorComparator;
+    typedef std::vector<std::string> StringList;
+    typedef CommonAPI::Variant<StringList, int32_t, uint32_t, int64_t, uint64_t, bool, float, double, std::string>  ResultUnion;
+    typedef std::unordered_map<std::string, ResultUnion> ResultMap;
+    typedef std::vector<ResultMap> ResultMapList;
 
 inline CommonAPI::InputStream& operator>>(CommonAPI::InputStream& inputStream, BackendError& enumValue) {
     return inputStream.readEnumValue<int32_t>(enumValue);

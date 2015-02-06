@@ -128,12 +128,13 @@ public:
     virtual void dequeueIndex(uint64_t pos, PlayerTypes::PlayerError& e);
 
     /**
-     * Retrieve the current play queue in JSON format
-             returns: Current play
-     *  queue in JSON format
+     * Retrieve the current play queue. The format of the result
+                         
+     *  object is described in MediaTypes.fidl
+             returns: Current play queue
      */
-    virtual void getCurrentPlayQueue(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string& playQueue, PlayerTypes::PlayerError& e);
-    virtual void getCurrentPlayQueue(std::string& playQueue, PlayerTypes::PlayerError& e);
+    virtual void getCurrentPlayQueue(const std::shared_ptr<CommonAPI::ClientId> clientId, MediaTypes::ResultMapList& playQueue, PlayerTypes::PlayerError& e);
+    virtual void getCurrentPlayQueue(MediaTypes::ResultMapList& playQueue, PlayerTypes::PlayerError& e);
 
     /**
      * Dequeue all elements, emptying the play queue

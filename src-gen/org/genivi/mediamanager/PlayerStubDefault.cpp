@@ -590,15 +590,16 @@ void PlayerStubDefault::dequeueIndex(uint64_t pos, PlayerTypes::PlayerError& e) 
 }
 
 /**
- * Retrieve the current play queue in JSON format
-         returns: Current play
- *  queue in JSON format
+ * Retrieve the current play queue. The format of the result
+                     
+ *  object is described in MediaTypes.fidl
+         returns: Current play queue
  */
-void PlayerStubDefault::getCurrentPlayQueue(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string& playQueue, PlayerTypes::PlayerError& e) {
+void PlayerStubDefault::getCurrentPlayQueue(const std::shared_ptr<CommonAPI::ClientId> clientId, MediaTypes::ResultMapList& playQueue, PlayerTypes::PlayerError& e) {
     // Call old style methods in default 
     getCurrentPlayQueue(playQueue, e);
 }
-void PlayerStubDefault::getCurrentPlayQueue(std::string& playQueue, PlayerTypes::PlayerError& e) {
+void PlayerStubDefault::getCurrentPlayQueue(MediaTypes::ResultMapList& playQueue, PlayerTypes::PlayerError& e) {
     // No operation in default
 }
 

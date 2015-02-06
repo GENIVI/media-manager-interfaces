@@ -43,81 +43,87 @@ void BrowserStubDefault::discoverMediaManagers(std::vector<std::string>& identif
 
 /**
  * List all containers below the given path.
-         returns: A JSON list of all
- *  containers with the given path as parent
-         errors: NO_CONNECTION if no
- *  connection can be established to underlying
-                  browsing engine
-
- *                   BAD_PATH if path parameter is invalid
+         returns: ResultMapList of
+ *  all containers with the given path as parent.
+         	   	  See
+ *  MediaTypes.fidl for a list of allowed keys.
+         errors: NO_CONNECTION if
+ *  no connection can be established to underlying
+                 browsing
+ *  engine
+                 BAD_PATH if path parameter is invalid
  * @param path The path to search for containers. The format of the path
                
  *  depends on the underlying browsing backend
  * @param offset: The offset to use for indexing the results list
  * @param count: The number of results to return, starting from offset
- * @param filter: Array of keys to include in resulting JSON elements
+ * @param filter: Array of keys to include in resulting ResultMapList
  */
-void BrowserStubDefault::listContainers(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string path, uint64_t offset, uint64_t count, std::vector<std::string> filter, std::string& containers, BrowserTypes::BrowserError& e) {
+void BrowserStubDefault::listContainers(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string path, uint64_t offset, uint64_t count, std::vector<std::string> filter, MediaTypes::ResultMapList& m, BrowserTypes::BrowserError& e) {
     // Call old style methods in default 
-    listContainers(path, offset, count, filter, containers, e);
+    listContainers(path, offset, count, filter, m, e);
 }
-void BrowserStubDefault::listContainers(std::string path, uint64_t offset, uint64_t count, std::vector<std::string> filter, std::string& containers, BrowserTypes::BrowserError& e) {
+void BrowserStubDefault::listContainers(std::string path, uint64_t offset, uint64_t count, std::vector<std::string> filter, MediaTypes::ResultMapList& m, BrowserTypes::BrowserError& e) {
     // No operation in default
 }
 
 /**
  * Extends ListContainers with sorting capabilities
- * @param sortKey Key to sort JSON result list on
+ * @param sortKey Key to sort ResultMapList on
  */
-void BrowserStubDefault::listContainersEx(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string path, uint64_t offset, uint64_t count, std::vector<std::string> filter, BrowserTypes::SortKey sortKey, std::string& containers, BrowserTypes::BrowserError& e) {
+void BrowserStubDefault::listContainersEx(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string path, uint64_t offset, uint64_t count, std::vector<std::string> filter, BrowserTypes::SortKey sortKey, MediaTypes::ResultMapList& m, BrowserTypes::BrowserError& e) {
     // Call old style methods in default 
-    listContainersEx(path, offset, count, filter, sortKey, containers, e);
+    listContainersEx(path, offset, count, filter, sortKey, m, e);
 }
-void BrowserStubDefault::listContainersEx(std::string path, uint64_t offset, uint64_t count, std::vector<std::string> filter, BrowserTypes::SortKey sortKey, std::string& containers, BrowserTypes::BrowserError& e) {
+void BrowserStubDefault::listContainersEx(std::string path, uint64_t offset, uint64_t count, std::vector<std::string> filter, BrowserTypes::SortKey sortKey, MediaTypes::ResultMapList& m, BrowserTypes::BrowserError& e) {
     // No operation in default
 }
 
 /**
  * List all items in the given container
-         returns: A JSON list of all
- *  items with the given container as parent
-         errors: NO_CONNECTION if no
- *  connection can be established to underlying
-                  browsing engine
-
- *                   BAD_PATH if path parameter is invalid
+         returns: A ResultMapList of all
+ *  items with the given container as parent.
+         		  See MediaTypes.fidl for
+ *  a list of allowed keys.
+         errors: NO_CONNECTION if no connection can be
+ *  established to underlying
+                 browsing engine
+                
+ *  BAD_PATH if path parameter is invalid
  * @param path The path of the container to search for items.
                 The format
  *  of the path depends on the underlying browsing
                 backend
  * @param offset: The offset to use for indexing the results list
  * @param count: The number of results to return, starting from offset
- * @param filter: Array of keys to include in resulting JSON elements
+ * @param filter: Array of keys to include in resulting ResultMapList
  */
-void BrowserStubDefault::listItems(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string path, uint64_t offset, uint64_t count, std::vector<std::string> filter, std::string& items, BrowserTypes::BrowserError& e) {
+void BrowserStubDefault::listItems(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string path, uint64_t offset, uint64_t count, std::vector<std::string> filter, MediaTypes::ResultMapList& m, BrowserTypes::BrowserError& e) {
     // Call old style methods in default 
-    listItems(path, offset, count, filter, items, e);
+    listItems(path, offset, count, filter, m, e);
 }
-void BrowserStubDefault::listItems(std::string path, uint64_t offset, uint64_t count, std::vector<std::string> filter, std::string& items, BrowserTypes::BrowserError& e) {
+void BrowserStubDefault::listItems(std::string path, uint64_t offset, uint64_t count, std::vector<std::string> filter, MediaTypes::ResultMapList& m, BrowserTypes::BrowserError& e) {
     // No operation in default
 }
 
 /**
  * Extends ListItems with sorting capabilities
- * @param sortKey Key to sort JSON result list on
+ * @param sortKey Key to sort ResultMapList
  */
-void BrowserStubDefault::listItemsEx(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string path, uint64_t offset, uint64_t count, std::vector<std::string> filter, BrowserTypes::SortKey sortKey, std::string& items, BrowserTypes::BrowserError& e) {
+void BrowserStubDefault::listItemsEx(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string path, uint64_t offset, uint64_t count, std::vector<std::string> filter, BrowserTypes::SortKey sortKey, MediaTypes::ResultMapList& m, BrowserTypes::BrowserError& e) {
     // Call old style methods in default 
-    listItemsEx(path, offset, count, filter, sortKey, items, e);
+    listItemsEx(path, offset, count, filter, sortKey, m, e);
 }
-void BrowserStubDefault::listItemsEx(std::string path, uint64_t offset, uint64_t count, std::vector<std::string> filter, BrowserTypes::SortKey sortKey, std::string& items, BrowserTypes::BrowserError& e) {
+void BrowserStubDefault::listItemsEx(std::string path, uint64_t offset, uint64_t count, std::vector<std::string> filter, BrowserTypes::SortKey sortKey, MediaTypes::ResultMapList& m, BrowserTypes::BrowserError& e) {
     // No operation in default
 }
 
 /**
  * List all children in the given container
-         returns: A JSON list of all
- *  children with the given container as parent
+         returns: A ResultMapList of
+ *  all children with the given container as parent.
+         		  See
+ *  MediaTypes.fidl for a list of allowed keys.
          errors: NO_CONNECTION if
  *  no connection can be established to underlying
                   browsing
@@ -129,38 +135,40 @@ void BrowserStubDefault::listItemsEx(std::string path, uint64_t offset, uint64_t
                 backend
  * @param offset: The offset to use for indexing the results list
  * @param count: The number of results to return, starting from offset
- * @param filter: Array of keys to include in resulting JSON elements
+ * @param filter: Array of keys to include in resulting ResultMapList
  */
-void BrowserStubDefault::listChildren(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string path, uint64_t offset, uint64_t count, std::vector<std::string> filter, std::string& children, BrowserTypes::BrowserError& e) {
+void BrowserStubDefault::listChildren(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string path, uint64_t offset, uint64_t count, std::vector<std::string> filter, MediaTypes::ResultMapList& m, BrowserTypes::BrowserError& e) {
     // Call old style methods in default 
-    listChildren(path, offset, count, filter, children, e);
+    listChildren(path, offset, count, filter, m, e);
 }
-void BrowserStubDefault::listChildren(std::string path, uint64_t offset, uint64_t count, std::vector<std::string> filter, std::string& children, BrowserTypes::BrowserError& e) {
+void BrowserStubDefault::listChildren(std::string path, uint64_t offset, uint64_t count, std::vector<std::string> filter, MediaTypes::ResultMapList& m, BrowserTypes::BrowserError& e) {
     // No operation in default
 }
 
 /**
  * Extends ListChildren with sorting capabilities
- * @param sortKey Key to sort JSON result list on
+ * @param sortKey Key to sort ResultMapList on
  */
-void BrowserStubDefault::listChildrenEx(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string path, uint64_t offset, uint64_t count, std::vector<std::string> filter, BrowserTypes::SortKey sortKey, std::string& children, BrowserTypes::BrowserError& e) {
+void BrowserStubDefault::listChildrenEx(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string path, uint64_t offset, uint64_t count, std::vector<std::string> filter, BrowserTypes::SortKey sortKey, MediaTypes::ResultMapList& m, BrowserTypes::BrowserError& e) {
     // Call old style methods in default 
-    listChildrenEx(path, offset, count, filter, sortKey, children, e);
+    listChildrenEx(path, offset, count, filter, sortKey, m, e);
 }
-void BrowserStubDefault::listChildrenEx(std::string path, uint64_t offset, uint64_t count, std::vector<std::string> filter, BrowserTypes::SortKey sortKey, std::string& children, BrowserTypes::BrowserError& e) {
+void BrowserStubDefault::listChildrenEx(std::string path, uint64_t offset, uint64_t count, std::vector<std::string> filter, BrowserTypes::SortKey sortKey, MediaTypes::ResultMapList& m, BrowserTypes::BrowserError& e) {
     // No operation in default
 }
 
 /**
  * Search for children in the given container
-         returns: A JSON list of all
- *  children matching the search criteria with
+         returns: A ResultMapList of
+ *  all children matching the search criteria with
                    the given
- *  container as parent
+ *  container as parent.See MediaTypes.fidl for a list of
+                  
+ *  allowed keys.
          errors: NO_CONNECTION if no connection can be
  *  established to underlying
-                  browsing engine
-                 
+                 browsing engine
+                
  *  BAD_PATH if path parameter is invalid
  * @param path The path of the container to search for children.
                 The
@@ -171,25 +179,25 @@ void BrowserStubDefault::listChildrenEx(std::string path, uint64_t offset, uint6
  *  query depends on the underlying browsing backend
  * @param offset: The offset to use for indexing the results list
  * @param count: The number of results to return, starting from offset
- * @param filter: Array of keys to include in resulting JSON elements
+ * @param filter: Array of keys to include in resulting ResultMapList
  */
-void BrowserStubDefault::searchObjects(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string path, std::string query, uint64_t offset, uint64_t count, std::vector<std::string> filter, std::string& objects, BrowserTypes::BrowserError& e) {
+void BrowserStubDefault::searchObjects(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string path, std::string query, uint64_t offset, uint64_t count, std::vector<std::string> filter, MediaTypes::ResultMapList& m, BrowserTypes::BrowserError& e) {
     // Call old style methods in default 
-    searchObjects(path, query, offset, count, filter, objects, e);
+    searchObjects(path, query, offset, count, filter, m, e);
 }
-void BrowserStubDefault::searchObjects(std::string path, std::string query, uint64_t offset, uint64_t count, std::vector<std::string> filter, std::string& objects, BrowserTypes::BrowserError& e) {
+void BrowserStubDefault::searchObjects(std::string path, std::string query, uint64_t offset, uint64_t count, std::vector<std::string> filter, MediaTypes::ResultMapList& m, BrowserTypes::BrowserError& e) {
     // No operation in default
 }
 
 /**
  * Extends SearchObjects with sorting capabilities
- * @param sortKey Key to sort JSON result list on
+ * @param sortKey Key to sort ResultMapList on
  */
-void BrowserStubDefault::searchObjectsEx(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string path, std::string query, uint64_t offset, uint64_t count, std::vector<std::string> filter, BrowserTypes::SortKey sortKey, std::string& objects, BrowserTypes::BrowserError& e) {
+void BrowserStubDefault::searchObjectsEx(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string path, std::string query, uint64_t offset, uint64_t count, std::vector<std::string> filter, BrowserTypes::SortKey sortKey, MediaTypes::ResultMapList& m, BrowserTypes::BrowserError& e) {
     // Call old style methods in default 
-    searchObjectsEx(path, query, offset, count, filter, sortKey, objects, e);
+    searchObjectsEx(path, query, offset, count, filter, sortKey, m, e);
 }
-void BrowserStubDefault::searchObjectsEx(std::string path, std::string query, uint64_t offset, uint64_t count, std::vector<std::string> filter, BrowserTypes::SortKey sortKey, std::string& objects, BrowserTypes::BrowserError& e) {
+void BrowserStubDefault::searchObjectsEx(std::string path, std::string query, uint64_t offset, uint64_t count, std::vector<std::string> filter, BrowserTypes::SortKey sortKey, MediaTypes::ResultMapList& m, BrowserTypes::BrowserError& e) {
     // No operation in default
 }
 
@@ -197,15 +205,15 @@ void BrowserStubDefault::searchObjectsEx(std::string path, std::string query, ui
  * Get a list of all initial letters and their index in the
                      
  *  given container
-         returns: A JSON list of tuples of initial letters and
+         returns: A list of tuples of initial letters and
  *  their first
                    observed position when sorting according to
  *  sortKey
          errors: NO_CONNECTION if no connection can be established to
  *  underlying
-                  browsing engine
-                  BAD_PATH if
- *  path parameter is invalid
+                 browsing engine
+                 BAD_PATH if path
+ *  parameter is invalid
  * @param container: Container to build index list for
  * @param count: How many (unsorted) items should be traversed to build
                  

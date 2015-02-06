@@ -38,5 +38,4 @@ typeCollection BrowserTypes {
         NO_CONNECTION
         BAD_PATH
     }
-
 }
