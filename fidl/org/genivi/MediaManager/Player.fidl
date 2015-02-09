@@ -44,7 +44,8 @@ interface Player {
     **>
     attribute RepeatStatus repeat
 
-    <** @description: Set the playback rate **>
+    <** @description: Get or set the playback rate. The allowed range of values
+                      is -16 to +16 **>
     attribute Double rate
 
     <** @description: Get or set volume, 0 is muted, and 1.0 means maximum
